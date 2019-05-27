@@ -7,6 +7,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { StatModule } from '../../shared/modules/stat/stat.module';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     imports: [
@@ -19,7 +20,8 @@ import { DashboardComponent } from './dashboard.component';
         MatTableModule,
         MatButtonModule,
         MatIconModule,
-        FlexLayoutModule.withConfig({addFlexToParent: false})
+        FlexLayoutModule.withConfig({addFlexToParent: false}),
+        HttpClientModule
     ],
     declarations: [DashboardComponent]
 })
