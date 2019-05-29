@@ -8,8 +8,8 @@ const routes: Routes = [
         path: '',
         redirectTo:'visit_productivity'
         
-    }
-    { path: 'visit_productivity', component: VisitProductivityComponent },
+    },
+    { path: 'visit_productivity', component: VisitProductivityComponent }
 ];
 
 @NgModule({

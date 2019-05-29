@@ -39,15 +39,31 @@ loading = true;
 
   downloadReport() {
     if (this.endDate >= this.startDate) {
-
+this.loadingReportMessage=true;
       let obj={
         regionId: this.selectedRegion.id || -1,
         startDate: moment(this.startDate).format('YYYY-MM-DD'),
         endDate: moment(this.endDate).format('YYYY-MM-DD'),
       }
 
-      let url='';
-      let encodeURL:any= this.httpService.UrlEncodeMaker(obj);
+      let url='visitProductivityReport';
+      let body= this.httpService.UrlEncodeMaker(obj);
+      this.httpService.getKeyForReport(url,body).subscribe(data=>{
+        let res: any = data
+
+        if(res){
+          let obj2 = {
+            key: res.key,
+            fileType: 'json.fileType'
+          }
+          let url = 'downloadReport'
+          this.getproductivityDownload(obj2, url)
+        } else {
+          // this.clearLoading()
+
+          this.toastr.info('Something went wrong,Please retry','Connectivity Message')
+        }
+      })
 
     }
     else{
@@ -59,11 +75,22 @@ loading = true;
 
   getRegions(){
     this.httpService.getRegion().subscribe(data=>{
-      if(data)
-      this.regions=data;
-      this.loading=false
+      if(data){
+        this.regions=data;
+        this.loading=false;
+        this.selectedRegion=data[0]
+      }
+     
     })
   }
+  getproductivityDownload(obj, url) {
+    const u = url
+    this.httpService.DownloadResource(obj, u);
+  setTimeout(() => {
+    this.loadingData = false;
+    this.loadingReportMessage = false;
+  }, 1000);
 
+  }
 
 }

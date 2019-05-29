@@ -33,8 +33,8 @@ export class LoginComponent implements OnInit {
         this.httpService.login(loginForm).subscribe((data:Response) => {
             const res: any = data;
         
-            console.log('data', data.headers);
-            this.toastr.success(res, 'Login Status');
+            // console.log('data', data.headers);
+            // this.toastr.success(res, 'Login Status');
             localStorage.setItem('isLoggedin', 'true');
             localStorage.setItem('today',moment(new Date).format('YYYY-MM-DD'))
             localStorage.setItem('user_id', res.user.user_id);

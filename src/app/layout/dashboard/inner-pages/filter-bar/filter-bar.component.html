@@ -4,9 +4,9 @@
     <mat-card-content>
         <mat-card-title>
             {{title| uppercase}}
-            <i color="primary" [ngClass]="{'fa fa-cog fa-spin':loading}"> </i>
+            <i color="primary" [ngClass]="{'fa fa-cog fa-spin':loading || loadingReportMessage }"> </i>
             <!-- <span *ngIf="loading">Please wait loading regions list</span> -->
-            <!-- <small style="color:lightseagreen !important" class="mtb-5-IMP" *ngIf="loadingReportMessage">Your file is being prepared for download</small> -->
+            <small style="color:lightseagreen !important" class="mtb-5-IMP" *ngIf="loadingReportMessage">Your file is being prepared for download</small>
 
         </mat-card-title>
         <section class="example-section" *ngIf="regions.length>0">

@@ -79,4 +79,10 @@ export class DashboardService {
     const newUrl = url.substring(0, url.length - 1);
     return newUrl;
   }
+
+  getKeyForReport(reportUrl,body) {
+    const url = this.ip + reportUrl;
+    return this.http.post(url, body, this.httpOptions);
+  
+  }
 }
