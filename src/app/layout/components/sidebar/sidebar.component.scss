@@ -18,6 +18,7 @@
         }
     }
 }
+
 .nested-menu {
     .nested {
         list-style-type: none;
@@ -41,8 +42,16 @@
         }
     }
 }
+
 @media screen and (max-width: 992px) {
     #sidebar {
         left: -250px;
     }
+}
+
+.bottom-fixed {
+    position: absolute;
+    bottom: 5px;
+    left: 45px;
+    width: 130px !important;
 }

@@ -1,13 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatButtonModule, MatCardModule, MatIconModule, MatTableModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatIconModule, MatTableModule, MatSelectModule, MatNativeDateModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 import { MatGridListModule } from '@angular/material/grid-list';
+import {MatDatepickerModule, MatDatepickerToggle} from '@angular/material/datepicker';
 
 import { StatModule } from '../../shared/modules/stat/stat.module';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
+
+import { FormsModule } from '@angular/forms';
+import { FilterBarComponent } from './inner-pages/filter-bar/filter-bar.component';
+import { VisitProductivityComponent } from './inner-pages/visit-productivity/visit-productivity.component';
 
 @NgModule({
     imports: [
@@ -21,8 +26,15 @@ import { HttpClientModule } from '@angular/common/http';
         MatButtonModule,
         MatIconModule,
         FlexLayoutModule.withConfig({addFlexToParent: false}),
-        HttpClientModule
+        HttpClientModule,
+        FormsModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatCardModule,
+        MatNativeDateModule,
+        MatFormFieldModule,
+        MatInputModule
     ],
-    declarations: [DashboardComponent]
+    declarations: [FilterBarComponent,DashboardComponent, VisitProductivityComponent]
 })
 export class DashboardModule {}
