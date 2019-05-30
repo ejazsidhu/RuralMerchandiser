@@ -11,7 +11,7 @@ const routes: Routes = [
         
     },
     { path: 'visit_productivity', component: VisitProductivityComponent },
-    { path: 'sections', component: SectionHomeComponent }
+    { path: 'evaluation', component: SectionHomeComponent }
 
 ];
 
