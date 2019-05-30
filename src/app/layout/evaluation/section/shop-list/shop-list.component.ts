@@ -16,8 +16,7 @@ export class ShopListComponent implements OnInit {
   constructor(private router:Router,private toastr:ToastrService,private httpService:EvaluationService,private activeRoute:ActivatedRoute) {
    
     this.activeRoute.queryParams.subscribe(p=>{
-      console.log('active params',p);
-      debugger
+
       if(p.surveyorId && p.startDate && p.endDate){
         // let obj=p;
         this.getTableData(p);
@@ -57,7 +56,7 @@ export class ShopListComponent implements OnInit {
   }
 
   gotoNewPage(id){  
-    window.open(`/#/dashboard/evaluation/list/details/${id}`,'_blank')
+    window.open(`/dashboard/evaluation/shop_list/details/${id}`,'_blank')
     }
  
 
