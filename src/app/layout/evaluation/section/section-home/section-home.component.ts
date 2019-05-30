@@ -55,7 +55,7 @@ this.httpService.ip;
     // userId:localStorage.getItem('user_id')
       }
 
-      // this.getData(obj)
+      this.getData(obj)
     });
 
   }

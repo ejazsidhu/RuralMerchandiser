@@ -27,5 +27,8 @@ export class SectionOneViewComponent implements OnInit {
 
     // this.childModal.show();
   }
+  setSelectedImage(img){
+    this.selectedImage=img;
 
+  }
 }
