@@ -29,6 +29,13 @@ export class DashboardService {
     return this.http.post(url, credentials);
   
   }
+  
+  getMerchandiserListForEvaluation(obj){
+
+    let urlEncode=this.UrlEncodeMaker(obj)
+    const url = this.ip + 'merchandiserList';
+    return this.http.post(url, urlEncode,this.httpOptions);
+  }
 
   getRegion() {
       const filter = JSON.stringify({ act: 7});

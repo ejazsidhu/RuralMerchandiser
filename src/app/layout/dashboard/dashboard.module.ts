@@ -18,6 +18,7 @@ import { SectionTwoViewComponent } from './inner-pages/section/section-two-view/
 import { SectionThreeViewComponent } from './inner-pages/section/section-three-view/section-three-view.component';
 import { SectionHomeComponent } from './inner-pages/section/section-home/section-home.component';
 import { AttendanceReportComponent } from './inner-pages/attendance-report/attendance-report.component';
+import { MerchandiserListComponent } from './inner-pages/merchandiser-list/merchandiser-list.component';
 
 @NgModule({
     imports: [
@@ -40,6 +41,6 @@ import { AttendanceReportComponent } from './inner-pages/attendance-report/atten
         MatFormFieldModule,
         MatInputModule
     ],
-    declarations: [FilterBarComponent,DashboardComponent, VisitProductivityComponent, SectionOneViewComponent, SectionTwoViewComponent, SectionThreeViewComponent, SectionHomeComponent, AttendanceReportComponent]
+    declarations: [FilterBarComponent,DashboardComponent, VisitProductivityComponent, SectionOneViewComponent, SectionTwoViewComponent, SectionThreeViewComponent, SectionHomeComponent, AttendanceReportComponent, MerchandiserListComponent]
 })
 export class DashboardModule {}

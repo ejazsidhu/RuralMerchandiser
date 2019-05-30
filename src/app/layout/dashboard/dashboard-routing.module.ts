@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard.component';
 import { VisitProductivityComponent } from './inner-pages/visit-productivity/visit-productivity.component';
 import { SectionHomeComponent } from './inner-pages/section/section-home/section-home.component';
 import { AttendanceReportComponent } from './inner-pages/attendance-report/attendance-report.component';
+import { MerchandiserListComponent } from './inner-pages/merchandiser-list/merchandiser-list.component';
 
 const routes: Routes = [
     {
@@ -12,9 +13,11 @@ const routes: Routes = [
         
     },
     { path: 'visit_productivity', component: VisitProductivityComponent },
-    { path: 'evaluation', component: SectionHomeComponent },
+    // { path: 'evaluation', component: SectionHomeComponent },
     { path: 'attendance_report', component: AttendanceReportComponent },
+    { path: 'merchandiser_list', component: MerchandiserListComponent },
 
+    { path: 'evaluation', loadChildren: '../evaluation/evaluation.module#EvaluationModule' },
 ];
 
 @NgModule({
