@@ -4,10 +4,10 @@ import { SectionHomeComponent } from './section/section-home/section-home.compon
 import { SectionLandingPageComponent } from './section/section-landing-page/section-landing-page.component';
 
 const routes: Routes = [ { path: '',redirectTo:'shop_list' ,pathMatch:'full' },
-{ path: 'shop_list', component:SectionHomeComponent,
+{ path: 'shop_list', component:SectionLandingPageComponent,
 children:[
 { path: '', redirectTo:'home',pathMatch:'full'},
-{ path: 'home',component:SectionLandingPageComponent },
+{ path: 'home',component:SectionHomeComponent },
 // { path: 'details/:id',component:HomeComponent },
 
 ] },];
