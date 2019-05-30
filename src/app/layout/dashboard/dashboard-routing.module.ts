@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { VisitProductivityComponent } from './inner-pages/visit-productivity/visit-productivity.component';
 import { SectionHomeComponent } from './inner-pages/section/section-home/section-home.component';
+import { AttendanceReportComponent } from './inner-pages/attendance-report/attendance-report.component';
 
 const routes: Routes = [
     {
@@ -11,7 +12,8 @@ const routes: Routes = [
         
     },
     { path: 'visit_productivity', component: VisitProductivityComponent },
-    { path: 'evaluation', component: SectionHomeComponent }
+    { path: 'evaluation', component: SectionHomeComponent },
+    { path: 'attendance_report', component: AttendanceReportComponent },
 
 ];
 
