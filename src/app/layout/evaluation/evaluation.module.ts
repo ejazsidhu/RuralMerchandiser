@@ -7,12 +7,16 @@ import { SectionOneViewComponent } from './section/section-one-view/section-one-
 import { SectionTwoViewComponent } from './section/section-two-view/section-two-view.component';
 import { SectionThreeViewComponent } from './section/section-three-view/section-three-view.component';
 import { SectionLandingPageComponent } from './section/section-landing-page/section-landing-page.component';
+import { ModalModule } from 'ngx-bootstrap';
+import { ShopListComponent } from './section/shop-list/shop-list.component';
 
 @NgModule({
-  declarations: [SectionHomeComponent,SectionOneViewComponent,SectionTwoViewComponent,SectionThreeViewComponent, SectionLandingPageComponent],
+  declarations: [SectionHomeComponent,SectionOneViewComponent,SectionTwoViewComponent,SectionThreeViewComponent, SectionLandingPageComponent, ShopListComponent],
   imports: [
     CommonModule,
-    EvaluationRoutingModule
+    EvaluationRoutingModule,
+    ModalModule.forRoot(),
+
   ]
 })
 export class EvaluationModule { }
