@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-section-one-view',
+  selector: 'section-one-view',
   templateUrl: './section-one-view.component.html',
   styleUrls: ['./section-one-view.component.scss']
 })

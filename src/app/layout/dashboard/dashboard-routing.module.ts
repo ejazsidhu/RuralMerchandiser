@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { VisitProductivityComponent } from './inner-pages/visit-productivity/visit-productivity.component';
+import { SectionHomeComponent } from './inner-pages/section/section-home/section-home.component';
 
 const routes: Routes = [
     {
@@ -9,7 +10,9 @@ const routes: Routes = [
         redirectTo:'visit_productivity'
         
     },
-    { path: 'visit_productivity', component: VisitProductivityComponent }
+    { path: 'visit_productivity', component: VisitProductivityComponent },
+    { path: 'sections', component: SectionHomeComponent }
+
 ];
 
 @NgModule({
