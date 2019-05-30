@@ -18,6 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { ToastrModule } from 'ngx-toastr';
+import { ModalModule } from 'ngx-bootstrap';
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => {
     /* for development
@@ -45,7 +46,8 @@ export const createTranslateLoader = (http: HttpClient) => {
                 deps: [HttpClient]
             }
         }),
-        ToastrModule.forRoot()
+        ToastrModule.forRoot(),
+        ModalModule.forRoot(),
     ],
     providers: [],
     bootstrap: [AppComponent]

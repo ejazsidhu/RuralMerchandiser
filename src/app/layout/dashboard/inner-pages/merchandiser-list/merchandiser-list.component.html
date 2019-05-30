@@ -12,7 +12,7 @@
 
 
                     <mat-form-field class="example-full-width mr-10-IMP">
-                        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker0" [(ngModel)]="startDate" placeholder="Choose a start date" readonly>
+                        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker0" [(ngModel)]="startDate" placeholder="Choose a date" readonly>
                         <mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
                         <mat-datepicker #picker0></mat-datepicker>
                     </mat-form-field>
@@ -48,7 +48,7 @@
                         <tbody *ngIf="merchandiserList.length>0">
                             <tr *ngFor="let item of merchandiserList">
                                 <td>{{item.m_code}}</td>
-                                <td style="color:blue;cursor:pointer" [routerLink]="['/dashboard/evaluation/list']" [queryParams]="{ surveyorId: item.id,startDate: modifyDate(startDate),endDate: modifyDate(startDate)}">{{item.full_name}}</td>
+                                <td style="color:blue;cursor:pointer" [routerLink]="['/dashboard/evaluation/shop_list']" [queryParams]="{ surveyorId: item.id,startDate: modifyDate(startDate),endDate: modifyDate(startDate)}">{{item.full_name}}</td>
 
                             </tr>
                         </tbody>

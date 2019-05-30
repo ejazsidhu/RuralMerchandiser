@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SectionHomeComponent } from './section/section-home/section-home.component';
+import { SectionLandingPageComponent } from './section/section-landing-page/section-landing-page.component';
 
-const routes: Routes = [ { path: '',redirectTo:'list' ,pathMatch:'full' },
-{ path: 'list', component:SectionHomeComponent,
+const routes: Routes = [ { path: '',redirectTo:'shop_list' ,pathMatch:'full' },
+{ path: 'shop_list', component:SectionHomeComponent,
 children:[
 { path: '', redirectTo:'home',pathMatch:'full'},
-// { path: 'home',component:DetailsPageComponent },
+{ path: 'home',component:SectionLandingPageComponent },
 // { path: 'details/:id',component:HomeComponent },
 
 ] },];

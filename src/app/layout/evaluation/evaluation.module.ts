@@ -6,9 +6,10 @@ import { SectionHomeComponent } from './section/section-home/section-home.compon
 import { SectionOneViewComponent } from './section/section-one-view/section-one-view.component';
 import { SectionTwoViewComponent } from './section/section-two-view/section-two-view.component';
 import { SectionThreeViewComponent } from './section/section-three-view/section-three-view.component';
+import { SectionLandingPageComponent } from './section/section-landing-page/section-landing-page.component';
 
 @NgModule({
-  declarations: [SectionHomeComponent,SectionOneViewComponent,SectionTwoViewComponent,SectionThreeViewComponent],
+  declarations: [SectionHomeComponent,SectionOneViewComponent,SectionTwoViewComponent,SectionThreeViewComponent, SectionLandingPageComponent],
   imports: [
     CommonModule,
     EvaluationRoutingModule
