@@ -13,6 +13,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FilterBarComponent } from './inner-pages/filter-bar/filter-bar.component';
 import { VisitProductivityComponent } from './inner-pages/visit-productivity/visit-productivity.component';
+import { SectionOneViewComponent } from './inner-pages/section/section-one-view/section-one-view.component';
+import { SectionTwoViewComponent } from './inner-pages/section/section-two-view/section-two-view.component';
+import { SectionThreeViewComponent } from './inner-pages/section/section-three-view/section-three-view.component';
+import { SectionHomeComponent } from './inner-pages/section/section-home/section-home.component';
 
 @NgModule({
     imports: [
@@ -35,6 +39,6 @@ import { VisitProductivityComponent } from './inner-pages/visit-productivity/vis
         MatFormFieldModule,
         MatInputModule
     ],
-    declarations: [FilterBarComponent,DashboardComponent, VisitProductivityComponent]
+    declarations: [FilterBarComponent,DashboardComponent, VisitProductivityComponent, SectionOneViewComponent, SectionTwoViewComponent, SectionThreeViewComponent, SectionHomeComponent]
 })
 export class DashboardModule {}
