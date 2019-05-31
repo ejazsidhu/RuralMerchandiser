@@ -183,73 +183,7 @@ this.httpService.ip;
 
     console.log('total score is',this.score)
   }
-  evaluateShop(){
-    let user_id=localStorage.getItem('user_id')
-    this.loading=true;
-    let req=true;
-    // if(this.selectedRemarks==0 || this.selectedRemarks==false || this.selectedRemarks==''){
-    //   this.toastr.info(`please select remarks for ALL selected criteria`);
-    //   this.loading=false;
-    //   req=false;
-    // }
-    this.cloneArray.forEach(element => {
-      
-        if (element.remarkId=='' || element.remarkId==false) {
-          this.toastr.info(`please select remarks for "${element.title}"`);
-          req=false;
-          this.loading=false;
-        }
-        
-      });
-      // this.evaluationArray.forEach(element => {
-      //   if(this.selectedRemarks==0 || this.selectedRemarks==false || this.selectedRemarks==''){
-      //     if (element.remarkId=='' || element.remarkId==false) {
-      //       this.toastr.info(`please select remarks for "${element.title}"`);
-      //       req=false;
-      //       this.loading=false;
-      //     }
-          
-      //   }});
-      
- 
-     
- if(req){
-   let pl=localStorage.getItem('productList')
-  let obj={
-    criteria:this.cloneArray,      
-    surveyId:this.surveyId,
-    evaluatorId:user_id,
-    msl:Math.ceil(this.availabilityCount || this.getAvailabilityCount(pl))
-  }
-this.evaluationService.evaluateShop(obj).subscribe((data:any)=>{
-// console.log('evaluated shop data',data);
-this.loading=false;
 
-if(data.success){
-this.toastr.success('shop evaluated successfully ');
-this .evaluationArray=[];
-this.cloneArray=[]
-this.indexList=[];
-setTimeout(() => {
-  
-// window.close();
-  
-}, 3000);
-}
-else{
-  this.toastr.info(data.errorMessage,'Info')
-}
-},error=>{
-// console.log('evaluated shop error',error)
-// window.close()
-this.loading=false;
-this.toastr.error(error.message,'Error');
-
-})
- }
-
-    
-  }
  
   showChildModal(shop): void {
     this.selectedShop=shop;

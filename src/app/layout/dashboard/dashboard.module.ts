@@ -16,7 +16,8 @@ import { VisitProductivityComponent } from './inner-pages/visit-productivity/vis
 
 import { AttendanceReportComponent } from './inner-pages/attendance-report/attendance-report.component';
 import { MerchandiserListComponent } from './inner-pages/merchandiser-list/merchandiser-list.component';
-
+import { MerchandiserProductivityComponent } from './inner-pages/merchandiser-productivity/merchandiser-productivity.component';
+import { Ng2OrderModule } from 'ng2-order-pipe';
 @NgModule({
     imports: [
         CommonModule,
@@ -36,8 +37,9 @@ import { MerchandiserListComponent } from './inner-pages/merchandiser-list/merch
         MatCardModule,
         MatNativeDateModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        Ng2OrderModule
     ],
-    declarations: [FilterBarComponent,DashboardComponent, VisitProductivityComponent, AttendanceReportComponent, MerchandiserListComponent]
+    declarations: [FilterBarComponent,DashboardComponent, VisitProductivityComponent, AttendanceReportComponent, MerchandiserListComponent, MerchandiserProductivityComponent]
 })
 export class DashboardModule {}

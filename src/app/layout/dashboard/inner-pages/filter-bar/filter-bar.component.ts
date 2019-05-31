@@ -74,7 +74,7 @@ this.loadingReportMessage=true;
   }
 
   getRegions(){
-    this.httpService.getRegion().subscribe(data=>{
+    this.httpService.getRegionFixed().subscribe(data=>{
       if(data){
         this.regions=data;
         this.loading=false;

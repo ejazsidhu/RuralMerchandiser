@@ -11,6 +11,7 @@ export class SectionOneViewComponent implements OnInit {
 
   selectedImage: any={};
   selectedShop: any;
+  ip=''
 
   constructor() { }
   ngOnChanges(changes: SimpleChanges): void {
@@ -30,5 +31,8 @@ export class SectionOneViewComponent implements OnInit {
   setSelectedImage(img){
     this.selectedImage=img;
 
+  }
+  hideChildModal(){
+  
   }
 }

@@ -19,6 +19,7 @@ import { AppComponent } from './app.component';
 
 import { ToastrModule } from 'ngx-toastr';
 import { ModalModule } from 'ngx-bootstrap';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => {
     /* for development
@@ -49,7 +50,7 @@ export const createTranslateLoader = (http: HttpClient) => {
         ToastrModule.forRoot(),
         ModalModule.forRoot(),
     ],
-    providers: [],
+    providers: [ { provide: LocationStrategy, useClass: HashLocationStrategy }],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

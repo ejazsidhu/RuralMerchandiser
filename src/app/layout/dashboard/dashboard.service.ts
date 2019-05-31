@@ -5,6 +5,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class DashboardService {
+  // ip='http://merch.concavetech.com/'
  
   // ip: any='http://192.168.3.209:8080/audit/';
   ip: any='http://192.168.3.189:8080/audit/';
@@ -23,10 +24,53 @@ export class DashboardService {
 
    }
 
+
+   merchandiserShopListCBL(obj) {
+    const body = this.UrlEncodeMaker(obj);
+    // `zoneId=${obj.zoneId}&regionId=${obj.regionId}&endDate=${obj.endDate}&startDate=${obj.startDate}&distributionId=${obj.distributionId}&cityId=${obj.cityId}&storeType=${obj.storeType}&channelId=${obj.channelId}`;
+    const url = this.ip + 'merchandiserShopListCBL';
+    return this.http.post(url, body, this.httpOptions);
+   
+  }
    public login(credentials: any) {
     // let body=JSON.stringify(credentials)
     const url = this.ip + 'pictureLogin';
     return this.http.post(url, credentials);
+  
+  }
+  getZone() {
+    this.user_id=localStorage.getItem('user_id')
+
+    const filter = JSON.stringify({ act: 0 ,userId:this.user_id});
+    const url = this.ip + 'loadFilters';
+    return this.http.post(url, filter);
+
+  }
+
+  getCities(regionId) {
+    this.user_id=localStorage.getItem('user_id')
+
+    const filter = JSON.stringify({ act: 2, regionId: regionId ,userId:this.user_id});
+    const url = this.ip + 'loadFilters';
+    return this.http.post(url, filter);
+  
+  }
+
+  getAreas(channelId) {
+    this.user_id=localStorage.getItem('user_id')
+
+    const filter = JSON.stringify({ act: 3, channelId: channelId,userId:this.user_id });
+    const url = this.ip + 'loadFilters';
+    return this.http.post(url, filter);
+
+  }
+
+   getRegion(zoneId) {
+    this.user_id=localStorage.getItem('user_id')
+
+    const filter = JSON.stringify({ act: 1, zoneId: zoneId,userId:this.user_id });
+    const url = this.ip + 'loadFilters';
+    return this.http.post(url, filter);
   
   }
   
@@ -37,7 +81,7 @@ export class DashboardService {
     return this.http.post(url, urlEncode,this.httpOptions);
   }
 
-  getRegion() {
+  getRegionFixed() {
       const filter = JSON.stringify({ act: 7});
     const url = this.ip + 'loadFilters';
     return this.http.post(url, filter);
@@ -92,4 +136,11 @@ export class DashboardService {
     return this.http.post(url, body, this.httpOptions);
   
   }
+
+  getKeyForProductivityReport(body, reportUrl) {
+    const url = this.ip + reportUrl;
+    return this.http.post(url, body, this.httpOptions);
+
+  }
+
 }

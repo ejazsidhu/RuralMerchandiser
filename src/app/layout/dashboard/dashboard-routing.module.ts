@@ -5,6 +5,7 @@ import { VisitProductivityComponent } from './inner-pages/visit-productivity/vis
 
 import { AttendanceReportComponent } from './inner-pages/attendance-report/attendance-report.component';
 import { MerchandiserListComponent } from './inner-pages/merchandiser-list/merchandiser-list.component';
+import { MerchandiserProductivityComponent } from './inner-pages/merchandiser-productivity/merchandiser-productivity.component';
 
 const routes: Routes = [
     {
@@ -15,6 +16,7 @@ const routes: Routes = [
     { path: 'visit_productivity', component: VisitProductivityComponent },
     { path: 'attendance_report', component: AttendanceReportComponent },
     { path: 'merchandiser_list', component: MerchandiserListComponent },
+    { path: 'productivity_report', component: MerchandiserProductivityComponent },
 
     { path: 'evaluation', loadChildren: '../evaluation/evaluation.module#EvaluationModule' },
 ];

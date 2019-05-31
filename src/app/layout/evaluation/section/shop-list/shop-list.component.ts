@@ -55,7 +55,7 @@ export class ShopListComponent implements OnInit {
   }
 
   gotoNewPage(id){  
-    window.open(`/dashboard/evaluation/shop_list/details/${id}`,'_blank')
+    window.open(`/#/dashboard/evaluation/shop_list/details/${id}`,'_blank')
     }
  
 
