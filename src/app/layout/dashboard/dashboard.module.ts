@@ -18,6 +18,8 @@ import { AttendanceReportComponent } from './inner-pages/attendance-report/atten
 import { MerchandiserListComponent } from './inner-pages/merchandiser-list/merchandiser-list.component';
 import { MerchandiserProductivityComponent } from './inner-pages/merchandiser-productivity/merchandiser-productivity.component';
 import { Ng2OrderModule } from 'ng2-order-pipe';
+import { ShopDetailComponent } from './inner-pages/shop-detail/shop-detail.component';
+import { ModalModule } from 'ngx-bootstrap';
 @NgModule({
     imports: [
         CommonModule,
@@ -38,8 +40,9 @@ import { Ng2OrderModule } from 'ng2-order-pipe';
         MatNativeDateModule,
         MatFormFieldModule,
         MatInputModule,
-        Ng2OrderModule
+        Ng2OrderModule,
+        ModalModule.forRoot()
     ],
-    declarations: [FilterBarComponent,DashboardComponent, VisitProductivityComponent, AttendanceReportComponent, MerchandiserListComponent, MerchandiserProductivityComponent]
+    declarations: [FilterBarComponent,DashboardComponent, VisitProductivityComponent, AttendanceReportComponent, MerchandiserListComponent, MerchandiserProductivityComponent, ShopDetailComponent]
 })
 export class DashboardModule {}

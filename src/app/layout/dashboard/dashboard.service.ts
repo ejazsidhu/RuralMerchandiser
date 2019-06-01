@@ -142,5 +142,10 @@ export class DashboardService {
     return this.http.post(url, body, this.httpOptions);
 
   }
+  getTableList(obj) {
+    const body = this.UrlEncodeMaker(obj);
+    const url = this.ip + 'completedShopListCBL';
+    return this.http.post(url, body, this.httpOptions);
+  }
 
 }
