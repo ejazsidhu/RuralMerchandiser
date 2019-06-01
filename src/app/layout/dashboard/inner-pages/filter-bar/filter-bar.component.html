@@ -88,23 +88,7 @@
                             {{getArrowType('unsuccessful')}}
                         </i>
                     </th>
-                    <!-- <th scope="col" (click)="sortIt('unvisited')" style="background:#F12E2B;color: white">Unvisited
-                                <br>
-                                <i class="material-icons arrow" style="color:white !important">
-                                  {{getArrowType('unvisited')}}
-                                  </i></th>
-                            <th scope="col" (click)="sortIt('completed_percent')">Productivity <strong>%</strong>
-                                <br>
-                                <i class="material-icons arrow">
-                                  {{getArrowType('completed_percent')}}
-                                  </i></th>
-                            <th scope="col" (click)="sortIt('successful_percent')">Successful <strong>%</strong>
-                                <br>
-                                <i class="material-icons arrow">
-                                  {{getArrowType('successful_percent')}}
-                                  </i></th>
-         -->
-
+                    
 
                 </tr>
             </thead>
@@ -117,12 +101,12 @@
                             {{item.merchandiser_name}}
                         </td>
 
-                        <td>{{item.planned}}</td>
+                        <td><a class="a-link" target="_blank" title="view shop details"
+                            [routerLink]="['/dashboard/shop_detail',item.id]"
+                            [queryParams]="{'id':item.id,'remark_id':-1}"
+                            queryParamsHandling="merge">{{item.planned}}</a></td>
                         <td class="a-link" *ngIf="item.completed!=0" title="Completed">
-                            <a class="a-link" target="_blank" title="view shop details"
-                                [routerLink]="['/dashboard/shop_detail',item.id]"
-                                [queryParams]="{'id':item.id,'remark_id':-1}"
-                                queryParamsHandling="merge">{{item.completed}}</a>
+                            {{item.completed}}
 
                         </td>
                         <td *ngIf="item.completed==0">
@@ -130,10 +114,8 @@
 
                         </td>
                         <td class="a-link" *ngIf="item.successfull!=0" title="Successful">
-                            <a class="a-link" target="_blank" title="view shop details"
-                                [routerLink]="['/dashboard/shop_detail',item.id]"
-                                [queryParams]="{'id':item.id,'remark_id':1}" queryParamsHandling="merge">
-                                {{item.successfull}}</a>
+                            
+                                {{item.successfull}}
 
                         </td>
                         <td *ngIf="item.successfull==0">
@@ -142,10 +124,8 @@
                         </td>
 
                         <td class="a-link" *ngIf="item.unsuccessful!=0" title="Un-Successful">
-                            <a class="a-link" target="_blank" title="view shop details"
-                                [routerLink]="['/dashboard/shop_detail',item.id]"
-                                [queryParams]="{'id':item.id,'remark_id':0}" queryParamsHandling="merge">
-                                {{item.unsuccessful}}</a>
+                            
+                                {{item.unsuccessful}}
 
                         </td>
                         <td *ngIf="item.unsuccessful==0">
@@ -155,9 +135,7 @@
 
 
 
-                        <!-- <td>{{item.unvisited}}</td>
-                                <td>{{getPercentage(item.completed_percent)}}</td>
-                                <td>{{getPercentage(item.successful_percent)}}</td> -->
+                     
 
                     </tr>
                 </ng-container>
