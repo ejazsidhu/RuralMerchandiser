@@ -13,7 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
+import { Ng2OrderModule } from 'ng2-order-pipe';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -35,6 +35,7 @@ export const createTranslateLoader = (http: HttpClient) => {
     declarations: [AppComponent],
     imports: [
         BrowserModule,
+        Ng2OrderModule,
         AppRoutingModule,
         BrowserAnimationsModule,
         LayoutModule,

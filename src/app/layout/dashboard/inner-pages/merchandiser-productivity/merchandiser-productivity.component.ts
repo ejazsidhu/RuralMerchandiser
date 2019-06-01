@@ -63,14 +63,14 @@ export class MerchandiserProductivityComponent implements OnInit {
 
     this.loading = true;
     let obj: any = {
-      zoneId: (this.selectedZone.id) ? this.selectedZone.id : -1,
+     // zoneId: (this.selectedZone.id) ? this.selectedZone.id : -1,
       regionId: (this.selectedRegion.id) ? this.selectedRegion.id : -1,
       startDate: (dateType == 'start') ? moment(data).format('YYYY-MM-DD') : moment(this.startDate).format('YYYY-MM-DD'),
       endDate: (dateType == 'end') ? moment(data).format('YYYY-MM-DD') : moment(this.endDate).format('YYYY-MM-DD'),
-      cityId: this.selectedCity.id || -1,
-      distributionId: this.selectedDistribution.id || -1,
-      storeType: this.selectedStoreType || null,
-      channelId: -1
+      //cityId: this.selectedCity.id || -1,
+     // distributionId: this.selectedDistribution.id || -1,
+     // storeType: this.selectedStoreType || null,
+     // channelId: -1
     }
     localStorage.setItem('obj', JSON.stringify(obj));
     this.getTableData(obj)

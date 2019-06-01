@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { DashboardService } from '../../dashboard.service';
 import * as moment from 'moment'
+import { routerNgProbeToken } from '@angular/router/src/router_module';
 @Component({
   selector: 'filter-bar',
   templateUrl: './filter-bar.component.html',
@@ -16,9 +17,10 @@ maxDate = new Date(2020, 0, 1);
 @Input() title;
 loadingData: boolean;
 regions: any = [];
-
+tableData: any=[];
 selectedRegion: any = {};
-
+sortOrder=true;
+sortBy:'completed'
 startDate = new Date();
 endDate = new Date();
 
@@ -35,6 +37,10 @@ loading = true;
   ngOnInit() {
     this.loading=true;
     this.getRegions()
+    console.log(this.router.url);
+    if(this.router.url === '/dashboard/visit_productivity'){
+      this.getTabsData();
+    }
   }
 
   downloadReport() {
@@ -138,4 +144,55 @@ loading = true;
 
   }
 
+  getTabsData(data?: any, dateType?: string) {
+
+    this.loading = true;
+    let obj: any = {
+      //zoneId: (this.selectedZone.id) ? this.selectedZone.id : -1,
+      regionId: (this.selectedRegion.id) ? this.selectedRegion.id : -1,
+      startDate: (dateType == 'start') ? moment(data).format('YYYY-MM-DD') : moment(this.startDate).format('YYYY-MM-DD'),
+      endDate: (dateType == 'end') ? moment(data).format('YYYY-MM-DD') : moment(this.endDate).format('YYYY-MM-DD'),
+      //cityId: this.selectedCity.id || -1,
+      //distributionId: this.selectedDistribution.id || -1,
+      //storeType: this.selectedStoreType || null,
+      //channelId: -1
+    }
+    localStorage.setItem('obj', JSON.stringify(obj));
+    this.getTableData(obj)
+
+
+
+
+
+  }
+  getTableData(obj) {
+
+    this.httpService.merchandiserShopListCBL(obj).subscribe(data => {
+      console.log(data, 'table data');
+      const res: any = data;
+
+      if(res) {
+      this.tableData = res;
+      }
+      this.loading = false;
+      // if (res.planned == 0)
+      //   this.toastr.info('No data available for current selection', 'Summary')
+    }, error => {
+      // this.clearLoading();
+
+      console.log(error, 'home error');
+
+    });
+  }
+  
+  sortIt(key){
+    this.sortBy=key;
+    this.sortOrder=!this.sortOrder;
+  }
+  getArrowType(key){
+    if(key==this.sortBy){
+      return (this.sortOrder)?'arrow_upward':'arrow_downward';
+    }else
+    return ''
+  }
 }
