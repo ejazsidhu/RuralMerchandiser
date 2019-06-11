@@ -26,7 +26,8 @@
                     <hr>
                     <!-- [productList]="productList" [isEditable]="isEditable" (productList)="calculateMSLAgain($event)" -->
                     <ng-container *ngIf="sec?.imageViewType===3">
-                        <!-- <section-three-view class="width-100" [data]="sec" (productList)="calculateMSLAgain($event)" (showModal)="showChildModal($event)"></section-three-view> -->
+                        <!-- (productList)="calculateMSLAgain($event)" -->
+                        <section-three-view class="width-100" [data]="sec" (showModal)="showChildModal($event)"></section-three-view>
                     </ng-container>
                 </ng-container>
 

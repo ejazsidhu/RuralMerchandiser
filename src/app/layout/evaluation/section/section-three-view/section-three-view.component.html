@@ -1,3 +1,36 @@
-<p>
-  section-three-view works!
-</p>
+<div class="row" style="border-bottom:2px solid black;width: 100%;margin: 5px 0">
+</div>
+
+<ng-container class="mt-2 justify-content-center" *ngIf="products.length>0">
+    <div class="row justify-content-center">
+        <h3><u>{{data.sectionTitle}}</u></h3>
+
+    </div>
+    <div class="col-md-12 mt-1">
+        <table class="table table-bordered table-hover" style="min-width:820px !important">
+            <thead style="background:lightgray">
+                <tr>
+                    <th>Product Name</th>
+                    <th>Trade Price</th>
+                    <th>Sale Quantity
+
+                    </th>
+                    <th>Sale Amount</th>
+
+                </tr>
+            </thead>
+            <tr *ngFor="let product of products;let j= index">
+                <td>{{product?.product_name}}</td>
+                <td>{{product?.trade_price}}</td>
+                <td>{{product?.sale_qty}}</td>
+
+                <td>{{product?.sale_amount}}</td>
+
+
+            </tr>
+
+
+        </table>
+
+    </div>
+</ng-container>
