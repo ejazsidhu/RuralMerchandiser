@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'section-one-view',
@@ -11,7 +12,7 @@ export class SectionOneViewComponent implements OnInit {
 
   selectedImage: any={};
   selectedShop: any;
-  ip=''
+  ip=environment.ip
 
   constructor() { }
   ngOnChanges(changes: SimpleChanges): void {

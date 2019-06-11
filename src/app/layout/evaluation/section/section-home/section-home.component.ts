@@ -14,7 +14,7 @@ export class SectionHomeComponent implements OnInit {
 
 
   data:any=[];
-  ip='';
+  ip=environment.ip;
 loading=false;
   selectedShop:any={}
   

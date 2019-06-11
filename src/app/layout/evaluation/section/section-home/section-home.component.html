@@ -45,7 +45,7 @@
 
 
 <div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-child-name">
-    <div class="modal-dialog ">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content" (click)="rotateImage()" style="cursor:pointer" title="click to rotate Image" [ngClass]="{'rotated-image-0': rotationDegree==0, 'rotated-image-90': rotationDegree==90, 'rotated-image-180': rotationDegree==180, 'rotated-image-270': rotationDegree==270, 'rotated-image-360': rotationDegree==360}">
             <!-- {{rotationDegree}} -->
 
@@ -56,7 +56,7 @@
         </button>
             </div> -->
             <div class="modal-body" style="padding:10px">
-                <img src="{{ip}}{{selectedShop.url}}" alt="" srcset="">
+                <img width=100% src="{{ip}}{{selectedShop.url}}" alt="" srcset="">
             </div>
         </div>
     </div>
