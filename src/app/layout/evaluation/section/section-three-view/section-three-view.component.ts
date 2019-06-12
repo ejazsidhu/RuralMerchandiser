@@ -15,7 +15,8 @@ export class SectionThreeViewComponent implements OnInit {
   @Input('isEditable') isEditable :any;
   @Output('productList') productForEmit:any=new EventEmitter<any>();
 
-  products: any;
+  products: any=[];
+  tagList:any=[]
   availability: any;
   changeColor: boolean;
   updatingMSL: boolean;
@@ -33,7 +34,8 @@ export class SectionThreeViewComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges): void {
     
     this.data=changes.data.currentValue;
-    this.products=this.data.mslTable;
+    this.products=this.data.mslTable || [];
+    this.tagList=this.data.tagsList|| []
     if(this.products.length>0)
     this.availability=this.getAvailabilityCount(this.products);
     console.log('is editable',this.isEditable)
