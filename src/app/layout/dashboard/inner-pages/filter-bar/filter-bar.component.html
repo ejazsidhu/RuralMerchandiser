@@ -86,7 +86,7 @@
                             {{getArrowType('unsuccessful')}}
                         </i>
                     </th>
-             </tr>
+                </tr>
             </thead>
             <tbody>
                 <!-- | orderBy: sortBy : sortOrder -->
@@ -99,7 +99,7 @@
 
                         <td>{{item.planned}}</td>
                         <td class="a-link" *ngIf="item.completed!=0" title="Completed">
-                                <a class="a-link" target="_blank" title="view shop details" [routerLink]="['/dashboard/shop_detail',item.id]" [queryParams]="{'id':item.id,'remark_id':-1}" queryParamsHandling="merge">
+                            <a class="a-link" target="_blank" title="view shop details" [routerLink]="['/dashboard/shop_detail',item.id]" [queryParams]="{'id':item.id,'remark_id':-1}" queryParamsHandling="merge">
                             {{item.completed}}
                         </a>
                         </td>
@@ -108,7 +108,7 @@
 
                         </td>
                         <td class="a-link" *ngIf="item.successfull!=0" title="Successful">
-                                <a class="a-link" target="_blank" title="view shop details" [routerLink]="['/dashboard/shop_detail',item.id]" [queryParams]="{'id':item.id,'remark_id':1}" queryParamsHandling="merge">
+                            <a class="a-link" target="_blank" title="view shop details" [routerLink]="['/dashboard/shop_detail',item.id]" [queryParams]="{'id':item.id,'remark_id':1}" queryParamsHandling="merge">
                             {{item.successfull}} </a>
 
                         </td>
@@ -118,7 +118,7 @@
                         </td>
 
                         <td class="a-link" *ngIf="item.unsuccessful!=0" title="Un-Successful">
-                                <a class="a-link" target="_blank" title="view shop details" [routerLink]="['/dashboard/shop_detail',item.id]" [queryParams]="{'id':item.id,'remark_id':0}" queryParamsHandling="merge">
+                            <a class="a-link" target="_blank" title="view shop details" [routerLink]="['/dashboard/shop_detail',item.id]" [queryParams]="{'id':item.id,'remark_id':0}" queryParamsHandling="merge">
                             {{item.unsuccessful}}</a>
 
                         </td>
@@ -188,7 +188,7 @@
 </mat-card>
 <!-- /attendance report -->
 
-<!-- raw data --> 
+<!-- raw data -->
 <mat-card class="mb-20" *ngIf="router.url==='/dashboard/raw_data'">
 
     <mat-card-content>
@@ -225,7 +225,7 @@
 
         <section class="example-section">
             <!-- [disabled]="selectedChannel.length<1" -->
-            <button [disabled]="!selectedQuery.id" mat-raised-button color="warn" (click)="getDashboardData()">Download</button>
+            <button [disabled]="!selectedQuery.id" mat-raised-button color="warn" (click)="downloadRawDataReport()">Download</button>
             <!-- <span *ngIf="selectedChannel.length<1" class="channel-message"><small>(channel selection is mandatory)</small></span> -->
 
         </section>
