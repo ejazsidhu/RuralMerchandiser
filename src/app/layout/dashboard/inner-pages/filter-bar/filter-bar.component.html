@@ -41,8 +41,78 @@
 
 </mat-card>
 
+<div *ngIf="tabsData" class="mb-20 animated  slideInLeft" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="10px">
 
-<mat-card *ngIf="tableData.length>0 && router.url==='/dashboard/visit_productivity'">
+    <div class="row">
+        <div class="col-md-12">
+            <mat-card>
+                <mat-card-header style="justify-content: flex-end;">
+                    <!-- <mat-card-title>
+                            <i class="material-icons refresh-btn" matTooltip="Refresh Stats" (click)="getData()">
+                                                cached
+                                                </i>
+                        </mat-card-title> -->
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div>
+                                <app-stat [bgClass]="'info'" [icon]="'assignment'" [count]="tabsData?.planned" [label]="'Planned'">
+                                </app-stat>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                <app-stat [bgClass]="'warn'" [icon]="'check_circle'" [count]="tabsData?.completed" [label]="'Visited'">
+                                </app-stat>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                <app-stat [bgClass]="'success'" [icon]="'thumb_up'" [count]="tabsData?.successful" [label]="'Productive'"></app-stat>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+
+                            <div>
+                                <app-stat [bgClass]="'danger'" [icon]="'thumb_down'" [count]="tabsData?.unsuccessful" [label]="'Un-Productive'"></app-stat>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div>
+                                <app-stat [bgClass]="'danger'" [icon]="'contact_support'" [count]="tabsData?.unvisited" [label]="'Unvisited'">
+                                </app-stat>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div>
+                                <app-stat [bgClass]="'purple'" [icon]="'check_circle'" [count]="tabsData?.completedPercent" [label]="'Productivity %'"></app-stat>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+
+                            <div>
+                                <app-stat [bgClass]="'primary'" [icon]="'thumb_up'" [count]="tabsData?.successfulPercent" [label]="'Successful %'"></app-stat>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+</div>
+
+
+
+<mat-card *ngIf="tableData.length>0 && router.url==='/dashboard/visit_productivity' ">
     <mat-card-content>
 
         <table class="table animated slideInLeft">
@@ -143,6 +213,7 @@
 
     </mat-card-content>
 </mat-card>
+
 
 <!-- /visit productivity dashboard -->
 

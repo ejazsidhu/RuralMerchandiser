@@ -155,5 +155,16 @@ export class DashboardService {
     const url = this.ip + 'loadFilters';
     return this.http.post(url, filter);
   }
+  getDashboardData(obj) {
+    let body = null;
+    if (obj != null) {
+      body = this.UrlEncodeMaker(obj)
+      // `zoneId=${obj.zoneId}&regionId=${obj.regionId}&endDate=${obj.endDate}&startDate=${obj.startDate}&distributionId=${obj.distributionId}&cityId=${obj.cityId}&storeType=${obj.storeType}&channelId=${obj.channelId}`;
+    }
+    const url = this.ip + 'dashboardDataCBL';
+    return this.http.post(url, body, this.httpOptions);
+
+
+  }
 
 }

@@ -64,6 +64,7 @@ loading = true;
     })
 
   }
+ 
 
   downloadReport() {
     if (this.endDate >= this.startDate) {
@@ -225,7 +226,19 @@ loading = true;
     this.getTableData(obj)
 
 
+    this.httpService.getDashboardData(obj).subscribe(data => {
+      // console.log(data, 'home data');
+      const res: any = data
+      if(res) {
+      this.tabsData = data;
+      }
+      this.loading = false;
+      // if (res.planned == 0)
+      //   this.toastr.info('No data available for current selection', 'Summary')
+    }, error => {
+   
 
+    })
 
 
   }
