@@ -83,11 +83,25 @@ export class DashboardService {
   }
 
   getRegionFixed() {
-      const filter = JSON.stringify({ act: 7});
+      const filter = JSON.stringify({ act: 7,userId:this.user_id});
     const url = this.ip + 'loadFilters';
     return this.http.post(url, filter);
    
   }
+
+  getRTE(regionID) {
+    const filter = JSON.stringify({ act:8 ,regionId:regionID});
+  const url = this.ip + 'loadFilters';
+  return this.http.post(url, filter);
+ 
+}
+
+getMerchandiserListRTE(rteId) {
+  const filter = JSON.stringify({ act:9 ,rteId:rteId});
+const url = this.ip + 'loadFilters';
+return this.http.post(url, filter);
+
+}
 
   public DownloadResource(obj, url) {
     let path;

@@ -29,6 +29,10 @@ endDate = new Date();
 loadingReportMessage: boolean = false;
 tabsData: any = [];
 loading = true;
+  RTEList: any=[];
+  selectedRTE:any={}
+  merchandiserRTEList: any=[];
+  selectedMerchandiserRTE:any={}
 
 //#endregion
 
@@ -47,7 +51,46 @@ loading = true;
       this.getQueryTypeList();
     }
   }
+getRTE(regionId){
+  this.httpService.getRTE(regionId).subscribe((data:any)=>{4
 
+    if(data){
+      this.RTEList=data;
+      setTimeout(() => {
+        this.loading=false;
+      }, 1000);
+    }
+
+    this.getTabsData();
+  })
+}
+getMerchandiserListRTE(regionId){
+  this.httpService.getMerchandiserListRTE(regionId).subscribe((data:any)=>{
+    if(data){
+      this.merchandiserRTEList=data;
+      setTimeout(() => {
+        this.loading=false;
+      }, 1000);
+    }
+
+
+    this.getTabsData();
+  })
+}
+  regionChange()
+  {
+this.loading=true
+    this.getRTE(this.selectedRegion.id)
+
+
+  }
+
+
+  regionRTE(){
+    this.loading=true;
+    this.getMerchandiserListRTE(this.selectedRTE.id)
+
+  }
   getQueryTypeList(){
 
     this.httpService.getQueryTypeList().subscribe(data=>{
@@ -181,11 +224,15 @@ loading = true;
   }
 
   getRegions(){
+    this.loading=true;
     this.httpService.getRegionFixed().subscribe(data=>{
       if(data){
         this.regions=data;
-        this.loading=false;
+        
         this.selectedRegion=data[0]
+        setTimeout(() => {
+          this.loading=false;
+        }, 1000);
       }
      
     })

@@ -12,8 +12,18 @@
         </mat-card-title>
         <section class="example-section" *ngIf="regions.length>0">
             <mat-form-field *ngIf="regions.length>0" class="example-margin mr-10-IMP">
-                <mat-select placeholder="Region" name='region' [(ngModel)]="selectedRegion" (ngModelChange)="getTabsData()">
+                <mat-select placeholder="Region" name='region' [(ngModel)]="selectedRegion" (ngModelChange)="regionChange()">
                     <mat-option [value]="region" *ngFor="let region of regions">{{region.title}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field *ngIf="RTEList.length>0" class="example-margin mr-10-IMP">
+                <mat-select placeholder="RTE" name='rte' [(ngModel)]="selectedRTE" (ngModelChange)="regionRTE()">
+                    <mat-option [value]="rte" *ngFor="let rte of RTEList">{{rte.title}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field *ngIf="merchandiserRTEList.length>0" class="example-margin mr-10-IMP">
+                <mat-select placeholder="Merchandisers" name='merchandiser' [(ngModel)]="selectedMerchandiserRTE">
+                    <mat-option [value]="merchandiser" *ngFor="let merchandiser of merchandiserRTEList">{{merchandiser.title}}</mat-option>
                 </mat-select>
             </mat-form-field>
 
