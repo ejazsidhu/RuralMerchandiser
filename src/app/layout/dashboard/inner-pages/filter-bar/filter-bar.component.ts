@@ -18,6 +18,8 @@ maxDate = new Date(2020, 0, 1);
 loadingData: boolean;
 regions: any = [];
 tableData: any=[];
+queryList: any=[];
+selectedQuery:any={};
 selectedRegion: any = {};
 sortOrder=true;
 sortBy:'completed'
@@ -41,6 +43,26 @@ loading = true;
     if(this.router.url === '/dashboard/visit_productivity'){
       this.getTabsData();
     }
+    if (this.router.url === '/dashboard/raw_data'){
+      this.getQueryTypeList();
+    }
+  }
+
+  getQueryTypeList(){
+
+    this.httpService.getQueryTypeList().subscribe(data=>{
+      console.log('qurry list',data);
+      if(data)
+      this.queryList=data;
+
+    },error=>{
+      (error.status === 0) ?
+                this.toastr.error('Please check Internet Connection', 'Error') :
+                this.toastr.error(error.description, 'Error');
+
+
+    })
+
   }
 
   downloadReport() {

@@ -7,6 +7,7 @@ import { AttendanceReportComponent } from './inner-pages/attendance-report/atten
 import { MerchandiserListComponent } from './inner-pages/merchandiser-list/merchandiser-list.component';
 import { MerchandiserProductivityComponent } from './inner-pages/merchandiser-productivity/merchandiser-productivity.component';
 import { ShopDetailComponent } from './inner-pages/shop-detail/shop-detail.component';
+import { RawDataComponent } from './raw-data/raw-data.component';
 
 const routes: Routes = [
     {
@@ -18,7 +19,7 @@ const routes: Routes = [
     { path: 'attendance_report', component: AttendanceReportComponent },
     { path: 'merchandiser_list', component: MerchandiserListComponent },
     { path: 'productivity_report', component: MerchandiserProductivityComponent },
-
+    { path: 'raw_data', component: RawDataComponent },
     { path: 'evaluation', loadChildren: '../evaluation/evaluation.module#EvaluationModule' },
     { path: 'shop_detail/:id', component: ShopDetailComponent },
 ];

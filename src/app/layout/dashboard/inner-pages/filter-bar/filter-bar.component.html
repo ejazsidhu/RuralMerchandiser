@@ -86,10 +86,7 @@
                             {{getArrowType('unsuccessful')}}
                         </i>
                     </th>
-                    
-
-
-                </tr>
+             </tr>
             </thead>
             <tbody>
                 <!-- | orderBy: sortBy : sortOrder -->
@@ -190,3 +187,51 @@
     </mat-card-content>
 </mat-card>
 <!-- /attendance report -->
+
+<!-- raw data --> 
+<mat-card class="mb-20" *ngIf="router.url==='/dashboard/raw_data'">
+
+    <mat-card-content>
+        <mat-card-title>
+            {{title| uppercase}} <i color="warn" [ngClass]="{'fa fa-cog fa-spin':loadingData}"></i>
+            <small style="color:lightseagreen !important" class="mtb-5-IMP" *ngIf="loadingReportMessage">Your file is being prepared for download</small>
+        </mat-card-title>
+        <section class="example-section">
+
+            <mat-form-field class="example-margin mr-10-IMP" *ngIf="queryList.length>0">
+                <mat-select placeholder="Query Type" name='queryList' [(ngModel)]="selectedQuery">
+                    <ng-container *ngFor="let query of queryList">
+                        <mat-option [value]="query">{{query.name}}</mat-option>
+                    </ng-container>
+
+                </mat-select>
+            </mat-form-field>
+
+
+
+
+            <mat-form-field class="example-full-width mr-10-IMP">
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker0" [(ngModel)]="startDate" placeholder="Choose a start date" readonly>
+                <mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
+                <mat-datepicker #picker0></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="example-full-width mr-10-IMP">
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker1" [(ngModel)]="endDate" placeholder="Choose a end date" readonly>
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+
+        </section>
+
+        <section class="example-section">
+            <!-- [disabled]="selectedChannel.length<1" -->
+            <button [disabled]="!selectedQuery.id" mat-raised-button color="warn" (click)="getDashboardData()">Download</button>
+            <!-- <span *ngIf="selectedChannel.length<1" class="channel-message"><small>(channel selection is mandatory)</small></span> -->
+
+        </section>
+
+
+    </mat-card-content>
+</mat-card>
+
+<!-- / raw data -->

@@ -9,7 +9,7 @@ import { StatModule } from '../../shared/modules/stat/stat.module';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { RawDataComponent } from './raw-data/raw-data.component';
 import { FormsModule } from '@angular/forms';
 import { FilterBarComponent } from './inner-pages/filter-bar/filter-bar.component';
 import { VisitProductivityComponent } from './inner-pages/visit-productivity/visit-productivity.component';
@@ -43,6 +43,6 @@ import { ModalModule } from 'ngx-bootstrap';
         Ng2OrderModule,
         ModalModule.forRoot()
     ],
-    declarations: [FilterBarComponent,DashboardComponent, VisitProductivityComponent, AttendanceReportComponent, MerchandiserListComponent, MerchandiserProductivityComponent, ShopDetailComponent]
+    declarations: [FilterBarComponent,DashboardComponent, VisitProductivityComponent, AttendanceReportComponent, MerchandiserListComponent, MerchandiserProductivityComponent, ShopDetailComponent,RawDataComponent]
 })
 export class DashboardModule {}
