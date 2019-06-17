@@ -16,51 +16,51 @@ export class LoginComponent implements OnInit {
         userName: '',
         password: ''
     };
-    loading=false;
-    constructor(private router: Router,private httpService:DashboardService,private toastr:ToastrService) {}
+    loading = false;
+    constructor(private router: Router, private httpService: DashboardService, private toastr: ToastrService) { }
 
-  
+
     ngOnInit() {
 
         localStorage.clear();
-     }
+    }
 
     onLogin(loginForm: any) {
-        this.loading=true;
+        this.loading = true;
         console.log(loginForm);
 
 
-        this.httpService.login(loginForm).subscribe((data:Response) => {
+        this.httpService.login(loginForm).subscribe((data: Response) => {
             const res: any = data;
-            localStorage.clear();   
+            localStorage.clear();
             // console.log('data', data.headers);
             // this.toastr.success(res, 'Login Status');
             localStorage.setItem('isLoggedin', 'true');
-            localStorage.setItem('today',moment(new Date).format('YYYY-MM-DD'))
+            localStorage.setItem('today', moment(new Date).format('YYYY-MM-DD'))
             localStorage.setItem('user_id', res.user.user_id);
             localStorage.setItem('regionId', res.user.regionId);
             localStorage.setItem('user_name', res.user.userName);
             localStorage.setItem('menu', JSON.stringify(res.list));
 
-            if(res.user.typeID==16)
-            this.router.navigate(['/dashboard/merchandiser_List']);
+            if (res.user.typeID == 16)
+                this.router.navigate(['/dashboard/merchandiser_List']);
             else
-            this.router.navigate(['/dashboard']);
+                this.router.navigate(['/dashboard']);
 
-            
+
 
             setTimeout(() => {
-                this.loading=false;
+                this.loading = false;
             }, 30000);
 
-        }, (error:HttpErrorResponse) => {
+        }, (error: HttpErrorResponse) => {
 
 
             this.toastr.error(error.message, 'Login Status');
             console.log('error', error);
-            this.loading=false;
+            this.loading = false;
 
-            
+
 
 
         });
