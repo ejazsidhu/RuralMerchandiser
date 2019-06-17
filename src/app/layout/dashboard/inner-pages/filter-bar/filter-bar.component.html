@@ -141,6 +141,12 @@
                             {{getArrowType('merchandiser_name')}}
                         </i>
                     </th>
+                    <th scope="col" (click)="sortIt('planned')">Total Village
+                        <br>
+                        <i class="material-icons arrow">
+                            {{getArrowType('total_village')}}
+                        </i>
+                    </th>
                     <th scope="col" (click)="sortIt('planned')">Total Shops
                         <br>
                         <i class="material-icons arrow">
@@ -174,6 +180,9 @@
                         <td scope="row">{{item.merchandiser_code}}</td>
                         <td>
                             {{item.merchandiser_name}}
+                        </td>
+                        <td>
+                            {{item.total_village}}
                         </td>
 
                         <td>{{item.planned}}</td>

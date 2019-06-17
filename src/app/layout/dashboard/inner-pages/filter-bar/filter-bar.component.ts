@@ -264,8 +264,8 @@ this.loading=true
       regionId: (this.selectedRegion.id) ? this.selectedRegion.id : localStorage.getItem('regionId'),
       startDate: (dateType == 'start') ? moment(data).format('YYYY-MM-DD') : moment(this.startDate).format('YYYY-MM-DD'),
       endDate: (dateType == 'end') ? moment(data).format('YYYY-MM-DD') : moment(this.endDate).format('YYYY-MM-DD'),
-      // rteId: this.selectedRTE.id || -1,
-      // merchandiserId:this.selectedMerchandiserRTE.id || -1
+      rteId: this.selectedRTE.id || -1,
+      merchandiserId:this.selectedMerchandiserRTE.id || -1
       
     }
     localStorage.setItem('obj', JSON.stringify(obj));
