@@ -5,10 +5,10 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class DashboardService {
-  // ip='http://merch.concavetech.com/'
+  ip='http://merch.concavetech.com/'
  
   // ip: any='http://192.168.3.209:8080/audit/';
-  ip: any='http://192.168.3.189:8080/audit/';
+  // ip: any='http://192.168.3.189:8080/audit/';
   // ip: any='http://192.168.3.94:8080/audit/';
 
   httpOptions = {
@@ -83,6 +83,7 @@ export class DashboardService {
   }
 
   getRegionFixed() {
+    this.user_id=localStorage.getItem('user_id');
       const filter = JSON.stringify({ act: 7,userId:this.user_id});
     const url = this.ip + 'loadFilters';
     return this.http.post(url, filter);

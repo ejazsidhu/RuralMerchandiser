@@ -32,12 +32,13 @@ export class LoginComponent implements OnInit {
 
         this.httpService.login(loginForm).subscribe((data:Response) => {
             const res: any = data;
-        
+            localStorage.clear();   
             // console.log('data', data.headers);
             // this.toastr.success(res, 'Login Status');
             localStorage.setItem('isLoggedin', 'true');
             localStorage.setItem('today',moment(new Date).format('YYYY-MM-DD'))
             localStorage.setItem('user_id', res.user.user_id);
+            localStorage.setItem('regionId', res.user.regionId);
             localStorage.setItem('user_name', res.user.userName);
             localStorage.setItem('menu', JSON.stringify(res.list));
 

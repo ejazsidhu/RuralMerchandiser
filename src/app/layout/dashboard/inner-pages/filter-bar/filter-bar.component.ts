@@ -229,7 +229,7 @@ this.loading=true
       if(data){
         this.regions=data;
         
-        this.selectedRegion=data[0]
+        //this.selectedRegion=data[0]
         setTimeout(() => {
           this.loading=false;
         }, 1000);
@@ -261,7 +261,7 @@ this.loading=true
     this.loading = true;
     let obj: any = {
       //zoneId: (this.selectedZone.id) ? this.selectedZone.id : -1,
-      regionId: (this.selectedRegion.id) ? this.selectedRegion.id : -1,
+      regionId: (this.selectedRegion.id) ? this.selectedRegion.id : localStorage.getItem('regionId'),
       startDate: (dateType == 'start') ? moment(data).format('YYYY-MM-DD') : moment(this.startDate).format('YYYY-MM-DD'),
       endDate: (dateType == 'end') ? moment(data).format('YYYY-MM-DD') : moment(this.endDate).format('YYYY-MM-DD'),
       // rteId: this.selectedRTE.id || -1,
