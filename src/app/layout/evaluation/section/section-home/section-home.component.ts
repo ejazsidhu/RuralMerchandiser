@@ -13,46 +13,46 @@ import { ModalDirective } from 'ngx-bootstrap';
 export class SectionHomeComponent implements OnInit {
 
 
-  data:any=[];
-  ip=environment.ip;
-loading=false;
-  selectedShop:any={}
-  
+  data: any = [];
+  ip = environment.ip;
+  loading = false;
+  selectedShop: any = {}
+
   @ViewChild('childModal') childModal: ModalDirective;
 
 
-  score: any=0;
- 
-  indexList:any=[];
-  surveyId: any=0;
-  remarksList: any=[];
-  selectedRemarks:any=false;
-  selectedCriteria: any={};
-  evaluationArray: any=[];
-  productList: any=[];
+  score: any = 0;
+
+  indexList: any = [];
+  surveyId: any = 0;
+  remarksList: any = [];
+  selectedRemarks: any = false;
+  selectedCriteria: any = {};
+  evaluationArray: any = [];
+  productList: any = [];
   msl: any;
   availabilityCount: number;
-  cloneArray: any=[];
-  isFromShop: boolean=true;
-  rotationDegree: number=0;
-  isEditable: any=false;
- 
-  constructor(private toastr:ToastrService,private activatedRoutes:ActivatedRoute,private httpService:EvaluationService) { 
+  cloneArray: any = [];
+  isFromShop: boolean = true;
+  rotationDegree: number = 0;
+  isEditable: any = false;
+
+  constructor(private toastr: ToastrService, private activatedRoutes: ActivatedRoute, private httpService: EvaluationService) {
     this.surveyId
-this.httpService.ip;
-    this.activatedRoutes.queryParams.subscribe(q=>{
+    this.httpService.ip;
+    this.activatedRoutes.queryParams.subscribe(q => {
 
-      if(q.location)
-      this.isFromShop=false;
+      if (q.location)
+        this.isFromShop = false;
     })
-    this.activatedRoutes.params.subscribe(params=>{
+    this.activatedRoutes.params.subscribe(params => {
 
 
-      this.surveyId=params.id;
+      this.surveyId = params.id;
 
-      let obj={
-        surveyId:this.surveyId,
-    // userId:localStorage.getItem('user_id')
+      let obj = {
+        surveyId: this.surveyId,
+        userTypeId: localStorage.getItem('user_type')
       }
 
       this.getData(obj)
@@ -64,34 +64,34 @@ this.httpService.ip;
   }
 
 
-  rotateImage(){
-    if(this.rotationDegree==360){
-      this.rotationDegree=90;
+  rotateImage() {
+    if (this.rotationDegree == 360) {
+      this.rotationDegree = 90;
     }
-    else{
-    this.rotationDegree+=90;
+    else {
+      this.rotationDegree += 90;
     }
-    
+
 
   }
-  getData(obj){
+  getData(obj) {
 
-    this.httpService.getShopDetails(obj).subscribe(data=>{
-      if(data){
-        this.data=data;
+    this.httpService.getShopDetails(obj).subscribe(data => {
+      if (data) {
+        this.data = data;
 
-    document.title=this.data.section[0].sectionTitle;
-    if(this.data.criteria){
-      this.evaluationArray=this.data.criteria;
-      this.cloneArray=this.evaluationArray.slice();
-    }
-   
+        document.title = this.data.section[0].sectionTitle;
+        if (this.data.criteria) {
+          this.evaluationArray = this.data.criteria;
+          this.cloneArray = this.evaluationArray.slice();
+        }
+
 
         // console.log(this.data)
         // this.remarksList=this.data.remarks;
-        this.productList=this.data.productList;
+        this.productList = this.data.productList;
 
-        localStorage.setItem('productList',JSON.stringify(this.productList))
+        localStorage.setItem('productList', JSON.stringify(this.productList))
         // this.msl=this.data.msl;
         // this.isEditable=this.data.isEditable || this.isEditable;
         // if(this.productList.length>0)
@@ -100,52 +100,52 @@ this.httpService.ip;
         // this.calculateScore();
 
       }
-   
-    },error=>{})
+
+    }, error => { })
 
   }
 
-  calculateMSLAgain(products){
-   this.msl=this.data.msl
-   localStorage.setItem('productList',JSON.stringify(products));
-   this.productList=localStorage.getItem('productList');
+  calculateMSLAgain(products) {
+    this.msl = this.data.msl
+    localStorage.setItem('productList', JSON.stringify(products));
+    this.productList = localStorage.getItem('productList');
 
-    this.availabilityCount=this.getAvailabilityCount(products);
-    
+    this.availabilityCount = this.getAvailabilityCount(products);
+
   }
 
-  getAvailabilityCount(products)
-  { if(!products){
-    products=localStorage.getItem('productList')
+  getAvailabilityCount(products) {
+    if (!products) {
+      products = localStorage.getItem('productList')
+    }
+    let pro = products.map(p => p.available_sku)
+    let sum = pro.reduce((a, v) => a + v);
+    return (sum / pro.length) * (this.msl);
   }
-    let pro=products.map(p=>p.available_sku)
-    let sum=pro.reduce((a,v)=>a+v);
-    return (sum/pro.length)*(this.msl);
-  }
-  
-  getCriteriaWithRemarks(remarks,criteria){
-    let obj={
-      remarkId:remarks,
-      id:criteria.id,
-      title:criteria.title,
-      score:0
+
+  getCriteriaWithRemarks(remarks, criteria) {
+    let obj = {
+      remarkId: remarks,
+      id: criteria.id,
+      title: criteria.title,
+      score: 0
     }
     this.cloneArray.forEach(element => {
 
-      var i=this.cloneArray.findIndex(e=>e.id==criteria.id);
-      this.cloneArray.splice(i,1,obj);
-      
+      var i = this.cloneArray.findIndex(e => e.id == criteria.id);
+      this.cloneArray.splice(i, 1, obj);
+
     });
 
     // this.evaluationArray.push(obj);
-    console.log('evaluation array clone',this.cloneArray);
+    console.log('evaluation array clone', this.cloneArray);
     // this.hideRemarksModal();
-    this.selectedRemarks=''
+    this.selectedRemarks = ''
 
 
   }
   // counter(event,criteria,index){
-    
+
   //   // console.dir(event.checked)
   //   if(event.checked){
   //     this.score=this.score-criteria.score;
@@ -170,32 +170,35 @@ this.httpService.ip;
   //       let e=this.evaluationArray.findIndex(i=>i.id==criteria.id)
   //       this.cloneArray.splice(e,1,obj);
   //     console.log('unchecked evaluation array',this.cloneArray)
-        
+
   //     }
-      
+
   //   }
   // }
 
-  calculateScore(){
+  calculateScore() {
     this.score
-    this.data.criteria.map(c=>{this.score+=c.score});
+    this.data.criteria.map(c => { this.score += c.score });
     // this.score=this.score-(this.msl);
 
-    console.log('total score is',this.score)
+    console.log('total score is', this.score)
   }
 
- 
+
   showChildModal(shop): void {
-    this.selectedShop=shop;
-    this.rotationDegree=0;
+    this.selectedShop = shop;
+    this.rotationDegree = 0;
     this.childModal.show();
   }
- 
+
   hideChildModal(): void {
-  
+
     this.childModal.hide();
-   
+
   }
+
+  evaluateShop(){
+    
 
   // showRemarksModal(){
   //   this.remarksModal.show()

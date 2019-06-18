@@ -17,7 +17,7 @@ const routes: Routes = [
     },
     { path: 'visit_productivity', component: VisitProductivityComponent },
     { path: 'attendance_report', component: AttendanceReportComponent },
-    { path: 'merchandiser_list', component: MerchandiserListComponent },
+    { path: 'merchandiser_List', component: MerchandiserListComponent },
     { path: 'productivity_report', component: MerchandiserProductivityComponent },
     { path: 'raw_data', component: RawDataComponent },
     { path: 'evaluation', loadChildren: '../evaluation/evaluation.module#EvaluationModule' },

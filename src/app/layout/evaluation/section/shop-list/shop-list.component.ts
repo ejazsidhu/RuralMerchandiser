@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { EvaluationService } from '../../evaluation.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-shop-list',
@@ -55,7 +56,7 @@ export class ShopListComponent implements OnInit {
   }
 
   gotoNewPage(id){  
-    window.open(`/#/dashboard/evaluation/shop_list/details/${id}`,'_blank')
+    window.open(`${environment.hash}dashboard/evaluation/shop_list/details/${id}`,'_blank')
     }
  
 
