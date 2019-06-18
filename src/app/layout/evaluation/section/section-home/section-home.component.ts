@@ -197,7 +197,7 @@ export class SectionHomeComponent implements OnInit {
 
   }
 
-  evaluateShop(){
+  evaluateShop(){}
     
 
   // showRemarksModal(){

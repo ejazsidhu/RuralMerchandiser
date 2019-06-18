@@ -45,7 +45,7 @@ export class ShopListComponent implements OnInit {
         this.loading=false;
         this.toastr.info('No record found.');
         setTimeout(() => {
-        this.router.navigate(['/dashboard/merchandiser_list'])  
+        this.router.navigate(['/dashboard/merchandiser_List'])  
         }, 1000);
       }
     this.headingsList=Object.keys(data);
