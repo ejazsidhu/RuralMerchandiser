@@ -9,6 +9,7 @@ import { SectionThreeViewComponent } from './section/section-three-view/section-
 import { SectionLandingPageComponent } from './section/section-landing-page/section-landing-page.component';
 import { ModalModule } from 'ngx-bootstrap';
 import { ShopListComponent } from './section/shop-list/shop-list.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [SectionHomeComponent,SectionOneViewComponent,SectionTwoViewComponent,SectionThreeViewComponent, SectionLandingPageComponent, ShopListComponent],
@@ -16,7 +17,7 @@ import { ShopListComponent } from './section/shop-list/shop-list.component';
     CommonModule,
     EvaluationRoutingModule,
     ModalModule.forRoot(),
-
+FormsModule
   ]
 })
 export class EvaluationModule { }

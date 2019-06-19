@@ -27,7 +27,7 @@ export class SectionHomeComponent implements OnInit {
   surveyId: any = 0;
   remarksList: any = [];
   selectedRemarks: any = false;
-  selectedCriteria: any = {};
+  selectedCriteria: any =0;
   evaluationArray: any = [];
   productList: any = [];
   msl: any;
@@ -83,6 +83,7 @@ export class SectionHomeComponent implements OnInit {
         document.title = this.data.section[0].sectionTitle;
         if (this.data.criteria) {
           this.evaluationArray = this.data.criteria;
+          this.selectedCriteria=this.data.criteria[0].id;
           this.cloneArray = this.evaluationArray.slice();
         }
 
@@ -197,7 +198,39 @@ export class SectionHomeComponent implements OnInit {
 
   }
 
-  evaluateShop(){}
+  evaluateShop(){
+
+    let obj={
+      criteriaId:this.selectedCriteria,
+      surveyId:this.surveyId,
+      evaluatorId:localStorage.getItem('user_id')
+    }
+    console.log('selected criteria',obj);
+    this.httpService.evaluateShop(obj).subscribe((data:any)=>{
+      // console.log('evaluated shop data',data);
+      this.loading=false;
+      
+      if(data.success){
+      this.toastr.success('shop evaluated successfully ');
+  
+      setTimeout(() => {
+        
+      window.close();
+        
+      }, 2000);
+      }
+      else{
+        this.toastr.info(data.errorMessage,'Info')
+      }
+      },error=>{
+      // console.log('evaluated shop error',error)
+      // window.close()
+      this.loading=false;
+      this.toastr.error(error.message,'Error');
+      
+      })
+
+  }
     
 
   // showRemarksModal(){

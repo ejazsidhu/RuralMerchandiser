@@ -55,8 +55,9 @@ export class ShopListComponent implements OnInit {
 
   }
 
-  gotoNewPage(id){  
-    window.open(`${environment.hash}dashboard/evaluation/shop_list/details/${id}`,'_blank')
+  gotoNewPage(item){  
+    if(item.flag!=1)
+    window.open(`${environment.hash}dashboard/evaluation/shop_list/details/${item.survey_id}`,'_blank')
     }
  
 
