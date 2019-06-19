@@ -56,10 +56,25 @@ export class LoginComponent implements OnInit {
 
         }, (error: HttpErrorResponse) => {
 
+            if(error.status==403){
+                this.toastr.error(error.error.description,'Login Status')
+            }
+            else if(error.status==400){
+                this.toastr.error(error.error.description,'Login Status')
+            }
+            else if(error.status==500){
+                this.toastr.error('Internal server error','Login Status')
 
-            this.toastr.error(error.message, 'Login Status');
-            console.log('error', error);
+            }
+            else{
+                this.toastr.error(error.message, 'Login Status');
+                console.log('error', error);
+            }
             this.loading = false;
+
+
+
+            
 
 
 
