@@ -20,6 +20,7 @@ import { MerchandiserProductivityComponent } from './inner-pages/merchandiser-pr
 import { Ng2OrderModule } from 'ng2-order-pipe';
 import { ShopDetailComponent } from './inner-pages/shop-detail/shop-detail.component';
 import { ModalModule } from 'ngx-bootstrap';
+import { UniqueBaseProductivityComponent } from './inner-pages/unique-base-productivity/unique-base-productivity.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -43,6 +44,6 @@ import { ModalModule } from 'ngx-bootstrap';
         Ng2OrderModule,
         ModalModule.forRoot()
     ],
-    declarations: [FilterBarComponent,DashboardComponent, VisitProductivityComponent, AttendanceReportComponent, MerchandiserListComponent, MerchandiserProductivityComponent, ShopDetailComponent,RawDataComponent]
+    declarations: [FilterBarComponent,DashboardComponent, VisitProductivityComponent, AttendanceReportComponent, MerchandiserListComponent, MerchandiserProductivityComponent, ShopDetailComponent,RawDataComponent, UniqueBaseProductivityComponent]
 })
 export class DashboardModule {}

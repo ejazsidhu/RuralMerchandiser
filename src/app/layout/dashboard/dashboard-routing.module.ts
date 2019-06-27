@@ -8,6 +8,7 @@ import { MerchandiserListComponent } from './inner-pages/merchandiser-list/merch
 import { MerchandiserProductivityComponent } from './inner-pages/merchandiser-productivity/merchandiser-productivity.component';
 import { ShopDetailComponent } from './inner-pages/shop-detail/shop-detail.component';
 import { RawDataComponent } from './raw-data/raw-data.component';
+import { UniqueBaseProductivityComponent } from './inner-pages/unique-base-productivity/unique-base-productivity.component';
 
 const routes: Routes = [
     {
@@ -17,6 +18,7 @@ const routes: Routes = [
     },
     { path: 'visit_productivity', component: VisitProductivityComponent },
     { path: 'attendance_report', component: AttendanceReportComponent },
+    { path: 'unique-base-productivity', component: UniqueBaseProductivityComponent },
     { path: 'merchandiser_List', component: MerchandiserListComponent },
     { path: 'productivity_report', component: MerchandiserProductivityComponent },
     { path: 'raw_data', component: RawDataComponent },

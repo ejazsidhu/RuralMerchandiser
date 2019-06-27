@@ -54,8 +54,6 @@ export class FilterBarComponent implements OnInit {
   }
   getRTE(regionId) {
     this.httpService.getRTE(regionId).subscribe((data: any) => {
-      4
-
       if (data) {
         this.RTEList = data;
         setTimeout(() => {
@@ -129,6 +127,8 @@ export class FilterBarComponent implements OnInit {
         regionId: this.selectedRegion.id || -1,
         startDate: moment(this.startDate).format('YYYY-MM-DD'),
         endDate: moment(this.endDate).format('YYYY-MM-DD'),
+        rteId: this.selectedRTE.id || -1,
+        merchandiserId: this.selectedMerchandiserRTE.id || -1,
       }
 
       let url = 'visitProductivityReport';
@@ -158,6 +158,43 @@ export class FilterBarComponent implements OnInit {
 
   }
 
+
+  downloadUniqueBaseProductivityReport() {
+    if (this.endDate >= this.startDate) {
+      this.loadingReportMessage = true;
+      this.loadingData = true;
+      let obj = {
+        regionId: this.selectedRegion.id || -1,
+        startDate: moment(this.startDate).format('YYYY-MM-DD'),
+        endDate: moment(this.endDate).format('YYYY-MM-DD'),
+      }
+
+      let url = 'capturedAbnormalUnvisited';
+      let body = this.httpService.UrlEncodeMaker(obj);
+      this.httpService.getKeyForReport(url, body).subscribe(data => {
+        let res: any = data
+
+        if (res) {
+          let obj2 = {
+            key: res.key,
+            fileType: 'json.fileType'
+          }
+          let url = 'downloadReport'
+          this.getproductivityDownload(obj2, url)
+        } else {
+          // this.clearLoading()
+
+          this.toastr.info('Something went wrong,Please retry', 'Connectivity Message')
+        }
+      })
+
+    }
+    else {
+      this.toastr.info('End date must be greater than start date', 'Date Selection')
+
+    }
+
+  }
 
   downloadRawDataReport() {
 
@@ -259,6 +296,7 @@ export class FilterBarComponent implements OnInit {
     }, 1000);
 
   }
+
   getAttendanceDownload(obj, url) {
     const u = url
     this.httpService.DownloadResource(obj, u);
