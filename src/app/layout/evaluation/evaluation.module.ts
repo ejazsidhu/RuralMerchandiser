@@ -10,14 +10,17 @@ import { SectionLandingPageComponent } from './section/section-landing-page/sect
 import { ModalModule } from 'ngx-bootstrap';
 import { ShopListComponent } from './section/shop-list/shop-list.component';
 import { FormsModule } from '@angular/forms';
+import { SectionFourComponent } from './section/section-four/section-four.component';
+import { MatCardModule } from '@angular/material';
 
 @NgModule({
-  declarations: [SectionHomeComponent,SectionOneViewComponent,SectionTwoViewComponent,SectionThreeViewComponent, SectionLandingPageComponent, ShopListComponent],
+  declarations: [SectionHomeComponent,SectionOneViewComponent,SectionTwoViewComponent,SectionThreeViewComponent, SectionLandingPageComponent, ShopListComponent, SectionFourComponent],
   imports: [
     CommonModule,
     EvaluationRoutingModule,
     ModalModule.forRoot(),
-FormsModule
+FormsModule,
+MatCardModule,
   ]
 })
 export class EvaluationModule { }
