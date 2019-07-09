@@ -58,6 +58,7 @@ export class FilterBarComponent implements OnInit {
         this.RTEList = data;
         setTimeout(() => {
           this.loading = false;
+          this.loadingData = false;
         }, 1000);
       }
 
@@ -70,6 +71,7 @@ export class FilterBarComponent implements OnInit {
         this.merchandiserRTEList = data;
         setTimeout(() => {
           this.loading = false;
+          this.loadingData = false;
         }, 1000);
       }
 
@@ -79,6 +81,7 @@ export class FilterBarComponent implements OnInit {
   }
   regionChange() {
     this.loading = true;
+    this.loadingData = true;
     this.RTEList = [];
     this.selectedRTE = {};
     this.merchandiserRTEList = [];
@@ -94,6 +97,7 @@ export class FilterBarComponent implements OnInit {
     this.merchandiserRTEList = [];
     this.selectedMerchandiserRTE = {};
     this.loading = true;
+    this.loadingData = true;
     this.getMerchandiserListRTE(this.selectedRTE.id);
 
   }
@@ -278,6 +282,8 @@ export class FilterBarComponent implements OnInit {
         regionId: this.selectedRegion.id || -1,
         startDate: moment(this.startDate).format('YYYY-MM-DD'),
         endDate: moment(this.endDate).format('YYYY-MM-DD'),
+        rteId: this.selectedRTE.id || -1,
+        merchandiserId: this.selectedMerchandiserRTE.id || -1
       };
 
       const url = 'saleDataReport';
