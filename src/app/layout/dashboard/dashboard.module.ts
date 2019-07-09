@@ -21,6 +21,8 @@ import { Ng2OrderModule } from 'ng2-order-pipe';
 import { ShopDetailComponent } from './inner-pages/shop-detail/shop-detail.component';
 import { ModalModule } from 'ngx-bootstrap';
 import { UniqueBaseProductivityComponent } from './inner-pages/unique-base-productivity/unique-base-productivity.component';
+import { SaleDataReportComponent } from './inner-pages/sale-data-report/sale-data-report.component';
+import { StockPopLoadingComponent } from './inner-pages/stock-pop-loading/stock-pop-loading.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -44,6 +46,6 @@ import { UniqueBaseProductivityComponent } from './inner-pages/unique-base-produ
         Ng2OrderModule,
         ModalModule.forRoot()
     ],
-    declarations: [FilterBarComponent,DashboardComponent, VisitProductivityComponent, AttendanceReportComponent, MerchandiserListComponent, MerchandiserProductivityComponent, ShopDetailComponent,RawDataComponent, UniqueBaseProductivityComponent]
+    declarations: [FilterBarComponent,DashboardComponent, VisitProductivityComponent, AttendanceReportComponent, MerchandiserListComponent, MerchandiserProductivityComponent, ShopDetailComponent,RawDataComponent, UniqueBaseProductivityComponent, SaleDataReportComponent, StockPopLoadingComponent]
 })
 export class DashboardModule {}

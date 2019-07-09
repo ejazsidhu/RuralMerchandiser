@@ -9,21 +9,26 @@ import { MerchandiserProductivityComponent } from './inner-pages/merchandiser-pr
 import { ShopDetailComponent } from './inner-pages/shop-detail/shop-detail.component';
 import { RawDataComponent } from './raw-data/raw-data.component';
 import { UniqueBaseProductivityComponent } from './inner-pages/unique-base-productivity/unique-base-productivity.component';
+import { SaleDataReportComponent } from './inner-pages/sale-data-report/sale-data-report.component';
+import { StockPopLoadingComponent } from './inner-pages/stock-pop-loading/stock-pop-loading.component';
 
 const routes: Routes = [
     {
         path: '',
-        redirectTo:'visit_productivity'
-        
+        redirectTo: 'visit_productivity'
+
     },
     { path: 'visit_productivity', component: VisitProductivityComponent },
     { path: 'attendance_report', component: AttendanceReportComponent },
     { path: 'unique-base-productivity', component: UniqueBaseProductivityComponent },
     { path: 'merchandiser_List', component: MerchandiserListComponent },
     { path: 'productivity_report', component: MerchandiserProductivityComponent },
+    { path: 'sale-data-report', component: SaleDataReportComponent },
+    { path: 'stock-pop-loading', component: StockPopLoadingComponent },
     { path: 'raw_data', component: RawDataComponent },
     { path: 'evaluation', loadChildren: '../evaluation/evaluation.module#EvaluationModule' },
     { path: 'shop_detail/:id', component: ShopDetailComponent },
+
 ];
 
 @NgModule({
