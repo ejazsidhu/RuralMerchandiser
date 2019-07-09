@@ -65,6 +65,31 @@ export class FilterBarComponent implements OnInit {
       this.getTabsData();
     });
   }
+  onRegionChange() {
+    this.loading = true;
+    this.loadingData = true;
+    this.RTEList = [];
+    this.selectedRTE = {};
+    this.merchandiserRTEList = [];
+    this.selectedMerchandiserRTE = {};
+
+    this.getRTERegionWise(this.selectedRegion.id);
+
+
+  }
+
+
+  getRTERegionWise(regionId) {
+    this.httpService.getRTE(regionId).subscribe((data: any) => {
+      if (data) {
+        this.RTEList = data;
+        setTimeout(() => {
+          this.loading = false;
+          this.loadingData = false;
+        }, 1000);
+      }
+    });
+  }
   getMerchandiserListRTE(regionId) {
     this.httpService.getMerchandiserListRTE(regionId).subscribe((data: any) => {
       if (data) {
@@ -77,6 +102,19 @@ export class FilterBarComponent implements OnInit {
 
 
       this.getTabsData();
+    });
+  }
+
+  getMerchandiserListRTEWise(regionId) {
+    this.httpService.getMerchandiserListRTE(regionId).subscribe((data: any) => {
+      if (data) {
+        this.merchandiserRTEList = data;
+        setTimeout(() => {
+          this.loading = false;
+          this.loadingData = false;
+        }, 1000);
+      }
+
     });
   }
   regionChange() {
@@ -102,6 +140,14 @@ export class FilterBarComponent implements OnInit {
 
   }
 
+  onRTEChange() {
+    this.merchandiserRTEList = [];
+    this.selectedMerchandiserRTE = {};
+    this.loading = true;
+    this.loadingData = true;
+    this.getMerchandiserListRTEWise(this.selectedRTE.id);
+
+  }
   statsMerchandiserWise() {
     this.loading = true;
     this.getTabsData();
