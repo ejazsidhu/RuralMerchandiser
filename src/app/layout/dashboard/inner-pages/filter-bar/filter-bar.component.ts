@@ -58,10 +58,36 @@ export class FilterBarComponent implements OnInit {
         this.RTEList = data;
         setTimeout(() => {
           this.loading = false;
+          this.loadingData = false;
         }, 1000);
       }
 
       this.getTabsData();
+    });
+  }
+  onRegionChange() {
+    this.loading = true;
+    this.loadingData = true;
+    this.RTEList = [];
+    this.selectedRTE = {};
+    this.merchandiserRTEList = [];
+    this.selectedMerchandiserRTE = {};
+
+    this.getRTERegionWise(this.selectedRegion.id);
+
+
+  }
+
+
+  getRTERegionWise(regionId) {
+    this.httpService.getRTE(regionId).subscribe((data: any) => {
+      if (data) {
+        this.RTEList = data;
+        setTimeout(() => {
+          this.loading = false;
+          this.loadingData = false;
+        }, 1000);
+      }
     });
   }
   getMerchandiserListRTE(regionId) {
@@ -70,6 +96,7 @@ export class FilterBarComponent implements OnInit {
         this.merchandiserRTEList = data;
         setTimeout(() => {
           this.loading = false;
+          this.loadingData = false;
         }, 1000);
       }
 
@@ -77,8 +104,22 @@ export class FilterBarComponent implements OnInit {
       this.getTabsData();
     });
   }
+
+  getMerchandiserListRTEWise(regionId) {
+    this.httpService.getMerchandiserListRTE(regionId).subscribe((data: any) => {
+      if (data) {
+        this.merchandiserRTEList = data;
+        setTimeout(() => {
+          this.loading = false;
+          this.loadingData = false;
+        }, 1000);
+      }
+
+    });
+  }
   regionChange() {
     this.loading = true;
+    this.loadingData = true;
     this.RTEList = [];
     this.selectedRTE = {};
     this.merchandiserRTEList = [];
@@ -94,10 +135,19 @@ export class FilterBarComponent implements OnInit {
     this.merchandiserRTEList = [];
     this.selectedMerchandiserRTE = {};
     this.loading = true;
+    this.loadingData = true;
     this.getMerchandiserListRTE(this.selectedRTE.id);
 
   }
 
+  onRTEChange() {
+    this.merchandiserRTEList = [];
+    this.selectedMerchandiserRTE = {};
+    this.loading = true;
+    this.loadingData = true;
+    this.getMerchandiserListRTEWise(this.selectedRTE.id);
+
+  }
   statsMerchandiserWise() {
     this.loading = true;
     this.getTabsData();
@@ -278,6 +328,8 @@ export class FilterBarComponent implements OnInit {
         regionId: this.selectedRegion.id || -1,
         startDate: moment(this.startDate).format('YYYY-MM-DD'),
         endDate: moment(this.endDate).format('YYYY-MM-DD'),
+        rteId: this.selectedRTE.id || -1,
+        merchandiserId: this.selectedMerchandiserRTE.id || -1
       };
 
       const url = 'saleDataReport';
