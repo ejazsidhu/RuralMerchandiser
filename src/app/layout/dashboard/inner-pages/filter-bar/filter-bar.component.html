@@ -137,10 +137,10 @@
 <mat-card *ngIf="tableData.length>0 && router.url==='/dashboard/visit_productivity' ">
     <mat-card-content>
 
-        <table class="table animated slideInLeft">
+        <table class="table table-hover animated slideInLeft">
             <thead>
                 <tr>
-
+                    <th scope="col">#</th>
                     <th scope="col" (click)="sortIt('merchandiser_code')">Code
                         <br>
                         <i class="material-icons arrow">
@@ -148,10 +148,16 @@
                         </i>
 
                     </th>
-                    <th scope="col" (click)="sortIt('merchandiser_name')">Name
+                    <th scope="col" (click)="sortIt('merchandiser_name')">VO Name
                         <br>
                         <i class="material-icons arrow">
                             {{getArrowType('merchandiser_name')}}
+                        </i>
+                    </th>
+                    <th scope="col" (click)="sortIt('merchandiser_name')">RTE Name
+                        <br>
+                        <i class="material-icons arrow">
+                            {{getArrowType('rte_name')}}
                         </i>
                     </th>
                     <th scope="col" (click)="sortIt('planned')">Total Village
@@ -188,11 +194,15 @@
             </thead>
             <tbody>
                 <!-- | orderBy: sortBy : sortOrder -->
-                <ng-container *ngFor="let item of tableData | orderBy: sortBy : sortOrder">
+                <ng-container *ngFor="let item of tableData | orderBy: sortBy : sortOrder;let i = index">
                     <tr>
+                        <td>{{i+1}}</td>
                         <td scope="row">{{item.merchandiser_code}}</td>
                         <td>
                             {{item.merchandiser_name}}
+                        </td>
+                        <td>
+                            {{item.rte_name}}
                         </td>
                         <td>
                             {{item.total_village}}
