@@ -55,6 +55,11 @@
 
 
 </mat-card>
+
+
+
+
+
 <div *ngIf="tabsData && router.url==='/dashboard/visit_productivity'" class="mb-20 animated  slideInLeft" fxLayout="row"
     fxLayout.lt-md="column" fxFlex fxLayoutGap="10px">
 
@@ -70,54 +75,61 @@
                 </mat-card-header>
                 <mat-card-content>
                     <div class="row">
-                        <div class="col-md-2">
+                        <!-- <div class="col-md-3 my-3">
                             <div>
                                 <app-stat [bgClass]="'info'" [icon]="'assignment'" [count]="tabsData?.planned"
                                     [label]="'Planned'">
                                 </app-stat>
                             </div>
-                        </div>
-                        <div class="col-md-2">
+                        </div> -->
+                        <div class="col-xl-2 my-3">
                             <div>
                                 <app-stat [bgClass]="'warn'" [icon]="'check_circle'" [count]="tabsData?.completed"
                                     [label]="'Visited'">
                                 </app-stat>
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-xl-2 my-3">
                             <div>
                                 <app-stat [bgClass]="'success'" [icon]="'thumb_up'" [count]="tabsData?.successful"
                                     [label]="'Productive'"></app-stat>
                             </div>
                         </div>
-                        <div class="col-md-2">
-
-                            <div>
-                                <app-stat [bgClass]="'danger'" [icon]="'thumb_down'" [count]="tabsData?.unsuccessful"
-                                    [label]="'Un-Productive'"></app-stat>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
+                        
+                        <!-- <div class="col-xl-2 my-3">
                             <div>
                                 <app-stat [bgClass]="'danger'" [icon]="'contact_support'" [count]="tabsData?.unvisited"
                                     [label]="'Unvisited'">
                                 </app-stat>
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="col-md-2">
+                        <div class="col-xl-2 my-3">
                             <div>
                                 <app-stat [bgClass]="'purple'" [icon]="'check_circle'"
-                                    [count]="tabsData?.completedPercent" [label]="'Productivity %'"></app-stat>
+                                    [count]="tabsData?.completedPercent" [label]="'Visit Efficiency'"></app-stat>
                             </div>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-xl-2 my-3">
 
                             <div>
                                 <app-stat [bgClass]="'primary'" [icon]="'thumb_up'"
-                                    [count]="tabsData?.successfulPercent" [label]="'Successful %'"></app-stat>
+                                    [count]="tabsData?.successfulPercent" [label]="'Productivity'"></app-stat>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 my-3">
+
+                            <div>
+                                <app-stat [bgClass]="'blue'" [icon]="'payment'" [count]="tabsData?.saleAmount"
+                                    [label]="'Sale Amount'"></app-stat>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 my-3">
+
+                            <div>
+                                <app-stat [bgClass]="'blue'" [icon]="'payment'" [count]="tabsData?.orderAmount"
+                                    [label]="'Order Amount'"></app-stat>
                             </div>
                         </div>
 

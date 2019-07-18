@@ -4,6 +4,12 @@
     text-align: left;
 }
 
+.mat-card{
+    height: 100px !important;
+    width: 180px;
+    margin: 0px auto;
+}
+
 .icon-lg {
     font-size: 40px;
 }
@@ -54,11 +60,15 @@
     background: linear-gradient(60deg, #9826da, #7400c1);
 }
 
-mat-card {
-    height: 100px !important;
-    width: 140px;
-    margin: 0 15px;
+.mat-card.blue {
+    background: linear-gradient(60deg, #2674da, #0d7ab9);
 }
+
+// mat-card {
+//     height: 100px !important;
+//     width: 140px;
+//     margin: 0 15px;
+// }
 
 // .mat-card-title {
 //     font-size: 35px !important;
