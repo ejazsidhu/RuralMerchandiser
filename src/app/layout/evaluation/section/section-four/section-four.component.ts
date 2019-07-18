@@ -36,7 +36,12 @@ export class SectionFourComponent implements OnInit {
 
     var a = this.centerPoint[0];
     var b = this.centerPoint[1];
-    var map = new google.maps.Map(document.getElementById('map'), { zoom: 12, center: new google.maps.LatLng(a, b)});
+    var map = new google.maps.Map(document.getElementById('map'), {
+       zoom: 17,
+        center: new google.maps.LatLng(a, b),
+        scrollwheel: false,
+
+      });
     // The marker, positioned at Uluru
     // var marker = new google.maps.Marker({position: marksman, map: map});
     var infowindow = new google.maps.InfoWindow();
