@@ -11,7 +11,11 @@
 
     <div class="col-md-6">
         <!--  -->
-        <img src="{{ip}}{{selectedImage?.url}}" width="400 " height="400" (click)="showChildModal(selectedImage)" class="img-thumbnail img-item">
+        <div class="img-container">
+            <img src="{{ip}}{{selectedImage?.url}}" width="400 " height="400" (click)="showChildModal(selectedImage)" class="img-thumbnail img-item">
+            <div class="top-left">{{selectedImage?.visitDate}}</div>
+        </div>
+
 
     </div>
 
@@ -20,7 +24,11 @@
 
             <ng-container *ngFor="let img of data.imageList ;let i=index ">
                 <div class="col-md-3 mb-1 card  ml-4" (click)="setSelectedImage(img)" style="padding: 0% !important;cursor:pointer" [ngClass]="{'bgColor': img?.url==selectedImage.url}">
-                    <img src="{{ip}}{{img?.url}} " width="50 " height="50 " class="img-thumbnail side-image">
+                    <div class="img-container">
+                        <img src="{{ip}}{{img?.url}} " width="50 " height="50 " class="img-thumbnail side-image">
+                        <div class="top-left">{{img?.visitDate}}</div>
+                    </div>
+
                     <div class="row justify-content-center" style="word-break: break-word">
                         <label for="date"><strong>Date:</strong>{{img?.visitDate}}</label>
                         <br>

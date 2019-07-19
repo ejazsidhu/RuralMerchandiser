@@ -14,7 +14,12 @@
 
         <div class="col-md-4 mb-2 text-center">
             <label class="title" for="title">{{img.title}}</label>
-            <img src="{{ip}}{{img.url}}" width="400" height="400" (click)="showChildModal(img)" class="img-thumbnail img-item">
+            <div class="img-container">
+                <!-- <img src="{{ip}}{{img?.url}} " width="50 " height="50 " class="img-thumbnail side-image"> -->
+                <img src="{{ip}}{{img.url}}" width="400" height="400" (click)="showChildModal(img)" class="img-thumbnail img-item">
+
+                <div class="top-left">{{img?.visitDate}}</div>
+            </div>
         </div>
     </ng-container>
 
