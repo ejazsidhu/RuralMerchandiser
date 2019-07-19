@@ -13,7 +13,7 @@
         <!--  -->
         <div class="img-container">
             <img src="{{ip}}{{selectedImage?.url}}" width="400 " height="400" (click)="showChildModal(selectedImage)" class="img-thumbnail img-item">
-            <div class="top-left">{{selectedImage?.visitDate}}</div>
+            <div class="top-left">{{selectedImage?.visitDateTime}}</div>
         </div>
 
 
@@ -26,7 +26,7 @@
                 <div class="col-md-3 mb-1 card  ml-4" (click)="setSelectedImage(img)" style="padding: 0% !important;cursor:pointer" [ngClass]="{'bgColor': img?.url==selectedImage.url}">
                     <div class="img-container">
                         <img src="{{ip}}{{img?.url}} " width="50 " height="50 " class="img-thumbnail side-image">
-                        <div class="top-left">{{img?.visitDate}}</div>
+                        <!-- <div class="top-left">{{img?.visitDateTime}}</div> -->
                     </div>
 
                     <div class="row justify-content-center" style="word-break: break-word">
