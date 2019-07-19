@@ -4,6 +4,12 @@
     text-align: left;
 }
 
+// .mat-card{
+//     height: 100px !important;
+//     width: 180px;
+//     margin: 0px auto;
+// }
+
 .icon-lg {
     font-size: 40px;
 }
@@ -54,10 +60,26 @@
     background: linear-gradient(60deg, #9826da, #7400c1);
 }
 
+.mat-card.blue {
+    background: linear-gradient(60deg, #2674da, #0d7ab9);
+}
+
 mat-card {
     height: 100px !important;
-    width: 140px;
+    width: 155px;
     margin: 0 15px;
+}
+
+.mat-card .mat-card-title {
+    font-size: 18px !important;
+}
+
+.mat-card-subtitle:not(:first-child), .mat-card-title:not(:first-child) {
+    margin-top: 5px;
+}
+
+.mat-card-subtitle, .mat-card-content {
+    font-size: 14px;
 }
 
 // .mat-card-title {
