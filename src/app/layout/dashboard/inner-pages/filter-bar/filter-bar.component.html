@@ -75,28 +75,28 @@
                 </mat-card-header>
                 <mat-card-content>
                     <div class="row">
-                        <!-- <div class="col-md-3 my-3">
+                        <div class="col-md-2">
                             <div>
                                 <app-stat [bgClass]="'info'" [icon]="'assignment'" [count]="tabsData?.planned"
                                     [label]="'Planned'">
                                 </app-stat>
                             </div>
-                        </div> -->
-                        <div class="col-xl-2 my-3">
+                        </div>
+                        <div class="col-md-2">
                             <div>
                                 <app-stat [bgClass]="'warn'" [icon]="'check_circle'" [count]="tabsData?.completed"
                                     [label]="'Visited'">
                                 </app-stat>
                             </div>
                         </div>
-                        <div class="col-xl-2 my-3">
+                        <div class="col-md-2">
                             <div>
                                 <app-stat [bgClass]="'success'" [icon]="'thumb_up'" [count]="tabsData?.successful"
                                     [label]="'Productive'"></app-stat>
                             </div>
                         </div>
                         
-                        <!-- <div class="col-xl-2 my-3">
+                        <!-- <div class="col-md-2">
                             <div>
                                 <app-stat [bgClass]="'danger'" [icon]="'contact_support'" [count]="tabsData?.unvisited"
                                     [label]="'Unvisited'">
@@ -104,31 +104,31 @@
                             </div>
                         </div> -->
 
-                        <div class="col-xl-2 my-3">
+                        <div class="col-md-2">
                             <div>
                                 <app-stat [bgClass]="'purple'" [icon]="'check_circle'"
-                                    [count]="tabsData?.completedPercent" [label]="'Visit Efficiency'"></app-stat>
+                                    [count]="tabsData?.completedPercent" [label]="'Visit Efficiency %'"></app-stat>
                             </div>
                         </div>
 
-                        <div class="col-xl-2 my-3">
+                        <div class="col-md-2">
 
                             <div>
                                 <app-stat [bgClass]="'primary'" [icon]="'thumb_up'"
-                                    [count]="tabsData?.successfulPercent" [label]="'Productivity'"></app-stat>
+                                    [count]="tabsData?.successfulPercent" [label]="'Productivity %'"></app-stat>
                             </div>
                         </div>
-                        <div class="col-xl-2 my-3">
+                        <div class="col-md-2">
 
                             <div>
-                                <app-stat [bgClass]="'blue'" [icon]="'payment'" [count]="tabsData?.saleAmount"
+                                <app-stat [bgClass]="'blue'" [icon]="'payment'" [count]="tabsData?.saleAmount | number"
                                     [label]="'Sale Amount'"></app-stat>
                             </div>
                         </div>
-                        <div class="col-xl-2 my-3">
+                        <div class="col-md-2">
 
                             <div>
-                                <app-stat [bgClass]="'blue'" [icon]="'payment'" [count]="tabsData?.orderAmount"
+                                <app-stat [bgClass]="'purple'" [icon]="'payment'" [count]="tabsData?.orderAmount | number"
                                     [label]="'Order Amount'"></app-stat>
                             </div>
                         </div>
@@ -166,7 +166,7 @@
                         </i>
 
                     </th>
-                    <th scope="col" (click)="sortIt('merchandiser_name')">VO Name
+                    <th scope="col" (click)="sortIt('merchandiser_name')">Resource
                         <br>
                         <i class="material-icons arrow">
                             {{getArrowType('merchandiser_name')}}
@@ -202,19 +202,19 @@
                             {{getArrowType('successfull')}}
                         </i>
                     </th>
-                    <th scope="col" (click)="sortIt('avg_time')">Average Time
+                    <th scope="col" (click)="sortIt('avg_time')">Avg Time/Capture Shop
                         <br>
                         <i class="material-icons arrow">
                             {{getArrowType('avg_time')}}
                         </i>
                     </th>
-                    <th scope="col" (click)="sortIt('time_spent')">Time Spend
+                    <!-- <th scope="col" (click)="sortIt('time_spent')">Time On Route
                         <br>
                         <i class="material-icons arrow">
                             {{getArrowType('time_spent')}}
                         </i>
-                    </th>
-                    <th scope="col" (click)="sortIt('sale_amount')">Sale Amount
+                    </th> -->
+                    <th scope="col" (click)="sortIt('sale_amount')">NNS
                         <br>
                         <i class="material-icons arrow">
                             {{getArrowType('sale_amount')}}
@@ -262,8 +262,8 @@
                         </td>
 
                         <td>{{item?.avg_time}}</td>
-                        <td>{{item?.time_spent}}</td>
-                        <td>{{item?.sale_amount}}</td>
+                        <!-- <td>{{item?.time_spent}}</td> -->
+                        <td>{{item?.sale_amount | number}}</td>
 
                     </tr>
                 </ng-container>
