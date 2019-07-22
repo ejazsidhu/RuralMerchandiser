@@ -16,29 +16,35 @@ export class MerchandiserListComponent implements OnInit {
   endDate=new Date();
   loadingReportMessage=false;
     merchandiserList: any=[];
+  loading: boolean;
     constructor(private httpService:DashboardService) { 
   
     this.maxDate.setDate(this.maxDate.getDate()-1);
     this.startDate.setDate(this.startDate.getDate()-1)
   
-  // this.startDate=moment(this.startDate).subtract('day',1).format('YYYY/MM/DD')
+    this.startDate = moment(this.startDate).format('YYYY-MM-DD');
+
   
     }
   
     ngOnInit() {
-      this.getMerchandiserList();
+      this.getMerchandiserList(this.startDate);
     }
   
-    getMerchandiserList(){
-      let obj={
-        evaluatorId:localStorage.getItem('user_id'),
+    getMerchandiserList(date) {
+      date = moment(date).format('YYYY-MM-DD');
+      let obj = {
+        evaluatorId: localStorage.getItem('user_id'),
+        startDate: date
       };
   
-      this.httpService.getMerchandiserListForEvaluation(obj).subscribe((data:any)=>{
+      this.httpService.getMerchandiserListForEvaluation(obj).subscribe((data: any) => {
         // console.log('merchandiser list for evaluation',data);
-        this.merchandiserList=data;
-      })
-  
+        if (data) {
+          this.merchandiserList = data;
+          this.loading = false;
+        }
+      });
     }
   
     modifyDate(date){
