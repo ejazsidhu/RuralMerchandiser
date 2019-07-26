@@ -45,7 +45,7 @@ export class FilterBarComponent implements OnInit {
     this.loading = true;
     this.getRegions();
     console.log(this.router.url);
-    if (this.router.url === '/dashboard/visit_productivity') {
+    if (this.router.url === '/dashboard/visit_productivity' || this.router.url === '/dashboard/sale_detail' ) {
       this.getTabsData();
     }
     if (this.router.url === '/dashboard/raw_data') {

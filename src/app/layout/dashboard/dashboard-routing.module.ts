@@ -11,6 +11,7 @@ import { RawDataComponent } from './raw-data/raw-data.component';
 import { UniqueBaseProductivityComponent } from './inner-pages/unique-base-productivity/unique-base-productivity.component';
 import { SaleDataReportComponent } from './inner-pages/sale-data-report/sale-data-report.component';
 import { StockPopLoadingComponent } from './inner-pages/stock-pop-loading/stock-pop-loading.component';
+import { SaleDetailComponent } from './inner-pages/sale-detail/sale-detail.component';
 
 const routes: Routes = [
     {
@@ -28,6 +29,7 @@ const routes: Routes = [
     { path: 'raw_data', component: RawDataComponent },
     { path: 'evaluation', loadChildren: '../evaluation/evaluation.module#EvaluationModule' },
     { path: 'shop_detail/:id', component: ShopDetailComponent },
+    { path: 'sale_detail', component: SaleDetailComponent }
 
 ];
 
