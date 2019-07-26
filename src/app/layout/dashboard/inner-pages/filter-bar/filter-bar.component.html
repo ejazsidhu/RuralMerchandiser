@@ -104,10 +104,10 @@
                                 <app-stat [bgClass]="'primary'" [icon]="'thumb_up'" [count]="tabsData?.successfulPercent" [label]="'Productivity %'"></app-stat>
                             </div>
                         </div>
-                        <div class="col-md-2" routerLink="/dashboard/sale_detail">
+                        <div class="col-md-2" (click)="goToSaleDetail()" style="cursor: pointer">
 
                             <div>
-                                <app-stat [bgClass]="'blue'" [icon]="'payment'" [count]="tabsData?.saleAmount | number" [label]="'Sale Amount'"></app-stat>
+                                <app-stat [bgClass]="'blue'" [icon]="'payment'" [count]="tabsData?.saleAmount | number" [label]="'NNS'"></app-stat>
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -196,7 +196,7 @@
                             {{getArrowType('time_spent')}}
                         </i>
                     </th> -->
-                    <th scope="col" (click)="sortIt('sale_amount')">NNS
+                    <th scope="col" (click)="sortIt('sale_amount')">Sale Amount
                         <br>
                         <i class="material-icons arrow">
                             {{getArrowType('sale_amount')}}
@@ -503,19 +503,22 @@
 
         </mat-card-title>
         <section class="example-section" *ngIf="regions.length>0">
+            <!-- {{selectedRegion |json}} -->
             <mat-form-field *ngIf="regions.length>0" class="example-margin mr-10-IMP">
                 <mat-select placeholder="Region" name='region' [(ngModel)]="selectedRegion" (ngModelChange)="regionChange()">
-                    <mat-option [value]="region" *ngFor="let region of regions">{{region.title}}</mat-option>
+                    <mat-option [value]="region.id" *ngFor="let region of regions">{{region.title}}</mat-option>
                 </mat-select>
             </mat-form-field>
+
             <mat-form-field *ngIf="RTEList.length>0" class="example-margin mr-10-IMP">
                 <mat-select placeholder="RTE" name='rte' [(ngModel)]="selectedRTE" (ngModelChange)="regionRTE()">
-                    <mat-option [value]="rte" *ngFor="let rte of RTEList">{{rte.title}}</mat-option>
+                    <mat-option [value]="rte.id" *ngFor="let rte of RTEList">{{rte.title}}</mat-option>
                 </mat-select>
             </mat-form-field>
+
             <mat-form-field *ngIf="merchandiserRTEList.length>0" class="example-margin mr-10-IMP">
                 <mat-select placeholder="Merchandisers" name='merchandiser' [(ngModel)]="selectedMerchandiserRTE" (ngModelChange)="statsMerchandiserWise()">
-                    <mat-option [value]="merchandiser" *ngFor="let merchandiser of merchandiserRTEList">
+                    <mat-option [value]="merchandiser.id" *ngFor="let merchandiser of merchandiserRTEList">
                         {{merchandiser.title}}</mat-option>
                 </mat-select>
             </mat-form-field>
@@ -544,17 +547,13 @@
 
 </mat-card>
 
-<div *ngIf="tabsData && router.url==='/dashboard/sale_detail'" class="mb-20 animated  slideInLeft" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="10px">
+<!-- <div *ngIf="tabsData && router.url==='/dashboard/sale_detail'" class="mb-20 animated  slideInLeft" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="10px">
 
     <div class="row">
         <div class="col-md-12">
             <mat-card>
                 <mat-card-header style="justify-content: flex-end;">
-                    <!-- <mat-card-title>
-                            <i class="material-icons refresh-btn" matTooltip="Refresh Stats" (click)="getData()">
-                                                cached
-                                                </i>
-                        </mat-card-title> -->
+                   
                 </mat-card-header>
                 <mat-card-content>
                     <div class="row">
@@ -576,13 +575,6 @@
                             </div>
                         </div>
 
-                        <!-- <div class="col-md-2">
-                            <div>
-                                <app-stat [bgClass]="'danger'" [icon]="'contact_support'" [count]="tabsData?.unvisited"
-                                    [label]="'Unvisited'">
-                                </app-stat>
-                            </div>
-                        </div> -->
 
                         <div class="col-md-2">
                             <div>
@@ -599,7 +591,7 @@
                         <div class="col-md-2">
 
                             <div>
-                                <app-stat [bgClass]="'blue'" [icon]="'payment'" [count]="tabsData?.saleAmount | number" [label]="'Sale Amount'"></app-stat>
+                                <app-stat [bgClass]="'blue'" [icon]="'payment'" [count]="tabsData?.saleAmount | number" [label]="'NNS'"></app-stat>
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -618,7 +610,7 @@
         </div>
     </div>
 
-</div>
+</div> -->
 
 <mat-card *ngIf="tableData.length>0 && router.url==='/dashboard/sale_detail' ">
     <mat-card-content>
@@ -688,7 +680,7 @@
                             {{getArrowType('time_spent')}}
                         </i>
                     </th> -->
-                    <th scope="col" (click)="sortIt('sale_amount')">NNS
+                    <th scope="col" (click)="sortIt('sale_amount')">Sale Amount
                         <br>
                         <i class="material-icons arrow">
                             {{getArrowType('sale_amount')}}
