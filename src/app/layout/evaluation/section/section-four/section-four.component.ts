@@ -19,7 +19,7 @@ export class SectionFourComponent implements OnInit {
     this.centerPoint = [];
     let i = 0;
     this.data.mslTable.forEach(e => {
-      let locationElement = [e.shop_title, parseFloat(e.latitude), parseFloat(e.longitude), i];
+      let locationElement = [e.shop_title+"</br>"+e.visit_datetime, parseFloat(e.latitude), parseFloat(e.longitude), i];
       this.locations.push(locationElement);
 
       if (i == 0) this.centerPoint = [parseFloat(e.latitude), parseFloat(e.longitude)];
