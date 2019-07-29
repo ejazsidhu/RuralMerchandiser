@@ -22,7 +22,7 @@ export class MerchandiserListComponent implements OnInit {
     this.maxDate.setDate(this.maxDate.getDate()-1);
     this.startDate.setDate(this.startDate.getDate()-1)
   
-    this.startDate = moment(this.startDate).format('YYYY-MM-DD');
+    // this.startDate = moment(this.startDate).format('YYYY-MM-DD');
 
   
     }
