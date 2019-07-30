@@ -188,7 +188,7 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
     this.loading = true;
     this.loadingData = true;
     this.RTEList = [];
-    (this.selectedRTE)?(this.selectedRTE=this.selectedRTE):(this.selectedRTE = {});
+    (this.selectedRTE)?(this.selectedRTE=this.selectedRTE) :(this.selectedRTE = {});
     this.merchandiserRTEList = [];
     (this.selectedMerchandiserRTE)?(this.selectedMerchandiserRTE=this.selectedMerchandiserRTE):(this.selectedMerchandiserRTE = {});
     // this.selectedMerchandiserRTE = {};
@@ -220,10 +220,12 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
   }
   statsMerchandiserWise() {
     this.loading = true;
-    if(this.router.url === '/dashboard/sale_detail')
+    if(this.router.url === '/dashboard/sale_detail') {
     this.getTabsDataForSaleDetail()
-    else
+    }
+    else {
     this.getTabsData();
+    }
   }
   getQueryTypeList() {
 
@@ -535,17 +537,19 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
 
   }
 
+
+
   getTabsDataForSaleDetail() {
 
     this.loading = true;
     // debugger;
     const obj: any = {
       // zoneId: (this.selectedZone.id) ? this.selectedZone.id : -1,
-      regionId: (this.selectedRegion.id) ? this.selectedRegion.id : (this.selectedRegion||-1),
+      regionId: (this.selectedRegion.id) ? this.selectedRegion.id : (this.selectedRegion || -1),
       startDate: moment(this.startDate).format('YYYY-MM-DD'),
       endDate:  moment(this.endDate).format('YYYY-MM-DD'),
-      rteId: this.selectedRTE.id ?this.selectedRTE.id: (this.selectedRTE|| -1),
-      merchandiserId: (this.selectedMerchandiserRTE.id)?this.selectedMerchandiserRTE.id:(this.selectedMerchandiserRTE||-1)
+      rteId: this.selectedRTE.id ? this.selectedRTE.id : (this.selectedRTE || -1),
+      merchandiserId: (this.selectedMerchandiserRTE.id) ? this.selectedMerchandiserRTE.id :(this.selectedMerchandiserRTE || -1)
 
     };
     localStorage.setItem('obj', JSON.stringify(obj));

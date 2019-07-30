@@ -5,11 +5,11 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class DashboardService {
-  // ip = 'http://merch.concavetech.com/';
+  ip = 'http://merch.concavetech.com/';
 
   // ip: any='http://192.168.3.209:8080/audit/';
   // ip: any = 'http://192.168.3.189:8080/audit/';
-  ip: any = 'http://192.168.3.94:8080/audit/';
+  // ip: any = 'http://192.168.3.94:8080/audit/';
   // ip: any = 'http://192.168.3.213:8080/audit/';
   // ip: any = 'http://192.168.3.241:8080/audit/';
 
@@ -167,7 +167,7 @@ return this.http.post(url, filter);
     return this.http.post(url, body, this.httpOptions);
   }
 
-  saleDetailData(obj){
+  saleDetailData(obj) {
     const body = this.UrlEncodeMaker(obj);
     const url = this.ip + 'sale-detail';
     return this.http.post(url, body, this.httpOptions);

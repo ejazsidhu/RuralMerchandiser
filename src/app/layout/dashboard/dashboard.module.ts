@@ -24,6 +24,7 @@ import { UniqueBaseProductivityComponent } from './inner-pages/unique-base-produ
 import { SaleDataReportComponent } from './inner-pages/sale-data-report/sale-data-report.component';
 import { StockPopLoadingComponent } from './inner-pages/stock-pop-loading/stock-pop-loading.component';
 import { SaleDetailComponent } from './inner-pages/sale-detail/sale-detail.component';
+import { AlertModule } from 'ngx-bootstrap/alert';
 @NgModule({
     imports: [
         CommonModule,
@@ -45,8 +46,9 @@ import { SaleDetailComponent } from './inner-pages/sale-detail/sale-detail.compo
         MatFormFieldModule,
         MatInputModule,
         Ng2OrderModule,
+        AlertModule.forRoot(),
         ModalModule.forRoot()
     ],
-    declarations: [FilterBarComponent,DashboardComponent, VisitProductivityComponent, AttendanceReportComponent, MerchandiserListComponent, MerchandiserProductivityComponent, ShopDetailComponent,RawDataComponent, UniqueBaseProductivityComponent, SaleDataReportComponent, StockPopLoadingComponent, SaleDetailComponent]
+    declarations: [FilterBarComponent, DashboardComponent, VisitProductivityComponent, AttendanceReportComponent, MerchandiserListComponent, MerchandiserProductivityComponent, ShopDetailComponent, RawDataComponent, UniqueBaseProductivityComponent, SaleDataReportComponent, StockPopLoadingComponent, SaleDetailComponent]
 })
 export class DashboardModule {}
