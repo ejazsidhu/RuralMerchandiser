@@ -547,71 +547,6 @@
 
 </mat-card>
 
-<!-- <div *ngIf="tabsData && router.url==='/dashboard/sale_detail'" class="mb-20 animated  slideInLeft" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="10px">
-
-    <div class="row">
-        <div class="col-md-12">
-            <mat-card>
-                <mat-card-header style="justify-content: flex-end;">
-                   
-                </mat-card-header>
-                <mat-card-content>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div>
-                                <app-stat [bgClass]="'info'" [icon]="'assignment'" [count]="tabsData?.planned" [label]="'Planned'">
-                                </app-stat>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div>
-                                <app-stat [bgClass]="'warn'" [icon]="'check_circle'" [count]="tabsData?.completed" [label]="'Visited'">
-                                </app-stat>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div>
-                                <app-stat [bgClass]="'success'" [icon]="'thumb_up'" [count]="tabsData?.successful" [label]="'Productive'"></app-stat>
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-2">
-                            <div>
-                                <app-stat [bgClass]="'purple'" [icon]="'check_circle'" [count]="tabsData?.completedPercent" [label]="'Visit Efficiency %'"></app-stat>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-
-                            <div>
-                                <app-stat [bgClass]="'primary'" [icon]="'thumb_up'" [count]="tabsData?.successfulPercent" [label]="'Productivity %'"></app-stat>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-
-                            <div>
-                                <app-stat [bgClass]="'blue'" [icon]="'payment'" [count]="tabsData?.saleAmount | number" [label]="'NNS'"></app-stat>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-
-                            <div>
-                                <app-stat [bgClass]="'purple'" [icon]="'payment'" [count]="tabsData?.orderAmount | number" [label]="'Order Amount'"></app-stat>
-                            </div>
-                        </div>
-
-
-
-
-                    </div>
-                </mat-card-content>
-            </mat-card>
-        </div>
-    </div>
-
-</div> -->
-
 <mat-card *ngIf="tableData.length>0 && router.url==='/dashboard/sale_detail' ">
     <mat-card-content>
 
@@ -625,17 +560,17 @@
                         </i>
 
                     </th>
-                    <th scope="col" (click)="sortIt('merchandiser_code')">Code
+                    <th scope="col" (click)="sortIt('m_code')">Code
                         <br>
                         <i class="material-icons arrow">
-                            {{getArrowType('merchandiser_code')}}
+                            {{getArrowType('m_code')}}
                         </i>
 
                     </th>
-                    <th scope="col" (click)="sortIt('merchandiser_name')">Resource
+                    <th scope="col" (click)="sortIt('full_name')">Resource
                         <br>
                         <i class="material-icons arrow">
-                            {{getArrowType('merchandiser_name')}}
+                            {{getArrowType('full_name')}}
                         </i>
                     </th>
                     <th scope="col" (click)="sortIt('rte_name')">RTE Name
@@ -644,42 +579,19 @@
                             {{getArrowType('rte_name')}}
                         </i>
                     </th>
-                    <th scope="col" (click)="sortIt('total_village')">Villages
+
+                    <th scope="col" (click)="sortIt('sale_qty')">Sale Quantity
                         <br>
                         <i class="material-icons arrow">
-                            {{getArrowType('total_village')}}
+                            {{getArrowType('sale_qty')}}
                         </i>
                     </th>
-                    <th scope="col" (click)="sortIt('planned')">Shops
+                    <th scope="col" (click)="sortIt('trade_price')">Trade Price
                         <br>
                         <i class="material-icons arrow">
-                            {{getArrowType('planned')}}
+                            {{getArrowType('trade_price')}}
                         </i>
                     </th>
-                    <th scope="col" (click)="sortIt('completed')">Visited
-                        <br>
-                        <i class="material-icons arrow">
-                            {{getArrowType('completed')}}
-                        </i>
-                    </th>
-                    <th scope="col" (click)="sortIt('successfull')">Productive
-                        <br>
-                        <i class="material-icons arrow">
-                            {{getArrowType('successfull')}}
-                        </i>
-                    </th>
-                    <th scope="col" (click)="sortIt('avg_time')">Avg Time/Capture Shop
-                        <br>
-                        <i class="material-icons arrow">
-                            {{getArrowType('avg_time')}}
-                        </i>
-                    </th>
-                    <!-- <th scope="col" (click)="sortIt('time_spent')">Time On Route
-                        <br>
-                        <i class="material-icons arrow">
-                            {{getArrowType('time_spent')}}
-                        </i>
-                    </th> -->
                     <th scope="col" (click)="sortIt('sale_amount')">Sale Amount
                         <br>
                         <i class="material-icons arrow">
@@ -693,38 +605,17 @@
                 <ng-container *ngFor="let item of tableData | orderBy: sortBy : sortOrder;let i = index">
                     <tr>
                         <td>{{i+1}}</td>
-                        <td scope="row">{{item?.merchandiser_code}}</td>
+                        <td scope="row">{{item?.m_code}}</td>
                         <td>
-                            {{item?.merchandiser_name}}
+                            {{item?.full_name}}
                         </td>
                         <td>
                             {{item?.rte_name}}
                         </td>
-                        <td>
-                            {{item?.total_village}}
-                        </td>
 
-                        <td>{{item?.planned}}</td>
-                        <td class="a-link" *ngIf="item.completed!=0" title="Completed">
-                            <a class="a-link" target="_blank" title="view shop details" [routerLink]="['/dashboard/shop_detail',item.id]" [queryParams]="{'id':item.id,'remark_id':-1}" queryParamsHandling="merge">
-                                {{item?.completed}}
-                            </a>
-                        </td>
-                        <td *ngIf="item.completed==0">
-                            {{item?.completed}}
 
-                        </td>
-                        <td class="a-link" *ngIf="item.successfull!=0" title="Successful">
-                            <a class="a-link" target="_blank" title="view shop details" [routerLink]="['/dashboard/shop_detail',item.id]" [queryParams]="{'id':item.id,'remark_id':1}" queryParamsHandling="merge">
-                                {{item?.successfull}} </a>
-
-                        </td>
-                        <td *ngIf="item.successfull==0">
-                            {{item?.successfull}}
-                        </td>
-
-                        <td>{{item?.avg_time}}</td>
-                        <!-- <td>{{item?.time_spent}}</td> -->
+                        <td>{{item?.sale_qty}}</td>
+                        <td>{{item?.trade_price}}</td>
                         <td>{{item?.sale_amount | number}}</td>
 
                     </tr>

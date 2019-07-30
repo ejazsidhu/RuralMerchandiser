@@ -96,7 +96,9 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
 
     if(this.router.url != '/dashboard/sale_detail')
     localStorage.removeItem("sale_detail_obj")
-
+    if(this.router.url == '/dashboard/sale_detail')
+    this.getTabsDataForSaleDetail()
+ 
 
     
 
@@ -111,6 +113,9 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
         }, 1000);
       }
 
+      if(this.router.url == '/dashboard/sale_detail')
+      this.getTabsDataForSaleDetail()
+      else
       this.getTabsData();
     });
   }
@@ -544,28 +549,47 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
 
     };
     localStorage.setItem('obj', JSON.stringify(obj));
-    this.getTableData(obj);
+    this.getTableForSaleData(obj);
 
 
-    this.httpService.getDashboardData(obj).subscribe(data => {
-      // console.log(data, 'home data');
-      const res: any = data;
-      if (res) {
-        this.tabsData = data;
-      }
-      this.loading = false;
-      // if (res.planned == 0)
-      //   this.toastr.info('No data available for current selection', 'Summary')
-    }, error => {
+    // this.httpService.getDashboardData(obj).subscribe(data => {
+    //   // console.log(data, 'home data');
+    //   const res: any = data;
+    //   if (res) {
+    //     this.tabsData = data;
+    //   }
+    //   this.loading = false;
+    //   // if (res.planned == 0)
+    //   //   this.toastr.info('No data available for current selection', 'Summary')
+    // }, error => {
 
 
-    });
+    // });
 
 
   }
   getTableData(obj) {
 
     this.httpService.merchandiserShopListCBL(obj).subscribe(data => {
+      console.log(data, 'table data');
+      const res: any = data;
+
+      if (res) {
+        this.tableData = res;
+      }
+      this.loading = false;
+      // if (res.planned == 0)
+      //   this.toastr.info('No data available for current selection', 'Summary')
+    }, error => {
+      // this.clearLoading();
+
+      console.log(error, 'home error');
+
+    });
+  }
+  getTableForSaleData(obj) {
+
+    this.httpService.saleDetailData(obj).subscribe(data => {
       console.log(data, 'table data');
       const res: any = data;
 
