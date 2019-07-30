@@ -24,6 +24,8 @@ export class SectionThreeViewComponent implements OnInit {
   surveyId: any;
   MSLCount: number=0;
   MSLNAvailabilityCount: number;
+  totalAmount=0;
+  totalQuantity=0;
 
   constructor(private router:Router,private toastr:ToastrService,private httpService:EvaluationService,) { }
 
@@ -34,52 +36,72 @@ export class SectionThreeViewComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges): void {
     
     this.data=changes.data.currentValue;
-    this.products=this.data.mslTable || [];
-    this.tagList=this.data.tagsList|| []
-    if(this.products.length>0)
-    this.availability=this.getAvailabilityCount(this.products);
-    console.log('is editable',this.isEditable)
-    this.MSLNAvailabilityCount=this.getMSLNAvailbilityCount(this.products)
+    this.tagList=this.data.tagsList || [];
+    console.log('tabList',this.tagList);
+    this.calculateData(this.tagList);
+
+    // this.products=this.data.mslTable || [];
+    // if(this.products.length>0)
+    // this.availability=this.getAvailabilityCount(this.products);
+    // this.MSLNAvailabilityCount=this.getMSLNAvailbilityCount(this.products)
     
   }
 
-  getAvailabilityCount(products)
-  {
-    let sum=[]
-    products.forEach(element => {
-      if(element.available_sku==1)
-      sum.push(element)
+  calculateData(data){
+
+    data.forEach(element => {
+      if(element.heading=="Sale Amount" && element.values.length>0){
+        this.totalAmount=element.values.reduce((a,v)=>parseInt(a)+parseInt(v));
+
+      }
+      else if(element.heading=="Sale Quantity"  && element.values.length>0){
+        this.totalQuantity=element.values.reduce((a,v)=>parseInt(a)+parseInt(v));
+
+      }
       
     });
-    return sum.length;
+
+    console.log('total amount',this.totalAmount,'total quantity',this.totalQuantity)
+
   }
-  getMSLNAvailbilityCount(products)
-  {
-    let pro=[];
-    let msl=[];
-    products.forEach(p=>{
-      let obj={};
-     if(p.MSL=='Yes'  && p.available_sku==1 ){
-       obj={
-         available_sku:p.available_sku,
-         MSL:p.MSL
-       }
-       pro.push(obj)
 
-     }
-
-     if(p.MSL=='Yes'){
-       msl.push(p)
-     }
+  // getAvailabilityCount(products)
+  // {
+  //   let sum=[]
+  //   products.forEach(element => {
+  //     if(element.available_sku==1)
+  //     sum.push(element)
       
-   })
-  this.MSLCount=msl.length;
-    return  pro.length;
-  }
+  //   });
+  //   return sum.length;
+  // }
+  // getMSLNAvailbilityCount(products)
+  // {
+  //   let pro=[];
+  //   let msl=[];
+  //   products.forEach(p=>{
+  //     let obj={};
+  //    if(p.MSL=='Yes'  && p.available_sku==1 ){
+  //      obj={
+  //        available_sku:p.available_sku,
+  //        MSL:p.MSL
+  //      }
+  //      pro.push(obj)
 
-  updateString(value){
-    return value?'Yes':'No';
-  }
+  //    }
+
+  //    if(p.MSL=='Yes'){
+  //      msl.push(p)
+  //    }
+      
+  //  })
+  // this.MSLCount=msl.length;
+  //   return  pro.length;
+  // }
+
+  // updateString(value){
+  //   return value?'Yes':'No';
+  // }
 
   // toggleValue(value){
   //   if(this.isEditable){
