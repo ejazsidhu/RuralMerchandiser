@@ -28,7 +28,9 @@ export class MerchandiserListComponent implements OnInit {
     }
   
     ngOnInit() {
-      this.getMerchandiserList(this.startDate);
+    this.getMerchandiserList(this.startDate);
+   
+
     }
   
     getMerchandiserList(date) {

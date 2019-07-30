@@ -14,10 +14,11 @@ export class ShopListComponent implements OnInit {
   tableData:any=[];      
   headingsList:any =[]; 
   loading=true;
+  params: any={};
   constructor(private router:Router,private toastr:ToastrService,private httpService:EvaluationService,private activeRoute:ActivatedRoute) {
    
     this.activeRoute.queryParams.subscribe(p=>{
-
+this.params=p
       if(p.surveyorId && p.startDate && p.endDate){
         // let obj=p;
         this.getTableData(p);
@@ -29,6 +30,15 @@ export class ShopListComponent implements OnInit {
 
   ngOnInit() {
     // this.getTableData();
+    let that=this;
+      var flag=false;
+      document.addEventListener('visibilitychange', function(e) {
+        console.log(document.hidden);
+        if(!document.hidden)
+        that.getTableData(that.params);
+        
+
+    });
   }
 
   getTableData(obj){
