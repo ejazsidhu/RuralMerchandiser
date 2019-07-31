@@ -49,13 +49,13 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
       let obj:any=JSON.parse(localStorage.getItem("sale_detail_obj"));
       if(obj && this.router.url === '/dashboard/sale_detail'){
         if(Object.keys(obj.regionId).length !== 0 && obj.regionId.constructor === Object){          
-          this.selectedRegion=obj.regionId.id;//{ zone_id: 0, id: 6, title: "Multan", type: 3 };
+          this.selectedRegion =obj.regionId.id;// { zone_id: 0, id: 6, title: "Multan", type: 3 };
       console.log("object region",this.selectedRegion)
-          
+
           setTimeout(() => {
-          this.regionChange();          
+          this.regionChange();
           }, 200);
-  
+
         }
         if(Object.keys(obj.rteId).length !== 0 && obj.rteId.constructor === Object){
           this.selectedRTE=obj.rteId.id;
@@ -66,20 +66,20 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
             }, 200);
 
         }
-  
+
         if(Object.keys(obj.merchandiserId).length !== 0 && obj.merchandiserId.constructor === Object){
           this.selectedMerchandiserRTE=obj.merchandiserId.id;
       console.log("object selectedMerchandiserRTE",this.selectedMerchandiserRTE)
 
           setTimeout(() => {
             this.statsMerchandiserWise();
-         
+
             }, 200);
 
         }
 
         this.startDate=obj.startDate;
-        this.endDate=obj.endDate;
+        this.endDate= obj.endDate;
         this.getTabsDataForSaleDetail()
       }
     }
@@ -96,11 +96,12 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
 
     if(this.router.url != '/dashboard/sale_detail')
     localStorage.removeItem("sale_detail_obj")
-    if(this.router.url == '/dashboard/sale_detail')
+    if(this.router.url == '/dashboard/sale_detail') {
     this.getTabsDataForSaleDetail()
- 
+    }
 
-    
+
+
 
   }
   getRTE(regionId) {
@@ -113,10 +114,11 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
         }, 1000);
       }
 
-      if(this.router.url == '/dashboard/sale_detail')
+      if(this.router.url == '/dashboard/sale_detail') {
       this.getTabsDataForSaleDetail()
-      else
+      } else {
       this.getTabsData();
+      }
     });
   }
   onRegionChange() {
@@ -133,7 +135,7 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
   }
 
   goToSaleDetail() {
-    let sale_details_obj:any={
+    let sale_details_obj:any= {
       rteId:this.selectedRTE,
       regionId:this.selectedRegion,
       merchandiserId:this.selectedMerchandiserRTE,
@@ -165,10 +167,11 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
           this.loadingData = false;
         }, 1000);
       }
-      if(this.router.url == '/dashboard/sale_detail')
+      if(this.router.url == '/dashboard/sale_detail') {
       this.getTabsDataForSaleDetail()
-      else
+      } else {
       this.getTabsData();
+      }
     });
   }
 
@@ -188,12 +191,12 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
     this.loading = true;
     this.loadingData = true;
     this.RTEList = [];
-    (this.selectedRTE)?(this.selectedRTE=this.selectedRTE) :(this.selectedRTE = {});
+    (this.selectedRTE) ? (this.selectedRTE = this.selectedRTE) :(this.selectedRTE = {});
     this.merchandiserRTEList = [];
-    (this.selectedMerchandiserRTE)?(this.selectedMerchandiserRTE=this.selectedMerchandiserRTE):(this.selectedMerchandiserRTE = {});
+    (this.selectedMerchandiserRTE) ? (this.selectedMerchandiserRTE = this.selectedMerchandiserRTE) :(this.selectedMerchandiserRTE = {});
     // this.selectedMerchandiserRTE = {};
 
-    this.selectedRegion.id?this.getRTE(this.selectedRegion.id):this.getRTE(this.selectedRegion);
+    this.selectedRegion.id ? this.getRTE(this.selectedRegion.id) :this.getRTE(this.selectedRegion);
 
 
   }
@@ -201,10 +204,10 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
 
   regionRTE() {
     this.merchandiserRTEList = [];
-    (this.selectedMerchandiserRTE)?(this.selectedMerchandiserRTE=this.selectedMerchandiserRTE):(this.selectedMerchandiserRTE = {});
+    (this.selectedMerchandiserRTE) ? (this.selectedMerchandiserRTE = this.selectedMerchandiserRTE) : (this.selectedMerchandiserRTE = {});
     this.loading = true;
     this.loadingData = true;
-    (this.selectedRTE.id)?this.getMerchandiserListRTE(this.selectedRTE.id):this.getMerchandiserListRTE(this.selectedRTE);
+    (this.selectedRTE.id) ? this.getMerchandiserListRTE(this.selectedRTE.id) : this.getMerchandiserListRTE(this.selectedRTE);
 
     // this.getMerchandiserListRTE(this.selectedRTE.id);
 
@@ -215,15 +218,14 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
     this.selectedMerchandiserRTE = {};
     this.loading = true;
     this.loadingData = true;
-    (this.selectedRTE.id)?this.getMerchandiserListRTEWise(this.selectedRTE.id):this.getMerchandiserListRTEWise(this.selectedRTE);
+    (this.selectedRTE.id) ? this.getMerchandiserListRTEWise(this.selectedRTE.id) : this.getMerchandiserListRTEWise(this.selectedRTE);
 
   }
   statsMerchandiserWise() {
     this.loading = true;
-    if(this.router.url === '/dashboard/sale_detail') {
-    this.getTabsDataForSaleDetail()
-    }
-    else {
+    if (this.router.url === '/dashboard/sale_detail') {
+    this.getTabsDataForSaleDetail();
+    } else {
     this.getTabsData();
     }
   }
@@ -549,7 +551,7 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
       startDate: moment(this.startDate).format('YYYY-MM-DD'),
       endDate:  moment(this.endDate).format('YYYY-MM-DD'),
       rteId: this.selectedRTE.id ? this.selectedRTE.id : (this.selectedRTE || -1),
-      merchandiserId: (this.selectedMerchandiserRTE.id) ? this.selectedMerchandiserRTE.id :(this.selectedMerchandiserRTE || -1)
+      merchandiserId: (this.selectedMerchandiserRTE.id) ? this.selectedMerchandiserRTE.id : (this.selectedMerchandiserRTE || -1)
 
     };
     localStorage.setItem('obj', JSON.stringify(obj));

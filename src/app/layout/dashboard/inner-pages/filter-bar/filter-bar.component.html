@@ -560,33 +560,33 @@
                         </i>
 
                     </th>
-                    <th scope="col" (click)="sortIt('m_code')">Code
+                    <th scope="col" (click)="sortIt('category_name')">Category
                         <br>
                         <i class="material-icons arrow">
-                            {{getArrowType('m_code')}}
+                            {{getArrowType('category_name')}}
                         </i>
 
                     </th>
-                    <th scope="col" (click)="sortIt('full_name')">Resource
+                    <th scope="col" (click)="sortIt('product_name')">Product
                         <br>
                         <i class="material-icons arrow">
-                            {{getArrowType('full_name')}}
+                            {{getArrowType('product_name')}}
                         </i>
                     </th>
-                    <th scope="col" (click)="sortIt('rte_name')">RTE Name
+                    
+                    <th scope="col" (click)="sortIt('sale_visit')">Sale Visit
                         <br>
                         <i class="material-icons arrow">
-                            {{getArrowType('rte_name')}}
+                            {{getArrowType('sale_visit')}}
                         </i>
                     </th>
-
                     <th scope="col" (click)="sortIt('sale_qty')">Sale Quantity
                         <br>
                         <i class="material-icons arrow">
                             {{getArrowType('sale_qty')}}
                         </i>
                     </th>
-                    <th scope="col" (click)="sortIt('trade_price')">Trade Price
+                    <th scope="col" (click)="sortIt('trade_price')">Updated Trade Price
                         <br>
                         <i class="material-icons arrow">
                             {{getArrowType('trade_price')}}
@@ -605,15 +605,13 @@
                 <ng-container *ngFor="let item of tableData | orderBy: sortBy : sortOrder;let i = index">
                     <tr>
                         <td>{{i+1}}</td>
-                        <td scope="row">{{item?.m_code}}</td>
+                        <td scope="row">{{item?.category_name}}</td>
                         <td>
-                            {{item?.full_name}}
+                            {{item?.product_name}}
                         </td>
-                        <td>
-                            {{item?.rte_name}}
-                        </td>
+                      
 
-
+                        <td>{{item?.sale_visit}}</td>
                         <td>{{item?.sale_qty}}</td>
                         <td>{{item?.trade_price}}</td>
                         <td>{{item?.sale_amount | number}}</td>
@@ -631,11 +629,11 @@
     </mat-card-content>
 </mat-card>
 
-  <mat-card *ngIf="tableData.length==0">
+  <!-- <mat-card *ngIf="tableData.length==0">
     <alert type="info">
         <strong>No Data Found!</strong> Against your selected filter.
       </alert>
-  </mat-card>
+  </mat-card> -->
 
 
 <!-- /shop detail -->
