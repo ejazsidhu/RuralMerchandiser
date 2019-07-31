@@ -34,6 +34,7 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
   selectedRTE: any = {};
   merchandiserRTEList: any = [];
   selectedMerchandiserRTE: any = {};
+  selectedDataType: any;
 
   //#endregion
 
@@ -51,7 +52,7 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
         if(Object.keys(obj.regionId).length !== 0 && obj.regionId.constructor === Object){          
           this.selectedRegion =obj.regionId.id;// { zone_id: 0, id: 6, title: "Multan", type: 3 };
       console.log("object region",this.selectedRegion)
-
+this.selectedDataType=obj.dataType
           setTimeout(() => {
           this.regionChange();
           }, 200);
@@ -134,13 +135,14 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
 
   }
 
-  goToSaleDetail() {
+  goToSaleDetail(dataType:string) {
     let sale_details_obj:any= {
       rteId:this.selectedRTE,
       regionId:this.selectedRegion,
       merchandiserId:this.selectedMerchandiserRTE,
       startDate:this.startDate,
-      endDate:this.endDate
+      endDate:this.endDate,
+      dataType:dataType
     }
     localStorage.setItem("sale_detail_obj",JSON.stringify(sale_details_obj))
     this.router.navigate(['/dashboard/sale_detail']);
@@ -198,6 +200,17 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
 
     this.selectedRegion.id ? this.getRTE(this.selectedRegion.id) :this.getRTE(this.selectedRegion);
 
+
+  }
+
+  regionChangeSaleDetail(){
+    this.loading = true;
+    this.loadingData = true;
+    this.RTEList = [];
+    this.selectedRTE = {};
+    this.merchandiserRTEList = [];
+    this.selectedMerchandiserRTE = {};
+    this.getRTE(this.selectedRegion);
 
   }
 
@@ -551,8 +564,8 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
       startDate: moment(this.startDate).format('YYYY-MM-DD'),
       endDate:  moment(this.endDate).format('YYYY-MM-DD'),
       rteId: this.selectedRTE.id ? this.selectedRTE.id : (this.selectedRTE || -1),
-      merchandiserId: (this.selectedMerchandiserRTE.id) ? this.selectedMerchandiserRTE.id : (this.selectedMerchandiserRTE || -1)
-
+      merchandiserId: (this.selectedMerchandiserRTE.id) ? this.selectedMerchandiserRTE.id : (this.selectedMerchandiserRTE || -1),
+      dataType:this.selectedDataType
     };
     localStorage.setItem('obj', JSON.stringify(obj));
     this.getTableForSaleData(obj);
