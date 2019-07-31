@@ -11,7 +11,7 @@ import { ModalModule } from 'ngx-bootstrap';
 import { ShopListComponent } from './section/shop-list/shop-list.component';
 import { FormsModule } from '@angular/forms';
 import { SectionFourComponent } from './section/section-four/section-four.component';
-import { MatCardModule } from '@angular/material';
+import { MatCardModule, MatRadioModule, MatCheckboxModule } from '@angular/material';
 
 @NgModule({
   declarations: [SectionHomeComponent,SectionOneViewComponent,SectionTwoViewComponent,SectionThreeViewComponent, SectionLandingPageComponent, ShopListComponent, SectionFourComponent],
@@ -21,6 +21,10 @@ import { MatCardModule } from '@angular/material';
     ModalModule.forRoot(),
 FormsModule,
 MatCardModule,
+MatRadioModule,
+MatCheckboxModule,
+
+
   ]
 })
 export class EvaluationModule { }
