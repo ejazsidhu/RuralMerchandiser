@@ -99,9 +99,7 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
     }
   ngOnInit() {
     this.loading = true;
-    let obj:any=JSON.parse(localStorage.getItem("sale_detail_obj"));
-    this.selectedDataType=obj.dataType
-    this.getRegions();
+ 
     console.log(this.router.url);
     if (this.router.url === '/dashboard/visit_productivity') {
       this.getTabsData();
@@ -115,9 +113,12 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
     if(this.router.url == '/dashboard/sale_detail') {
     this.getCategoryList();
     this.getTabsDataForSaleDetail();
+    let obj:any=JSON.parse(localStorage.getItem("sale_detail_obj"));  
+    this.selectedDataType=obj.dataType
     }
 
 
+    this.getRegions();
 
 
   }
