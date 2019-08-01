@@ -10,7 +10,7 @@ import { routerNgProbeToken } from '@angular/router/src/router_module';
   templateUrl: './filter-bar.component.html',
   styleUrls: ['./filter-bar.component.scss']
 })
-export class FilterBarComponent implements OnInit ,AfterContentInit{
+export class FilterBarComponent implements OnInit, AfterContentInit {
   //#region veriables
   minDate = new Date(2000, 0, 1);
   maxDate = new Date();
@@ -35,71 +35,72 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
   merchandiserRTEList: any = [];
   selectedMerchandiserRTE: any = {};
   selectedDataType: any;
-  categoryList:any=[];
-  selectedCategory:any={}
+  categoryList: any = [];
+  selectedCategory: any = {};
 
   //#endregion
 
   constructor(private toastr: ToastrService,
     private httpService: DashboardService,
-    public router: Router,private activeRoute:ActivatedRoute) { 
-
-   
-    }
+    public router: Router, private activeRoute: ActivatedRoute) {
 
 
-    ngAfterContentInit(){
-      let obj:any=JSON.parse(localStorage.getItem("sale_detail_obj"));
-      this.selectedDataType=obj.dataType
+  }
 
-      if(obj && this.router.url === '/dashboard/sale_detail'){
-        if(Object.keys(obj.regionId).length !== 0 && obj.regionId.constructor === Object){          
-          this.selectedRegion =obj.regionId.id;// { zone_id: 0, id: 6, title: "Multan", type: 3 };
-      console.log("object region",this.selectedRegion)
-      this.selectedDataType=obj.dataType
 
-          setTimeout(() => {
+  ngAfterContentInit() {
+    const obj: any = JSON.parse(localStorage.getItem('sale_detail_obj'));
+    debugger;
+    // this.selectedDataType = obj.dataType
+
+    if (obj && this.router.url === '/dashboard/sale_detail') {
+      if (Object.keys(obj.regionId).length !== 0 && obj.regionId.constructor === Object) {
+        this.selectedRegion = obj.regionId.id; // { zone_id: 0, id: 6, title: "Multan", type: 3 };
+        console.log('object region', this.selectedRegion);
+        this.selectedDataType = obj.dataType;
+
+        setTimeout(() => {
           this.regionChange();
-          }, 200);
+        }, 200);
 
-        }
-        if(Object.keys(obj.rteId).length !== 0 && obj.rteId.constructor === Object){
-          this.selectedRTE=obj.rteId.id;
-      console.log("object selectedRTE",this.selectedRTE)
-
-          setTimeout(() => {
-            this.regionRTE();
-            }, 200);
-
-        }
-
-        if(Object.keys(obj.merchandiserId).length !== 0 && obj.merchandiserId.constructor === Object){
-          this.selectedMerchandiserRTE=obj.merchandiserId.id;
-      console.log("object selectedMerchandiserRTE",this.selectedMerchandiserRTE)
-
-          setTimeout(() => {
-            this.statsMerchandiserWise();
-
-            }, 200);
-
-        }
-
-        this.startDate=obj.startDate;
-        this.endDate= obj.endDate;
-        // this.getTabsDataForSaleDetail()
       }
+      if (Object.keys(obj.rteId).length !== 0 && obj.rteId.constructor === Object) {
+        this.selectedRTE = obj.rteId.id;
+        console.log('object selectedRTE', this.selectedRTE);
+
+        setTimeout(() => {
+          this.regionRTE();
+        }, 200);
+
+      }
+
+      if (Object.keys(obj.merchandiserId).length !== 0 && obj.merchandiserId.constructor === Object) {
+        this.selectedMerchandiserRTE = obj.merchandiserId.id;
+        console.log('object selectedMerchandiserRTE', this.selectedMerchandiserRTE);
+
+        setTimeout(() => {
+          this.statsMerchandiserWise();
+
+        }, 200);
+
+      }
+
+      this.startDate = obj.startDate;
+      this.endDate = obj.endDate;
+      // this.getTabsDataForSaleDetail()
     }
+  }
 
 
-    getCategoryList(){
-      this.httpService.getcategories().subscribe((data:any)=>{
-        // console.log("category list",data)
-        this.categoryList=data || [];
-      },error=>{})
-    }
+  getCategoryList() {
+    this.httpService.getcategories().subscribe((data: any) => {
+      // console.log("category list",data)
+      this.categoryList = data || [];
+    }, error => { });
+  }
   ngOnInit() {
     this.loading = true;
- 
+
     console.log(this.router.url);
     if (this.router.url === '/dashboard/visit_productivity') {
       this.getTabsData();
@@ -108,13 +109,15 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
       this.getQueryTypeList();
     }
 
-    if(this.router.url != '/dashboard/sale_detail')
-    localStorage.removeItem("sale_detail_obj")
-    if(this.router.url == '/dashboard/sale_detail') {
-    this.getCategoryList();
-    this.getTabsDataForSaleDetail();
-    let obj:any=JSON.parse(localStorage.getItem("sale_detail_obj"));  
-    this.selectedDataType=obj.dataType
+    if (this.router.url !== '/dashboard/sale_detail') {
+      localStorage.removeItem('sale_detail_obj');
+    }
+    if (this.router.url === '/dashboard/sale_detail') {
+      this.getCategoryList();
+      this.getTabsDataForSaleDetail();
+      const obj: any = JSON.parse(localStorage.getItem('sale_detail_obj'));
+      debugger;
+      this.selectedDataType = obj.dataType;
     }
 
 
@@ -123,10 +126,9 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
 
   }
 
-  categoryChangeSaleDetail()
-  {
+  categoryChangeSaleDetail() {
     this.getTabsDataForSaleDetail();
-    
+
   }
   getRTE(regionId) {
     this.httpService.getRTE(regionId).subscribe((data: any) => {
@@ -138,10 +140,10 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
         }, 1000);
       }
 
-      if(this.router.url == '/dashboard/sale_detail') {
-      this.getTabsDataForSaleDetail()
+      if (this.router.url === '/dashboard/sale_detail') {
+        this.getTabsDataForSaleDetail();
       } else {
-      this.getTabsData();
+        this.getTabsData();
       }
     });
   }
@@ -158,16 +160,17 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
 
   }
 
-  goToSaleDetail(dataType:string) {
-    let sale_details_obj:any= {
-      rteId:this.selectedRTE,
-      regionId:this.selectedRegion,
-      merchandiserId:this.selectedMerchandiserRTE,
-      startDate:this.startDate,
-      endDate:this.endDate,
-      dataType:dataType
-    }
-    localStorage.setItem("sale_detail_obj",JSON.stringify(sale_details_obj))
+  goToSaleDetail(dataType: string) {
+    const sale_details_obj: any = {
+      rteId: this.selectedRTE,
+      regionId: this.selectedRegion,
+      merchandiserId: this.selectedMerchandiserRTE,
+      startDate: this.startDate,
+      endDate: this.endDate,
+      dataType: dataType
+    };
+    localStorage.setItem('sale_detail_obj', JSON.stringify(sale_details_obj));
+    debugger;
     this.router.navigate(['/dashboard/sale_detail']);
 
     // this.router.navigate(['/dashboard/sale_detail'], { queryParams: { rteId: this.selectedRTE.id,merchandiserId:this.selectedMerchandiserRTE.id,regionId:this.selectedRegion.id,startDate:moment(this.startDate).format("YYYY-MM-DD"),endDate:moment(this.endDate).format("YYYY-MM-DD")}, queryParamsHandling: 'merge' });
@@ -192,10 +195,10 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
           this.loadingData = false;
         }, 1000);
       }
-      if(this.router.url == '/dashboard/sale_detail') {
-      this.getTabsDataForSaleDetail()
+      if (this.router.url === '/dashboard/sale_detail') {
+        this.getTabsDataForSaleDetail();
       } else {
-      this.getTabsData();
+        this.getTabsData();
       }
     });
   }
@@ -216,17 +219,17 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
     this.loading = true;
     this.loadingData = true;
     this.RTEList = [];
-    (this.selectedRTE) ? (this.selectedRTE = this.selectedRTE) :(this.selectedRTE = {});
+    (this.selectedRTE) ? (this.selectedRTE = this.selectedRTE) : (this.selectedRTE = {});
     this.merchandiserRTEList = [];
-    (this.selectedMerchandiserRTE) ? (this.selectedMerchandiserRTE = this.selectedMerchandiserRTE) :(this.selectedMerchandiserRTE = {});
+    (this.selectedMerchandiserRTE) ? (this.selectedMerchandiserRTE = this.selectedMerchandiserRTE) : (this.selectedMerchandiserRTE = {});
     // this.selectedMerchandiserRTE = {};
 
-    this.selectedRegion.id ? this.getRTE(this.selectedRegion.id) :this.getRTE(this.selectedRegion);
+    this.selectedRegion.id ? this.getRTE(this.selectedRegion.id) : this.getRTE(this.selectedRegion);
 
 
   }
 
-  regionChangeSaleDetail(){
+  regionChangeSaleDetail() {
     this.loading = true;
     this.loadingData = true;
     this.RTEList = [];
@@ -260,9 +263,9 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
   statsMerchandiserWise() {
     this.loading = true;
     if (this.router.url === '/dashboard/sale_detail') {
-    this.getTabsDataForSaleDetail();
+      this.getTabsDataForSaleDetail();
     } else {
-    this.getTabsData();
+      this.getTabsData();
     }
   }
   getQueryTypeList() {
@@ -579,19 +582,21 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
 
   getTabsDataForSaleDetail() {
 
+    const obj1: any = JSON.parse(localStorage.getItem('sale_detail_obj'));
     this.loading = true;
     // debugger;
     const obj: any = {
       // zoneId: (this.selectedZone.id) ? this.selectedZone.id : -1,
       regionId: (this.selectedRegion.id) ? this.selectedRegion.id : (this.selectedRegion || -1),
       startDate: moment(this.startDate).format('YYYY-MM-DD'),
-      endDate:  moment(this.endDate).format('YYYY-MM-DD'),
+      endDate: moment(this.endDate).format('YYYY-MM-DD'),
       rteId: this.selectedRTE.id ? this.selectedRTE.id : (this.selectedRTE || -1),
       merchandiserId: (this.selectedMerchandiserRTE.id) ? this.selectedMerchandiserRTE.id : (this.selectedMerchandiserRTE || -1),
-      dataType:this.selectedDataType,
-      tposmCategoryId:this.selectedCategory
+      dataType: (this.selectedDataType || obj1.dataType),
+      tposmCategoryId: this.selectedCategory
     };
     localStorage.setItem('obj', JSON.stringify(obj));
+    debugger;
     this.getTableForSaleData(obj);
 
 
@@ -639,7 +644,7 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
       if (res) {
         this.tableData = res;
       }
-      
+
       this.loading = false;
       // if (res.planned == 0)
       //   this.toastr.info('No data available for current selection', 'Summary')

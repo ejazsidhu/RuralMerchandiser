@@ -617,7 +617,7 @@
 
 
                         <td>{{item?.sale_visit}}</td>
-                        <td>{{item?.sale_qty}}</td>
+                        <td>{{item?.sale_qty | number}}</td>
                         <td>{{item?.trade_price}}</td>
                         <td>{{item?.sale_amount | number}}</td>
 
@@ -634,7 +634,7 @@
     </mat-card-content>
 </mat-card>
 
-<mat-card *ngIf="tableData.length==0 && !loading" class="text-center">
+<mat-card *ngIf="tableData.length==0 && !loading && router.url==='/dashboard/sale_detail'" class="text-center">
     <alert type="info">
         Against your selected filter
         <strong>No Data Found!</strong>
