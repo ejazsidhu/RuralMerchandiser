@@ -213,9 +213,15 @@ export class SectionHomeComponent implements OnInit {
   }
 
   hideChildModal(): void {
-
     this.childModal.hide();
+  }
 
+  cancelSelection(){
+    this.selectedRemarksList=[];
+    console.log('remarks list', this.selectedRemarksList);
+
+    this.selectedCriteria=1;
+    this.hideRemarksModal();
   }
 
   evaluateShop(){
@@ -253,11 +259,20 @@ export class SectionHomeComponent implements OnInit {
       })
 
   }
+
+  clearCheckboxes(){
+    var inputs: any = document.querySelectorAll('.checkbox');
+    for (var j = 0; j < inputs.length; j++) {
+      if (this.selectedCriteria.id == inputs[j].id) inputs[j].checked = false;
+    }
+  }
     
 
   showRemarksModal(){
-    if(this.selectedCriteria==1)
+    if(this.selectedCriteria==1){
+    this.selectedRemarksList=[];
     this.remarksModal.show();
+    }
     else
     this.selectedRemarksList=[];
   }
