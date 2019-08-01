@@ -35,6 +35,8 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
   merchandiserRTEList: any = [];
   selectedMerchandiserRTE: any = {};
   selectedDataType: any;
+  categoryList:any=[];
+  selectedCategory:any={}
 
   //#endregion
 
@@ -48,11 +50,12 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
 
     ngAfterContentInit(){
       let obj:any=JSON.parse(localStorage.getItem("sale_detail_obj"));
+      this.selectedDataType=obj.dataType
+
       if(obj && this.router.url === '/dashboard/sale_detail'){
         if(Object.keys(obj.regionId).length !== 0 && obj.regionId.constructor === Object){          
           this.selectedRegion =obj.regionId.id;// { zone_id: 0, id: 6, title: "Multan", type: 3 };
       console.log("object region",this.selectedRegion)
-this.selectedDataType=obj.dataType
           setTimeout(() => {
           this.regionChange();
           }, 200);
@@ -84,6 +87,14 @@ this.selectedDataType=obj.dataType
         this.getTabsDataForSaleDetail()
       }
     }
+
+
+    getCategoryList(){
+      this.httpService.getcategories().subscribe((data:any)=>{
+        // console.log("category list",data)
+        this.categoryList=data || [];
+      },error=>{})
+    }
   ngOnInit() {
     this.loading = true;
     this.getRegions();
@@ -98,12 +109,19 @@ this.selectedDataType=obj.dataType
     if(this.router.url != '/dashboard/sale_detail')
     localStorage.removeItem("sale_detail_obj")
     if(this.router.url == '/dashboard/sale_detail') {
-    this.getTabsDataForSaleDetail()
+    this.getCategoryList();
+    this.getTabsDataForSaleDetail();
     }
 
 
 
 
+  }
+
+  categoryChangeSaleDetail()
+  {
+    this.getTabsDataForSaleDetail();
+    
   }
   getRTE(regionId) {
     this.httpService.getRTE(regionId).subscribe((data: any) => {
@@ -565,7 +583,8 @@ this.selectedDataType=obj.dataType
       endDate:  moment(this.endDate).format('YYYY-MM-DD'),
       rteId: this.selectedRTE.id ? this.selectedRTE.id : (this.selectedRTE || -1),
       merchandiserId: (this.selectedMerchandiserRTE.id) ? this.selectedMerchandiserRTE.id : (this.selectedMerchandiserRTE || -1),
-      dataType:this.selectedDataType
+      dataType:this.selectedDataType,
+      tposmCategoryId:this.selectedCategory
     };
     localStorage.setItem('obj', JSON.stringify(obj));
     this.getTableForSaleData(obj);
@@ -615,6 +634,7 @@ this.selectedDataType=obj.dataType
       if (res) {
         this.tableData = res;
       }
+      
       this.loading = false;
       // if (res.planned == 0)
       //   this.toastr.info('No data available for current selection', 'Summary')

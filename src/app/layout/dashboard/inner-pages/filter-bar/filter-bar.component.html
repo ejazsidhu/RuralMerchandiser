@@ -502,29 +502,34 @@
                 being prepared for download</small>
 
         </mat-card-title>
-        <section class="example-section" *ngIf="regions.length>0">
+        <section class="example-section" *ngIf="categoryList.length>0">
+            <mat-form-field *ngIf="categoryList.length>0" class="example-margin mr-10-IMP">
+                <mat-select placeholder="Category" name='category' [(ngModel)]="selectedCategory" (ngModelChange)="categoryChangeSaleDetail()">
+                    <mat-option [value]="category.id" *ngFor="let category of categoryList">{{category.title}}</mat-option>
+                </mat-select>
+            </mat-form-field>
             <!-- {{selectedRegion |json}} -->
             <mat-form-field *ngIf="regions.length>0" class="example-margin mr-10-IMP">
-                <mat-select placeholder="Region" name='region' [(ngModel)]="selectedRegion" (ngModelChange)="regionChangeSaleDetail()" >
+                <mat-select placeholder="Region" name='region' [(ngModel)]="selectedRegion" (ngModelChange)="regionChangeSaleDetail()">
                     <mat-option [value]="region.id" *ngFor="let region of regions">{{region.title}}</mat-option>
                 </mat-select>
             </mat-form-field>
 
             <mat-form-field *ngIf="RTEList.length>0" class="example-margin mr-10-IMP">
-                <mat-select placeholder="RTE" name='rte' [(ngModel)]="selectedRTE" (ngModelChange)="regionRTE()" >
+                <mat-select placeholder="RTE" name='rte' [(ngModel)]="selectedRTE" (ngModelChange)="regionRTE()">
                     <mat-option [value]="rte.id" *ngFor="let rte of RTEList">{{rte.title}}</mat-option>
                 </mat-select>
             </mat-form-field>
 
             <mat-form-field *ngIf="merchandiserRTEList.length>0" class="example-margin mr-10-IMP">
-                <mat-select placeholder="Merchandisers" name='merchandiser' [(ngModel)]="selectedMerchandiserRTE" (ngModelChange)="statsMerchandiserWise()" >
+                <mat-select placeholder="Merchandisers" name='merchandiser' [(ngModel)]="selectedMerchandiserRTE" (ngModelChange)="statsMerchandiserWise()">
                     <mat-option [value]="merchandiser.id" *ngFor="let merchandiser of merchandiserRTEList">
                         {{merchandiser.title}}</mat-option>
                 </mat-select>
             </mat-form-field>
 
             <mat-form-field class="example-full-width mr-10-IMP">
-                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker0" [(ngModel)]="startDate" (ngModelChange)="getTabsDataForSaleDetail()" placeholder="Choose a start date" readonly >
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker0" [(ngModel)]="startDate" (ngModelChange)="getTabsDataForSaleDetail()" placeholder="Choose a start date" readonly>
                 <mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
                 <mat-datepicker #picker0></mat-datepicker>
             </mat-form-field>
@@ -629,11 +634,12 @@
     </mat-card-content>
 </mat-card>
 
-<!-- <mat-card *ngIf="tableData.length==0">
+<mat-card *ngIf="tableData.length==0 && !loading" class="text-center">
     <alert type="info">
-        <strong>No Data Found!</strong> Against your selected filter.
-      </alert>
-  </mat-card> -->
+        Against your selected filter
+        <strong>No Data Found!</strong>
+    </alert>
+</mat-card>
 
 
 <!-- /shop detail -->
