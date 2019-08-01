@@ -56,6 +56,8 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
         if(Object.keys(obj.regionId).length !== 0 && obj.regionId.constructor === Object){          
           this.selectedRegion =obj.regionId.id;// { zone_id: 0, id: 6, title: "Multan", type: 3 };
       console.log("object region",this.selectedRegion)
+      this.selectedDataType=obj.dataType
+
           setTimeout(() => {
           this.regionChange();
           }, 200);
@@ -84,7 +86,7 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
 
         this.startDate=obj.startDate;
         this.endDate= obj.endDate;
-        this.getTabsDataForSaleDetail()
+        // this.getTabsDataForSaleDetail()
       }
     }
 
@@ -97,6 +99,8 @@ export class FilterBarComponent implements OnInit ,AfterContentInit{
     }
   ngOnInit() {
     this.loading = true;
+    let obj:any=JSON.parse(localStorage.getItem("sale_detail_obj"));
+    this.selectedDataType=obj.dataType
     this.getRegions();
     console.log(this.router.url);
     if (this.router.url === '/dashboard/visit_productivity') {
