@@ -50,11 +50,11 @@ export class SectionThreeViewComponent implements OnInit {
   calculateData(data){
 
     data.forEach(element => {
-      if(element.heading=="Sale Amount" && element.values.length>0){
+      if(element.heading=="Amount" && element.values.length>0){
         this.totalAmount=element.values.reduce((a,v)=>parseInt(a)+parseInt(v));
 
       }
-      else if(element.heading=="Sale Quantity"  && element.values.length>0){
+      else if(element.heading=="Quantity"  && element.values.length>0){
         this.totalQuantity=element.values.reduce((a,v)=>parseInt(a)+parseInt(v));
 
       }
