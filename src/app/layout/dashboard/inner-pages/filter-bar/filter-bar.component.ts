@@ -37,6 +37,9 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
   selectedDataType: any;
   categoryList: any = [];
   selectedCategory: any = {};
+  totalVisits: any;
+  totalQuantity: any;
+  totalAmount: any;
 
   //#endregion
 
@@ -635,6 +638,24 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
 
     });
   }
+
+  getCalculation(data){
+    this.totalVisits=0;
+    this.totalQuantity=0;
+    this.totalAmount=0;
+    data.forEach(element => {
+      if(element.sale_visit)
+      this.totalVisits +=element.sale_visit;
+
+      if(element.sale_qty)
+      this.totalQuantity += element.sale_qty;
+      if(element.sale_amount)
+      this.totalAmount += element.sale_amount;
+
+      
+    });
+  }
+
   getTableForSaleData(obj) {
 
     this.httpService.saleDetailData(obj).subscribe(data => {
@@ -643,6 +664,7 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
 
       if (res) {
         this.tableData = res;
+        this.getCalculation(this.tableData)
       }
 
       this.loading = false;
