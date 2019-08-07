@@ -20,6 +20,7 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
   tableData: any = [];
   queryList: any = [];
   selectedQuery: any = {};
+  selectedBrand: any = {};
   selectedRegion: any = {};
   merchandiser: any = {};
   sortOrder = true;
@@ -37,6 +38,7 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
   selectedDataType: any;
   categoryList: any = [];
   selectedCategory: any = {};
+  brandList: any = [];
   totalVisits: any;
   totalQuantity: any;
   totalAmount: any;
@@ -97,7 +99,10 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
   getCategoryList() {
     this.httpService.getcategories().subscribe((data: any) => {
       // console.log("category list",data)
-      this.categoryList = data || [];
+      console.log(data);
+      debugger;
+      this.categoryList = data.categotyList || [];
+      this.brandList  = data.brandList || [];
     }, error => { });
   }
   ngOnInit() {
@@ -129,6 +134,10 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
   }
 
   categoryChangeSaleDetail() {
+    this.getTabsDataForSaleDetail();
+
+  }
+  brandChangeSaleDetail() {
     this.getTabsDataForSaleDetail();
 
   }
@@ -287,14 +296,14 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
     });
 
   }
-  downloadVOErrorReport(){
+  downloadVOErrorReport() {
     if (this.endDate >= this.startDate) {
       this.loadingReportMessage = true;
       const obj = {
         regionId: this.selectedRegion.id || -1,
         startDate: moment(this.startDate).format('YYYY-MM-DD'),
         endDate: moment(this.endDate).format('YYYY-MM-DD'),
-    
+
       };
 
       const url = 'dailyEvaluationReport';
@@ -628,7 +637,8 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
       rteId: this.selectedRTE.id ? this.selectedRTE.id : (this.selectedRTE || -1),
       merchandiserId: (this.selectedMerchandiserRTE.id) ? this.selectedMerchandiserRTE.id : (this.selectedMerchandiserRTE || -1),
       dataType: (this.selectedDataType || obj1.dataType),
-      tposmCategoryId: this.selectedCategory
+      tposmCategoryId: this.selectedCategory,
+      brandType: this.selectedBrand
     };
     localStorage.setItem('obj', JSON.stringify(obj));
     debugger;
@@ -671,20 +681,23 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
     });
   }
 
-  getCalculation(data){
-    this.totalVisits=0;
-    this.totalQuantity=0;
-    this.totalAmount=0;
+  getCalculation(data) {
+    this.totalVisits = 0;
+    this.totalQuantity = 0;
+    this.totalAmount = 0;
     data.forEach(element => {
-      if(element.sale_visit)
-      this.totalVisits +=element.sale_visit;
+      if (element.sale_visit) {
+      this.totalVisits += element.sale_visit;
+      }
 
-      if(element.sale_qty)
+      if (element.sale_qty) {
       this.totalQuantity += element.sale_qty;
-      if(element.sale_amount)
+      }
+      if (element.sale_amount) {
       this.totalAmount += element.sale_amount;
+      }
 
-      
+
     });
   }
 
@@ -696,7 +709,7 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
 
       if (res) {
         this.tableData = res;
-        this.getCalculation(this.tableData)
+        this.getCalculation(this.tableData);
       }
 
       this.loading = false;

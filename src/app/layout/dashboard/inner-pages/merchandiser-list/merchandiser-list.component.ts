@@ -79,7 +79,7 @@ export class MerchandiserListComponent implements OnInit {
         this.merchandiserList.push(item);
       }
     }
-    this.rteList.sort((a, b) => (a.rte_name > b.rte_name) ? 1 : -1);
+    // this.rteList.sort((a, b) => (a.rte_name > b.rte_name) ? 1 : -1);
   }
 
 
