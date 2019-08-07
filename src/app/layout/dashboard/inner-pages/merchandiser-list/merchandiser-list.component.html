@@ -42,14 +42,18 @@
                                     <tr>
                                         <th>VO Code</th>
                                         <th>VO Name</th>
+                                        <th>Visited</th>
+                                        <th>Evaluated</th>
 
                                     </tr>
                                 </thead>
 
                                 <tbody *ngIf="merchandiserList.length>0">
                                     <tr *ngFor="let item of merchandiserList">
-                                        <td>{{item.m_code}}</td>
+                                        <td>{{item?.m_code}}</td>
                                         <td style="color:blue;cursor:pointer" [routerLink]="['/dashboard/evaluation/shop_list']" [queryParams]="{ surveyorId: item.id,startDate: modifyDate(startDate),endDate: modifyDate(startDate)}">{{item.full_name}}</td>
+                                        <td>{{item?.visited}}</td>
+                                        <td>{{item?.evaluated}}</td>
 
                                     </tr>
                                 </tbody>
