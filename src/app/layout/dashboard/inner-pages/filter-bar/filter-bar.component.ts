@@ -53,7 +53,6 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
 
   ngAfterContentInit() {
     const obj: any = JSON.parse(localStorage.getItem('sale_detail_obj'));
-    debugger;
     // this.selectedDataType = obj.dataType
 
     if (obj && this.router.url === '/dashboard/sale_detail') {
