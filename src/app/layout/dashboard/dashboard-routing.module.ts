@@ -12,6 +12,7 @@ import { UniqueBaseProductivityComponent } from './inner-pages/unique-base-produ
 import { SaleDataReportComponent } from './inner-pages/sale-data-report/sale-data-report.component';
 import { StockPopLoadingComponent } from './inner-pages/stock-pop-loading/stock-pop-loading.component';
 import { SaleDetailComponent } from './inner-pages/sale-detail/sale-detail.component';
+import { VoErrorReportComponent } from './inner-pages/vo-error-report/vo-error-report.component';
 
 const routes: Routes = [
     {
@@ -29,7 +30,9 @@ const routes: Routes = [
     { path: 'raw_data', component: RawDataComponent },
     { path: 'evaluation', loadChildren: '../evaluation/evaluation.module#EvaluationModule' },
     { path: 'shop_detail/:id', component: ShopDetailComponent },
-    { path: 'sale_detail', component: SaleDetailComponent }
+    { path: 'sale_detail', component: SaleDetailComponent },
+    { path: 'vo_error_report', component: VoErrorReportComponent },
+
 
 ];
 

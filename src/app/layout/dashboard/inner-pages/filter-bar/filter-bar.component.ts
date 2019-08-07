@@ -287,7 +287,40 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
     });
 
   }
+  downloadVOErrorReport(){
+    if (this.endDate >= this.startDate) {
+      this.loadingReportMessage = true;
+      const obj = {
+        regionId: this.selectedRegion.id || -1,
+        startDate: moment(this.startDate).format('YYYY-MM-DD'),
+        endDate: moment(this.endDate).format('YYYY-MM-DD'),
+    
+      };
 
+      const url = 'dailyEvaluationReport';
+      const body = this.httpService.UrlEncodeMaker(obj);
+      this.httpService.getKeyForReport(url, body).subscribe(data => {
+        const res: any = data;
+
+        if (res) {
+          const obj2 = {
+            key: res.key,
+            fileType: 'json.fileType'
+          };
+          const url = 'downloadReport';
+          this.getproductivityDownload(obj2, url);
+        } else {
+          // this.clearLoading()
+
+          this.toastr.info('Something went wrong,Please retry', 'Connectivity Message');
+        }
+      });
+
+    } else {
+      this.toastr.info('End date must be greater than start date', 'Date Selection');
+
+    }
+  }
 
   downloadReport() {
     if (this.endDate >= this.startDate) {
