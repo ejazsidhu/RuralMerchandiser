@@ -100,9 +100,12 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
     this.httpService.getcategories().subscribe((data: any) => {
       // console.log("category list",data)
       console.log(data);
-      debugger;
-      this.categoryList = data.categotyList || [];
-      this.brandList  = data.brandList || [];
+     
+      this.categoryList = data.categoryList;
+      this.brandList = data.brandList;
+      console.log(this.categoryList);
+      console.log(this.brandList);
+      
     }, error => { });
   }
   ngOnInit() {
@@ -123,7 +126,7 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
       this.getCategoryList();
       this.getTabsDataForSaleDetail();
       const obj: any = JSON.parse(localStorage.getItem('sale_detail_obj'));
-      debugger;
+   
       this.selectedDataType = obj.dataType;
     }
 
@@ -136,7 +139,9 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
   categoryChangeSaleDetail() {
     this.getTabsDataForSaleDetail();
 
+
   }
+
   brandChangeSaleDetail() {
     this.getTabsDataForSaleDetail();
 
@@ -181,7 +186,7 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
       dataType: dataType
     };
     localStorage.setItem('sale_detail_obj', JSON.stringify(sale_details_obj));
-    debugger;
+
     this.router.navigate(['/dashboard/sale_detail']);
 
     // this.router.navigate(['/dashboard/sale_detail'], { queryParams: { rteId: this.selectedRTE.id,merchandiserId:this.selectedMerchandiserRTE.id,regionId:this.selectedRegion.id,startDate:moment(this.startDate).format("YYYY-MM-DD"),endDate:moment(this.endDate).format("YYYY-MM-DD")}, queryParamsHandling: 'merge' });
@@ -627,6 +632,7 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
   getTabsDataForSaleDetail() {
 
     const obj1: any = JSON.parse(localStorage.getItem('sale_detail_obj'));
+  
     this.loading = true;
     // debugger;
     const obj: any = {
@@ -637,11 +643,11 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
       rteId: this.selectedRTE.id ? this.selectedRTE.id : (this.selectedRTE || -1),
       merchandiserId: (this.selectedMerchandiserRTE.id) ? this.selectedMerchandiserRTE.id : (this.selectedMerchandiserRTE || -1),
       dataType: (this.selectedDataType || obj1.dataType),
-      tposmCategoryId: this.selectedCategory,
-      brandType: this.selectedBrand
+      tposmCategoryId: this.selectedCategory.id || -1,
+      brandType: this.selectedBrand.brand || 'All'
     };
     localStorage.setItem('obj', JSON.stringify(obj));
-    debugger;
+    
     this.getTableForSaleData(obj);
 
 

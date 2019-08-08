@@ -505,12 +505,14 @@
         <section class="example-section" *ngIf="categoryList.length>0">
             <mat-form-field *ngIf="categoryList.length>0" class="example-margin mr-10-IMP">
                 <mat-select placeholder="Category" name='category' [(ngModel)]="selectedCategory" (ngModelChange)="categoryChangeSaleDetail()">
-                    <mat-option [value]="category.id" *ngFor="let category of categoryList">{{category.title}}</mat-option>
+                    <mat-option value="-1">All</mat-option>
+                    <mat-option [value]="category" *ngFor="let category of categoryList">{{category.title}}</mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field *ngIf="brandList.length>0" class="example-margin mr-10-IMP">
                 <mat-select placeholder="Brand" name='brand' [(ngModel)]="selectedBrand" (ngModelChange)="brandChangeSaleDetail()">
-                    <mat-option [value]="category.brand" *ngFor="let category of brandList">{{category.brand}}</mat-option>
+                    <mat-option value="All">All</mat-option>
+                    <mat-option [value]="brand" *ngFor="let brand of brandList">{{brand.brand}}</mat-option>
                 </mat-select>
             </mat-form-field>
             <!-- {{selectedRegion |json}} -->
