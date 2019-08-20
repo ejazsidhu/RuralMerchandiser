@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../../dashboard.service';
+
 import * as moment from 'moment';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-merchandiser-list',
@@ -81,6 +83,13 @@ export class MerchandiserListComponent implements OnInit {
     }
     // this.rteList.sort((a, b) => (a.rte_name > b.rte_name) ? 1 : -1);
   }
+
+  gotoNewPage(item) {
+
+    window.open(`${environment.hash}dashboard/evaluation/shop_list/home?surveyorId=${item.id}&startDate=${this.modifyDate(this.startDate)}&endDate=${this.modifyDate(this.startDate)}`, '_blank');
+    // /dashboard/evaluation/shop_list/home?surveyorId=3&startDate=2019-08-08&endDate=2019-08-08
+
+    }
 
 
 

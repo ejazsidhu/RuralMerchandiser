@@ -100,12 +100,12 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
     this.httpService.getcategories().subscribe((data: any) => {
       // console.log("category list",data)
       console.log(data);
-     
+
       this.categoryList = data.categoryList;
       this.brandList = data.brandList;
       console.log(this.categoryList);
       console.log(this.brandList);
-      
+
     }, error => { });
   }
   ngOnInit() {
@@ -126,7 +126,7 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
       this.getCategoryList();
       this.getTabsDataForSaleDetail();
       const obj: any = JSON.parse(localStorage.getItem('sale_detail_obj'));
-   
+
       this.selectedDataType = obj.dataType;
     }
 
@@ -308,7 +308,42 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
         regionId: this.selectedRegion.id || -1,
         startDate: moment(this.startDate).format('YYYY-MM-DD'),
         endDate: moment(this.endDate).format('YYYY-MM-DD'),
+        pageType: 0
+      };
 
+      const url = 'dailyEvaluationReport';
+      const body = this.httpService.UrlEncodeMaker(obj);
+      this.httpService.getKeyForReport(url, body).subscribe(data => {
+        const res: any = data;
+
+        if (res) {
+          const obj2 = {
+            key: res.key,
+            fileType: 'json.fileType'
+          };
+          const url = 'downloadReport';
+          this.getproductivityDownload(obj2, url);
+        } else {
+          // this.clearLoading()
+
+          this.toastr.info('Something went wrong,Please retry', 'Connectivity Message');
+        }
+      });
+
+    } else {
+      this.toastr.info('End date must be greater than start date', 'Date Selection');
+
+    }
+  }
+
+  downloadEvaluationSummaryReport() {
+    if (this.endDate >= this.startDate) {
+      this.loadingReportMessage = true;
+      const obj = {
+        regionId: this.selectedRegion.id || -1,
+        startDate: moment(this.startDate).format('YYYY-MM-DD'),
+        endDate: moment(this.endDate).format('YYYY-MM-DD'),
+        pageType: 1
       };
 
       const url = 'dailyEvaluationReport';
@@ -599,6 +634,7 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
     // debugger;
     const obj: any = {
       // zoneId: (this.selectedZone.id) ? this.selectedZone.id : -1,
+      // regionId take from local storage to show only regional data, that region id taged to specific login
       regionId: (this.selectedRegion.id) ? this.selectedRegion.id : localStorage.getItem('regionId'),
       startDate: (dateType === 'start') ? moment(data).format('YYYY-MM-DD') : moment(this.startDate).format('YYYY-MM-DD'),
       endDate: (dateType === 'end') ? moment(data).format('YYYY-MM-DD') : moment(this.endDate).format('YYYY-MM-DD'),
@@ -632,7 +668,7 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
   getTabsDataForSaleDetail() {
 
     const obj1: any = JSON.parse(localStorage.getItem('sale_detail_obj'));
-  
+
     this.loading = true;
     // debugger;
     const obj: any = {
@@ -647,7 +683,7 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
       brandType: this.selectedBrand.brand || 'All'
     };
     localStorage.setItem('obj', JSON.stringify(obj));
-    
+
     this.getTableForSaleData(obj);
 
 

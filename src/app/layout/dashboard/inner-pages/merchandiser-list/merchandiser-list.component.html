@@ -62,9 +62,7 @@
                                 <tbody *ngIf="merchandiserList.length>0">
                                     <tr *ngFor="let item of merchandiserList">
                                         <td>{{item?.m_code}}</td>
-                                        <td style="color:blue;cursor:pointer"
-                                            [routerLink]="['/dashboard/evaluation/shop_list']"
-                                            [queryParams]="{ surveyorId: item.id,startDate: modifyDate(startDate),endDate: modifyDate(startDate)}">
+                                        <td style="color:blue;cursor:pointer" (click)="gotoNewPage(item)">
                                             {{item.full_name}}</td>
                                         <td>{{item?.visited}}</td>
                                         <td>{{item?.evaluated}}</td>

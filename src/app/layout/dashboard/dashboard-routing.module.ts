@@ -13,6 +13,7 @@ import { SaleDataReportComponent } from './inner-pages/sale-data-report/sale-dat
 import { StockPopLoadingComponent } from './inner-pages/stock-pop-loading/stock-pop-loading.component';
 import { SaleDetailComponent } from './inner-pages/sale-detail/sale-detail.component';
 import { VoErrorReportComponent } from './inner-pages/vo-error-report/vo-error-report.component';
+import { EvaluationSummaryComponent } from './inner-pages/evaluation-summary/evaluation-summary.component';
 
 const routes: Routes = [
     {
@@ -24,6 +25,7 @@ const routes: Routes = [
     { path: 'attendance_report', component: AttendanceReportComponent },
     { path: 'unique-base-productivity', component: UniqueBaseProductivityComponent },
     { path: 'merchandiser_List', component: MerchandiserListComponent },
+    { path: 'evaluation_summary', component: EvaluationSummaryComponent },
     { path: 'productivity_report', component: MerchandiserProductivityComponent },
     { path: 'sale-data-report', component: SaleDataReportComponent },
     { path: 'stock-pop-loading', component: StockPopLoadingComponent },
@@ -32,6 +34,7 @@ const routes: Routes = [
     { path: 'shop_detail/:id', component: ShopDetailComponent },
     { path: 'sale_detail', component: SaleDetailComponent },
     { path: 'vo_error_report', component: VoErrorReportComponent },
+
 
 
 ];
