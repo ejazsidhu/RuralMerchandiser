@@ -20,6 +20,7 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
   tableData: any = [];
   queryList: any = [];
   selectedQuery: any = {};
+  selectedBrand: any = {};
   selectedRegion: any = {};
   merchandiser: any = {};
   sortOrder = true;
@@ -37,6 +38,7 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
   selectedDataType: any;
   categoryList: any = [];
   selectedCategory: any = {};
+  brandList: any = [];
   totalVisits: any;
   totalQuantity: any;
   totalAmount: any;
@@ -97,7 +99,13 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
   getCategoryList() {
     this.httpService.getcategories().subscribe((data: any) => {
       // console.log("category list",data)
-      this.categoryList = data || [];
+      console.log(data);
+
+      this.categoryList = data.categoryList;
+      this.brandList = data.brandList;
+      console.log(this.categoryList);
+      console.log(this.brandList);
+
     }, error => { });
   }
   ngOnInit() {
@@ -118,7 +126,7 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
       this.getCategoryList();
       this.getTabsDataForSaleDetail();
       const obj: any = JSON.parse(localStorage.getItem('sale_detail_obj'));
-      debugger;
+
       this.selectedDataType = obj.dataType;
     }
 
@@ -129,6 +137,12 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
   }
 
   categoryChangeSaleDetail() {
+    this.getTabsDataForSaleDetail();
+
+
+  }
+
+  brandChangeSaleDetail() {
     this.getTabsDataForSaleDetail();
 
   }
@@ -172,7 +186,7 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
       dataType: dataType
     };
     localStorage.setItem('sale_detail_obj', JSON.stringify(sale_details_obj));
-    debugger;
+
     this.router.navigate(['/dashboard/sale_detail']);
 
     // this.router.navigate(['/dashboard/sale_detail'], { queryParams: { rteId: this.selectedRTE.id,merchandiserId:this.selectedMerchandiserRTE.id,regionId:this.selectedRegion.id,startDate:moment(this.startDate).format("YYYY-MM-DD"),endDate:moment(this.endDate).format("YYYY-MM-DD")}, queryParamsHandling: 'merge' });
@@ -287,14 +301,49 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
     });
 
   }
-  downloadVOErrorReport(){
+  downloadVOErrorReport() {
     if (this.endDate >= this.startDate) {
       this.loadingReportMessage = true;
       const obj = {
         regionId: this.selectedRegion.id || -1,
         startDate: moment(this.startDate).format('YYYY-MM-DD'),
         endDate: moment(this.endDate).format('YYYY-MM-DD'),
-    
+        pageType: 0
+      };
+
+      const url = 'dailyEvaluationReport';
+      const body = this.httpService.UrlEncodeMaker(obj);
+      this.httpService.getKeyForReport(url, body).subscribe(data => {
+        const res: any = data;
+
+        if (res) {
+          const obj2 = {
+            key: res.key,
+            fileType: 'json.fileType'
+          };
+          const url = 'downloadReport';
+          this.getproductivityDownload(obj2, url);
+        } else {
+          // this.clearLoading()
+
+          this.toastr.info('Something went wrong,Please retry', 'Connectivity Message');
+        }
+      });
+
+    } else {
+      this.toastr.info('End date must be greater than start date', 'Date Selection');
+
+    }
+  }
+
+  downloadEvaluationSummaryReport() {
+    if (this.endDate >= this.startDate) {
+      this.loadingReportMessage = true;
+      const obj = {
+        regionId: this.selectedRegion.id || -1,
+        startDate: moment(this.startDate).format('YYYY-MM-DD'),
+        endDate: moment(this.endDate).format('YYYY-MM-DD'),
+        pageType: 1
       };
 
       const url = 'dailyEvaluationReport';
@@ -585,6 +634,7 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
     // debugger;
     const obj: any = {
       // zoneId: (this.selectedZone.id) ? this.selectedZone.id : -1,
+      // regionId take from local storage to show only regional data, that region id taged to specific login
       regionId: (this.selectedRegion.id) ? this.selectedRegion.id : localStorage.getItem('regionId'),
       startDate: (dateType === 'start') ? moment(data).format('YYYY-MM-DD') : moment(this.startDate).format('YYYY-MM-DD'),
       endDate: (dateType === 'end') ? moment(data).format('YYYY-MM-DD') : moment(this.endDate).format('YYYY-MM-DD'),
@@ -618,6 +668,7 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
   getTabsDataForSaleDetail() {
 
     const obj1: any = JSON.parse(localStorage.getItem('sale_detail_obj'));
+
     this.loading = true;
     // debugger;
     const obj: any = {
@@ -628,10 +679,11 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
       rteId: this.selectedRTE.id ? this.selectedRTE.id : (this.selectedRTE || -1),
       merchandiserId: (this.selectedMerchandiserRTE.id) ? this.selectedMerchandiserRTE.id : (this.selectedMerchandiserRTE || -1),
       dataType: (this.selectedDataType || obj1.dataType),
-      tposmCategoryId: this.selectedCategory
+      tposmCategoryId: this.selectedCategory.id || -1,
+      brandType: this.selectedBrand.brand || 'All'
     };
     localStorage.setItem('obj', JSON.stringify(obj));
-    debugger;
+
     this.getTableForSaleData(obj);
 
 
@@ -671,20 +723,23 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
     });
   }
 
-  getCalculation(data){
-    this.totalVisits=0;
-    this.totalQuantity=0;
-    this.totalAmount=0;
+  getCalculation(data) {
+    this.totalVisits = 0;
+    this.totalQuantity = 0;
+    this.totalAmount = 0;
     data.forEach(element => {
-      if(element.sale_visit)
-      this.totalVisits +=element.sale_visit;
+      if (element.sale_visit) {
+      this.totalVisits += element.sale_visit;
+      }
 
-      if(element.sale_qty)
+      if (element.sale_qty) {
       this.totalQuantity += element.sale_qty;
-      if(element.sale_amount)
+      }
+      if (element.sale_amount) {
       this.totalAmount += element.sale_amount;
+      }
 
-      
+
     });
   }
 
@@ -696,7 +751,7 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
 
       if (res) {
         this.tableData = res;
-        this.getCalculation(this.tableData)
+        this.getCalculation(this.tableData);
       }
 
       this.loading = false;
