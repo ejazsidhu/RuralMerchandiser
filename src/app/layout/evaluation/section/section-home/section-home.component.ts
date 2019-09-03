@@ -17,6 +17,7 @@ export class SectionHomeComponent implements OnInit {
   ip = environment.ip;
   loading = false;
   selectedShop: any = {}
+  clickCount=0;
 
   @ViewChild('childModal') childModal: ModalDirective;
   @ViewChild('remarksModal') remarksModal: ModalDirective;
@@ -225,7 +226,7 @@ export class SectionHomeComponent implements OnInit {
   }
 
   evaluateShop(){
-
+this.clickCount=1;
     let obj={
       criteriaId:this.selectedCriteria,
       surveyId:this.surveyId,
