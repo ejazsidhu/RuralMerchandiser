@@ -6,12 +6,13 @@ const routes: Routes = [
     {
         path: '',
         loadChildren: './layout/layout.module#LayoutModule',
-        canActivate: [AuthGuard]
+        // canActivate: [AuthGuard]
     },
     {
         path: 'login',
         loadChildren: './login/login.module#LoginModule'
-    }
+    },
+    {path:"**",redirectTo:"login"}
 ];
 
 @NgModule({

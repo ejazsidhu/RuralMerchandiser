@@ -5,14 +5,17 @@
             <mat-card-content>
                 <mat-card-title>
                     {{title| uppercase}} <i color="warn" [ngClass]="{'fa fa-cog fa-spin':loadingData}"></i>
-                    <small style="color:lightseagreen !important" class="mtb-5-IMP" *ngIf="loadingReportMessage">Your file is being prepared for download</small>
+                    <small style="color:lightseagreen !important" class="mtb-5-IMP" *ngIf="loadingReportMessage">Your
+                        file is being prepared for download</small>
 
                 </mat-card-title>
                 <section class="example-section">
 
 
                     <mat-form-field class="example-full-width mr-10-IMP">
-                        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker0" [(ngModel)]="startDate" placeholder="Choose a date" readonly>
+                        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker0"
+                            [(ngModel)]="startDate" placeholder="Choose a date"
+                            (ngModelChange)="getMerchandiserList(startDate)" readonly>
                         <mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
                         <mat-datepicker #picker0></mat-datepicker>
                     </mat-form-field>
@@ -21,6 +24,14 @@
                       <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                       <mat-datepicker #picker1></mat-datepicker>
                   </mat-form-field> -->
+
+                    <mat-form-field *ngIf="rteList.length>0" class="example-margin mr-10-IMP">
+                        <mat-select placeholder="RTE" name='rte' [(ngModel)]="selectedRTE" (ngModelChange)="loadMerchandiserRTEWise()">
+                            <mat-option *ngFor="let rte of rteList" [value]="rte">
+                                {{rte.rte_name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
 
                 </section>
 
@@ -35,24 +46,34 @@
             <mat-card-content>
 
                 <section class="example-section">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table ">
+                                <thead>
+                                    <tr>
+                                        <th>VO Code</th>
+                                        <th>VO Name</th>
+                                        <th>Visited</th>
+                                        <th>Evaluated</th>
 
-                    <table class="table table-bordered">
-                        <thead style="background:lightgray">
-                            <tr>
-                                <th>VO Code</th>
-                                <th>VO Name</th>
+                                    </tr>
+                                </thead>
 
-                            </tr>
-                        </thead>
+                                <tbody *ngIf="merchandiserList.length>0">
+                                    <tr *ngFor="let item of merchandiserList">
+                                        <td>{{item?.m_code}}</td>
+                                        <td style="color:blue;cursor:pointer" (click)="gotoNewPage(item)">
+                                            {{item.full_name}}</td>
+                                        <td>{{item?.visited}}</td>
+                                        <td>{{item?.evaluated}}</td>
 
-                        <tbody *ngIf="merchandiserList.length>0">
-                            <tr *ngFor="let item of merchandiserList">
-                                <td>{{item.m_code}}</td>
-                                <td style="color:blue;cursor:pointer" [routerLink]="['/dashboard/evaluation/shop_list']" [queryParams]="{ surveyorId: item.id,startDate: modifyDate(startDate),endDate: modifyDate(startDate)}">{{item.full_name}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
-                            </tr>
-                        </tbody>
-                    </table>
+
 
 
                 </section>

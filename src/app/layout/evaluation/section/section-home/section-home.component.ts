@@ -17,8 +17,11 @@ export class SectionHomeComponent implements OnInit {
   ip = environment.ip;
   loading = false;
   selectedShop: any = {}
+  clickCount=0;
 
   @ViewChild('childModal') childModal: ModalDirective;
+  @ViewChild('remarksModal') remarksModal: ModalDirective;
+
 
 
   score: any = 0;
@@ -27,7 +30,8 @@ export class SectionHomeComponent implements OnInit {
   surveyId: any = 0;
   remarksList: any = [];
   selectedRemarks: any = false;
-  selectedCriteria: any =0;
+  selectedRemarksList:any=[]
+  selectedCriteria: any;
   evaluationArray: any = [];
   productList: any = [];
   msl: any;
@@ -76,7 +80,7 @@ export class SectionHomeComponent implements OnInit {
   }
   getData(obj) {
 
-    this.httpService.getShopDetails(obj).subscribe(data => {
+    this.httpService.getShopDetails(obj).subscribe((data:any) => {
       if (data) {
         this.data = data;
 
@@ -85,6 +89,7 @@ export class SectionHomeComponent implements OnInit {
           this.evaluationArray = this.data.criteria;
           this.selectedCriteria=this.data.criteria[0].id;
           this.cloneArray = this.evaluationArray.slice();
+          this.remarksList=data.remarks;
         }
 
 
@@ -127,9 +132,9 @@ export class SectionHomeComponent implements OnInit {
   getCriteriaWithRemarks(remarks, criteria) {
     let obj = {
       remarkId: remarks,
-      id: criteria.id,
-      title: criteria.title,
-      score: 0
+      id: criteria,
+      // title: criteria.title,
+      // score: this.selectedCriteria
     }
     this.cloneArray.forEach(element => {
 
@@ -141,9 +146,25 @@ export class SectionHomeComponent implements OnInit {
     // this.evaluationArray.push(obj);
     console.log('evaluation array clone', this.cloneArray);
     // this.hideRemarksModal();
-    this.selectedRemarks = ''
+    // this.selectedRemarks = ''
 
 
+  }
+
+  checkboxChange(event, id) {
+    console.log('checkbox event', !event.checked, id);
+
+    if (!event.checked) this.selectedRemarksList.push(id);
+    else {
+      for (var i = 0; i < this.selectedRemarksList.length; i++) {
+        if (this.selectedRemarksList[i] == id) {
+          this.selectedRemarksList.splice(i, 1);
+        }
+      }
+    }
+    // this.selectedRemarksList.pop(id)
+
+    console.log('remarks list', this.selectedRemarksList);
   }
   // counter(event,criteria,index){
 
@@ -193,17 +214,24 @@ export class SectionHomeComponent implements OnInit {
   }
 
   hideChildModal(): void {
-
     this.childModal.hide();
+  }
 
+  cancelSelection(){
+    this.selectedRemarksList=[];
+    console.log('remarks list', this.selectedRemarksList);
+
+    this.selectedCriteria=1;
+    this.hideRemarksModal();
   }
 
   evaluateShop(){
-
+this.clickCount=1;
     let obj={
       criteriaId:this.selectedCriteria,
       surveyId:this.surveyId,
-      evaluatorId:localStorage.getItem('user_id')
+      evaluatorId:localStorage.getItem('user_id'),
+      remarksId:this.selectedRemarksList
     }
     console.log('selected criteria',obj);
     this.httpService.evaluateShop(obj).subscribe((data:any)=>{
@@ -212,6 +240,7 @@ export class SectionHomeComponent implements OnInit {
       
       if(data.success){
       this.toastr.success('shop evaluated successfully ');
+      this.selectedRemarksList=[]
   
       setTimeout(() => {
         
@@ -231,17 +260,29 @@ export class SectionHomeComponent implements OnInit {
       })
 
   }
+
+  clearCheckboxes(){
+    var inputs: any = document.querySelectorAll('.checkbox');
+    for (var j = 0; j < inputs.length; j++) {
+      if (this.selectedCriteria.id == inputs[j].id) inputs[j].checked = false;
+    }
+  }
     
 
-  // showRemarksModal(){
-  //   this.remarksModal.show()
-  // }
-  // hideRemarksModal(){
-  //   if(!!this.selectedRemarks)
-  //   this.remarksModal.hide()
-  //   else{
-  //     this.toastr.info(`please select remarks for "${this.selectedCriteria.title}"`)
-  //   }
-  // }
+  showRemarksModal(){
+    if(this.selectedCriteria==1){
+    this.selectedRemarksList=[];
+    this.remarksModal.show();
+    }
+    else
+    this.selectedRemarksList=[];
+  }
+  hideRemarksModal(){
+    // if(!!this.selectedRemarks)
+    this.remarksModal.hide()
+    // else{
+    //   this.toastr.info(`please select remarks for "${this.selectedCriteria.title}"`)
+    // }
+  }
 
 }

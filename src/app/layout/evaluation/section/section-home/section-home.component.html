@@ -59,7 +59,7 @@
                             <tr *ngFor="let item of data?.criteria;let i=index">
                                 <td>
                                     <label class="container">{{item?.title}}
-                                        <input type="radio" name="radio" [value]="item?.id" [(ngModel)]="selectedCriteria">
+                                        <input  type="radio" name="radio" [value]="item?.id" [(ngModel)]="selectedCriteria" (click)="showRemarksModal()">
                                         <span class="checkmark"></span>
                                     </label>
                                 </td>
@@ -72,7 +72,7 @@
                         </table>
                         <div class="row">
                             <div class="col-md-12" style="text-align: end; padding: 0 20px 5px 0; ">
-                                <button [disabled]="loading" class="btn btn-primary" (click)="evaluateShop()">
+                                <button [disabled]="clickCount==1" class="btn btn-primary" (click)="evaluateShop();">
                                     <i [ngClass]="{'fa fa-spinner fa-spin': loading}"></i>
                                     Evaluate</button>
                             </div>
@@ -116,6 +116,59 @@
             </div> -->
             <div class="modal-body" style="padding:10px">
                 <img width=100% src="{{ip}}{{selectedShop.url}}" alt="" srcset="">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- remarks modal -->
+<div bsModal #remarksModal="bs-modal" [config]="{backdrop: 'static',keyboard:false}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-child-name">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+                <h4 id="dialog-child-name" class="modal-title pull-left">Remarks</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="hideRemarksModal()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            </div> -->
+            <div class="modal-body" style="padding:10px">
+
+
+                <label id="example-radio-group-label">Pick your remarks </label>
+                <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="selectedRemarks">
+
+                    <ng-container *ngFor="let remark of remarksList">
+
+
+                        <section class="example-section">
+                            <!-- *ngIf="remark.criteriaId==selectedCriteria.id" (click)="checkboxChange(checkStatus,remark.id)" -->
+                            <mat-checkbox #checkStatus class="example-margin" (click)="checkboxChange(checkStatus,remark.id)">
+                                {{remark.description}}
+                            </mat-checkbox>
+
+                        </section>
+
+
+                        <!-- <mat-radio-button *ngIf="remark.criteriaId==selectedCriteria.id" class="example-radio-button" [value]="remark.id">
+                            {{remark.description}}
+                        </mat-radio-button> -->
+                    </ng-container>
+
+                </mat-radio-group>
+
+
+                <div class="row">
+                    <!-- <div class="col-md-8" *ngIf="!!selectedCriteria?.isEditable">
+                        <label for="criteriaDesireScore">Min Score:0,Max Score: {{selectedCriteria?.score}}, Current Score:{{criteriaDesireScore}}</label>
+                        <mat-slider [(ngModel)]="criteriaDesireScore" thumbLabel [displayWith]="formatLabel" tickInterval="1000" min="0" max="{{selectedCriteria?.score}}"></mat-slider>
+                      
+                    </div> -->
+                    <!-- {{selectedRemarksList |json}} -->
+                    <div class="col-md" style="text-align: end; padding: 0 20px 5px 0; ">
+                        <button class="btn btn-default mr-2 btn-sm" (click)="cancelSelection()">Cancel</button>
+                        <button [disabled]="selectedRemarksList?.length==0" class="btn btn-primary btn-sm" (click)="getCriteriaWithRemarks(selectedRemarksList,selectedCriteria);hideRemarksModal()">Submit</button>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -12,8 +12,7 @@
         </mat-card-title>
         <section class="example-section" *ngIf="regions.length>0">
             <mat-form-field *ngIf="regions.length>0" class="example-margin mr-10-IMP">
-                <mat-select placeholder="Region" name='region' [(ngModel)]="selectedRegion"
-                    (ngModelChange)="regionChange()">
+                <mat-select placeholder="Region" name='region' [(ngModel)]="selectedRegion" (ngModelChange)="regionChange()">
                     <mat-option [value]="region" *ngFor="let region of regions">{{region.title}}</mat-option>
                 </mat-select>
             </mat-form-field>
@@ -23,22 +22,19 @@
                 </mat-select>
             </mat-form-field>
             <mat-form-field *ngIf="merchandiserRTEList.length>0" class="example-margin mr-10-IMP">
-                <mat-select placeholder="Merchandisers" name='merchandiser' [(ngModel)]="selectedMerchandiserRTE"
-                    (ngModelChange)="statsMerchandiserWise()">
+                <mat-select placeholder="Merchandisers" name='merchandiser' [(ngModel)]="selectedMerchandiserRTE" (ngModelChange)="statsMerchandiserWise()">
                     <mat-option [value]="merchandiser" *ngFor="let merchandiser of merchandiserRTEList">
                         {{merchandiser.title}}</mat-option>
                 </mat-select>
             </mat-form-field>
 
             <mat-form-field class="example-full-width mr-10-IMP">
-                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker0" [(ngModel)]="startDate"
-                    (ngModelChange)="getTabsData($event,'start')" placeholder="Choose a start date" readonly>
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker0" [(ngModel)]="startDate" (ngModelChange)="getTabsData($event,'start')" placeholder="Choose a start date" readonly>
                 <mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
                 <mat-datepicker #picker0></mat-datepicker>
             </mat-form-field>
             <mat-form-field class="example-full-width mr-10-IMP">
-                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker1" [(ngModel)]="endDate"
-                    (ngModelChange)="getTabsData($event,'end')" placeholder="Choose a end date" readonly>
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker1" [(ngModel)]="endDate" (ngModelChange)="getTabsData($event,'end')" placeholder="Choose a end date" readonly>
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
             </mat-form-field>
@@ -55,8 +51,8 @@
 
 
 </mat-card>
-<div *ngIf="tabsData && router.url==='/dashboard/visit_productivity'" class="mb-20 animated  slideInLeft" fxLayout="row"
-    fxLayout.lt-md="column" fxFlex fxLayoutGap="10px">
+
+<div *ngIf="tabsData && router.url==='/dashboard/visit_productivity'" class="mb-20 animated  slideInLeft" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="10px">
 
     <div class="row">
         <div class="col-md-12">
@@ -72,52 +68,52 @@
                     <div class="row">
                         <div class="col-md-2">
                             <div>
-                                <app-stat [bgClass]="'info'" [icon]="'assignment'" [count]="tabsData?.planned"
-                                    [label]="'Planned'">
+                                <app-stat [bgClass]="'info'" [icon]="'assignment'" [count]="tabsData?.planned" [label]="'Planned'">
                                 </app-stat>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div>
-                                <app-stat [bgClass]="'warn'" [icon]="'check_circle'" [count]="tabsData?.completed"
-                                    [label]="'Visited'">
+                                <app-stat [bgClass]="'warn'" [icon]="'check_circle'" [count]="tabsData?.completed" [label]="'Visited'">
                                 </app-stat>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div>
-                                <app-stat [bgClass]="'success'" [icon]="'thumb_up'" [count]="tabsData?.successful"
-                                    [label]="'Productive'"></app-stat>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-
-                            <div>
-                                <app-stat [bgClass]="'danger'" [icon]="'thumb_down'" [count]="tabsData?.unsuccessful"
-                                    [label]="'Un-Productive'"></app-stat>
+                                <app-stat [bgClass]="'success'" [icon]="'thumb_up'" [count]="tabsData?.successful" [label]="'Productive'"></app-stat>
                             </div>
                         </div>
 
-                        <div class="col-md-2">
+                        <!-- <div class="col-md-2">
                             <div>
                                 <app-stat [bgClass]="'danger'" [icon]="'contact_support'" [count]="tabsData?.unvisited"
                                     [label]="'Unvisited'">
                                 </app-stat>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="col-md-2">
                             <div>
-                                <app-stat [bgClass]="'purple'" [icon]="'check_circle'"
-                                    [count]="tabsData?.completedPercent" [label]="'Productivity %'"></app-stat>
+                                <app-stat [bgClass]="'purple'" [icon]="'check_circle'" [count]="tabsData?.completedPercent" [label]="'Visit Efficiency %'"></app-stat>
                             </div>
                         </div>
 
                         <div class="col-md-2">
 
                             <div>
-                                <app-stat [bgClass]="'primary'" [icon]="'thumb_up'"
-                                    [count]="tabsData?.successfulPercent" [label]="'Successful %'"></app-stat>
+                                <app-stat [bgClass]="'primary'" [icon]="'thumb_up'" [count]="tabsData?.successfulPercent" [label]="'Productivity %'"></app-stat>
+                            </div>
+                        </div>
+                        <div class="col-md-2" (click)="goToSaleDetail('SALE_DATA')" style="cursor: pointer">
+
+                            <div>
+                                <app-stat [bgClass]="'blue'" [icon]="'payment'" [count]="tabsData?.saleAmount | number" [label]="'NNS'"></app-stat>
+                            </div>
+                        </div>
+                        <div class="col-md-2" (click)="goToSaleDetail('ORDER_DATA')" style="cursor: pointer">
+
+                            <div>
+                                <app-stat [bgClass]="'purple'" [icon]="'payment'" [count]="tabsData?.orderAmount | number" [label]="'Order Amount'"></app-stat>
                             </div>
                         </div>
 
@@ -132,15 +128,19 @@
 
 </div>
 
-
-
 <mat-card *ngIf="tableData.length>0 && router.url==='/dashboard/visit_productivity' ">
     <mat-card-content>
 
-        <table class="table animated slideInLeft">
+        <table class="table table-hover animated slideInLeft">
             <thead>
                 <tr>
+                    <th scope="col" (click)="sortIt('id')">#
+                        <br>
+                        <i class="material-icons arrow">
+                            {{getArrowType('id')}}
+                        </i>
 
+                    </th>
                     <th scope="col" (click)="sortIt('merchandiser_code')">Code
                         <br>
                         <i class="material-icons arrow">
@@ -148,19 +148,25 @@
                         </i>
 
                     </th>
-                    <th scope="col" (click)="sortIt('merchandiser_name')">Name
+                    <th scope="col" (click)="sortIt('merchandiser_name')">Resource
                         <br>
                         <i class="material-icons arrow">
                             {{getArrowType('merchandiser_name')}}
                         </i>
                     </th>
-                    <th scope="col" (click)="sortIt('planned')">Total Village
+                    <th scope="col" (click)="sortIt('rte_name')">RTE Name
+                        <br>
+                        <i class="material-icons arrow">
+                            {{getArrowType('rte_name')}}
+                        </i>
+                    </th>
+                    <th scope="col" (click)="sortIt('total_village')">Villages
                         <br>
                         <i class="material-icons arrow">
                             {{getArrowType('total_village')}}
                         </i>
                     </th>
-                    <th scope="col" (click)="sortIt('planned')">Total Shops
+                    <th scope="col" (click)="sortIt('planned')">Shops
                         <br>
                         <i class="material-icons arrow">
                             {{getArrowType('planned')}}
@@ -178,65 +184,64 @@
                             {{getArrowType('successfull')}}
                         </i>
                     </th>
-                    <th scope="col" (click)="sortIt('unsuccessful')">Un-Productive
+                    <th scope="col" (click)="sortIt('avg_time')">Avg Time/Capture Shop
                         <br>
                         <i class="material-icons arrow">
-                            {{getArrowType('unsuccessful')}}
+                            {{getArrowType('avg_time')}}
+                        </i>
+                    </th>
+                    <!-- <th scope="col" (click)="sortIt('time_spent')">Time On Route
+                        <br>
+                        <i class="material-icons arrow">
+                            {{getArrowType('time_spent')}}
+                        </i>
+                    </th> -->
+                    <th scope="col" (click)="sortIt('sale_amount')">Sale Amount
+                        <br>
+                        <i class="material-icons arrow">
+                            {{getArrowType('sale_amount')}}
                         </i>
                     </th>
                 </tr>
             </thead>
             <tbody>
                 <!-- | orderBy: sortBy : sortOrder -->
-                <ng-container *ngFor="let item of tableData | orderBy: sortBy : sortOrder">
+                <ng-container *ngFor="let item of tableData | orderBy: sortBy : sortOrder;let i = index">
                     <tr>
-                        <td scope="row">{{item.merchandiser_code}}</td>
+                        <td>{{i+1}}</td>
+                        <td scope="row">{{item?.merchandiser_code}}</td>
                         <td>
-                            {{item.merchandiser_name}}
+                            {{item?.merchandiser_name}}
                         </td>
                         <td>
-                            {{item.total_village}}
+                            {{item?.rte_name}}
+                        </td>
+                        <td>
+                            {{item?.total_village}}
                         </td>
 
-                        <td>{{item.planned}}</td>
+                        <td>{{item?.planned}}</td>
                         <td class="a-link" *ngIf="item.completed!=0" title="Completed">
-                            <a class="a-link" target="_blank" title="view shop details"
-                                [routerLink]="['/dashboard/shop_detail',item.id]"
-                                [queryParams]="{'id':item.id,'remark_id':-1}" queryParamsHandling="merge">
-                                {{item.completed}}
+                            <a class="a-link" target="_blank" title="view shop details" [routerLink]="['/dashboard/shop_detail',item.id]" [queryParams]="{'id':item.id,'remark_id':-1}" queryParamsHandling="merge">
+                                {{item?.completed}}
                             </a>
                         </td>
                         <td *ngIf="item.completed==0">
-                            {{item.completed}}
+                            {{item?.completed}}
 
                         </td>
                         <td class="a-link" *ngIf="item.successfull!=0" title="Successful">
-                            <a class="a-link" target="_blank" title="view shop details"
-                                [routerLink]="['/dashboard/shop_detail',item.id]"
-                                [queryParams]="{'id':item.id,'remark_id':1}" queryParamsHandling="merge">
-                                {{item.successfull}} </a>
+                            <a class="a-link" target="_blank" title="view shop details" [routerLink]="['/dashboard/shop_detail',item.id]" [queryParams]="{'id':item.id,'remark_id':1}" queryParamsHandling="merge">
+                                {{item?.successfull}} </a>
 
                         </td>
                         <td *ngIf="item.successfull==0">
-                            {{item.successfull}}
-
+                            {{item?.successfull}}
                         </td>
 
-                        <td class="a-link" *ngIf="item.unsuccessful!=0" title="Un-Successful">
-                            <a class="a-link" target="_blank" title="view shop details"
-                                [routerLink]="['/dashboard/shop_detail',item.id]"
-                                [queryParams]="{'id':item.id,'remark_id':0}" queryParamsHandling="merge">
-                                {{item.unsuccessful}}</a>
-
-                        </td>
-                        <td *ngIf="item.unsuccessful==0">
-                            {{item.unsuccessful}}
-
-                        </td>
-
-
-
-
+                        <td>{{item?.avg_time}}</td>
+                        <!-- <td>{{item?.time_spent}}</td> -->
+                        <td>{{item?.sale_amount | number}}</td>
 
                     </tr>
                 </ng-container>
@@ -274,14 +279,12 @@
             </mat-form-field>
 
             <mat-form-field class="example-full-width mr-10-IMP">
-                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker0" [(ngModel)]="startDate"
-                    placeholder="Choose a start date" readonly>
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker0" [(ngModel)]="startDate" placeholder="Choose a start date" readonly>
                 <mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
                 <mat-datepicker #picker0></mat-datepicker>
             </mat-form-field>
             <mat-form-field class="example-full-width mr-10-IMP">
-                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker1" [(ngModel)]="endDate"
-                    placeholder="Choose a end date" readonly>
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker1" [(ngModel)]="endDate" placeholder="Choose a end date" readonly>
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
             </mat-form-field>
@@ -322,14 +325,12 @@
 
 
             <mat-form-field class="example-full-width mr-10-IMP">
-                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker0" [(ngModel)]="startDate"
-                    placeholder="Choose a start date" readonly>
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker0" [(ngModel)]="startDate" placeholder="Choose a start date" readonly>
                 <mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
                 <mat-datepicker #picker0></mat-datepicker>
             </mat-form-field>
             <mat-form-field class="example-full-width mr-10-IMP">
-                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker1" [(ngModel)]="endDate"
-                    placeholder="Choose a end date" readonly>
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker1" [(ngModel)]="endDate" placeholder="Choose a end date" readonly>
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
             </mat-form-field>
@@ -338,8 +339,7 @@
 
         <section class="example-section">
             <!-- [disabled]="selectedChannel.length<1" -->
-            <button [disabled]="!selectedQuery.id" mat-raised-button color="warn"
-                (click)="downloadRawDataReport()">Download</button>
+            <button [disabled]="!selectedQuery.id" mat-raised-button color="warn" (click)="downloadRawDataReport()">Download</button>
             <!-- <span *ngIf="selectedChannel.length<1" class="channel-message"><small>(channel selection is mandatory)</small></span> -->
 
         </section>
@@ -369,22 +369,20 @@
             </mat-form-field>
 
             <mat-form-field class="example-full-width mr-10-IMP">
-                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker0" [(ngModel)]="startDate"
-                    placeholder="Choose a start date" readonly>
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker0" [(ngModel)]="startDate" placeholder="Choose a start date" readonly>
                 <mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
                 <mat-datepicker #picker0></mat-datepicker>
             </mat-form-field>
             <mat-form-field class="example-full-width mr-10-IMP">
-                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker1" [(ngModel)]="endDate"
-                    placeholder="Choose a end date" readonly>
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker1" [(ngModel)]="endDate" placeholder="Choose a end date" readonly>
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
             </mat-form-field>
 
         </section>
 
-        
-        <section  class="example-section" *ngIf="regions.length>0">
+
+        <section class="example-section" *ngIf="regions.length>0">
             <button mat-raised-button color="warn" (click)="downloadUniqueBaseProductivityReport()">Download</button>
 
         </section>
@@ -407,8 +405,7 @@
 
 
             <mat-form-field *ngIf="regions.length>0" class="example-margin mr-10-IMP">
-                <mat-select placeholder="Region" name='region' [(ngModel)]="selectedRegion"
-                    (ngModelChange)="onRegionChange()">
+                <mat-select placeholder="Region" name='region' [(ngModel)]="selectedRegion" (ngModelChange)="onRegionChange()">
                     <mat-option [value]="region" *ngFor="let region of regions">{{region.title}}</mat-option>
                 </mat-select>
             </mat-form-field>
@@ -425,22 +422,20 @@
             </mat-form-field>
 
             <mat-form-field class="example-full-width mr-10-IMP">
-                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker0" [(ngModel)]="startDate"
-                    placeholder="Choose a start date" readonly>
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker0" [(ngModel)]="startDate" placeholder="Choose a start date" readonly>
                 <mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
                 <mat-datepicker #picker0></mat-datepicker>
             </mat-form-field>
             <mat-form-field class="example-full-width mr-10-IMP">
-                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker1" [(ngModel)]="endDate"
-                    placeholder="Choose a end date" readonly>
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker1" [(ngModel)]="endDate" placeholder="Choose a end date" readonly>
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
             </mat-form-field>
 
         </section>
 
-        
-        <section  class="example-section" *ngIf="regions.length>0">
+
+        <section class="example-section" *ngIf="regions.length>0">
             <button mat-raised-button color="warn" (click)="downloadSaleDataReport()">Download</button>
 
         </section>
@@ -469,22 +464,20 @@
             </mat-form-field>
 
             <mat-form-field class="example-full-width mr-10-IMP">
-                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker0" [(ngModel)]="startDate"
-                    placeholder="Choose a start date" readonly>
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker0" [(ngModel)]="startDate" placeholder="Choose a start date" readonly>
                 <mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
                 <mat-datepicker #picker0></mat-datepicker>
             </mat-form-field>
             <mat-form-field class="example-full-width mr-10-IMP">
-                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker1" [(ngModel)]="endDate"
-                    placeholder="Choose a end date" readonly>
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker1" [(ngModel)]="endDate" placeholder="Choose a end date" readonly>
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
             </mat-form-field>
 
         </section>
 
-        
-        <section  class="example-section" *ngIf="regions.length>0">
+
+        <section class="example-section" *ngIf="regions.length>0">
             <button mat-raised-button color="warn" (click)="downloadStockPopLoadingReport()">Download</button>
 
         </section>
@@ -492,3 +485,268 @@
 
     </mat-card-content>
 </mat-card>
+
+
+<!-- stock pop loading -->
+
+
+<!-- shop detail  -->
+<mat-card class="mb-20" *ngIf="router.url==='/dashboard/sale_detail' ">
+
+    <mat-card-content>
+        <mat-card-title>
+            {{title| uppercase}}
+            <i color="primary" [ngClass]="{'fa fa-cog fa-spin':loading || loadingReportMessage }"> </i>
+            <!-- <span *ngIf="loading">Please wait loading regions list</span> -->
+            <small style="color:lightseagreen !important" class="mtb-5-IMP" *ngIf="loadingReportMessage">Your file is
+                being prepared for download</small>
+
+        </mat-card-title>
+        <section class="example-section" *ngIf="categoryList.length>0">
+            <mat-form-field *ngIf="categoryList.length>0" class="example-margin mr-10-IMP">
+                <mat-select placeholder="Category" name='category' [(ngModel)]="selectedCategory" (ngModelChange)="categoryChangeSaleDetail()">
+                    <mat-option value="-1">All</mat-option>
+                    <mat-option [value]="category" *ngFor="let category of categoryList">{{category.title}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field *ngIf="brandList.length>0" class="example-margin mr-10-IMP">
+                <mat-select placeholder="Brand" name='brand' [(ngModel)]="selectedBrand" (ngModelChange)="brandChangeSaleDetail()">
+                    <mat-option value="All">All</mat-option>
+                    <mat-option [value]="brand" *ngFor="let brand of brandList">{{brand.brand}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!-- {{selectedRegion |json}} -->
+            <mat-form-field *ngIf="regions.length>0" class="example-margin mr-10-IMP">
+                <mat-select placeholder="Region" name='region' [(ngModel)]="selectedRegion" (ngModelChange)="regionChangeSaleDetail()">
+                    <mat-option [value]="region.id" *ngFor="let region of regions">{{region.title}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="RTEList.length>0" class="example-margin mr-10-IMP">
+                <mat-select placeholder="RTE" name='rte' [(ngModel)]="selectedRTE" (ngModelChange)="regionRTE()">
+                    <mat-option [value]="rte.id" *ngFor="let rte of RTEList">{{rte.title}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="merchandiserRTEList.length>0" class="example-margin mr-10-IMP">
+                <mat-select placeholder="Merchandisers" name='merchandiser' [(ngModel)]="selectedMerchandiserRTE" (ngModelChange)="statsMerchandiserWise()">
+                    <mat-option [value]="merchandiser.id" *ngFor="let merchandiser of merchandiserRTEList">
+                        {{merchandiser.title}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width mr-10-IMP">
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker0" [(ngModel)]="startDate" (ngModelChange)="getTabsDataForSaleDetail()" placeholder="Choose a start date" readonly>
+                <mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
+                <mat-datepicker #picker0></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="example-full-width mr-10-IMP">
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker1" [(ngModel)]="endDate" (ngModelChange)="getTabsDataForSaleDetail()" placeholder="Choose a end date" readonly>
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+
+
+        </section>
+
+        <!-- <section class="example-section" *ngIf="regions.length>0">
+            <button mat-raised-button color="warn" (click)="downloadReport()">Download</button>
+
+        </section> -->
+
+    </mat-card-content>
+
+
+</mat-card>
+
+<mat-card *ngIf="tableData.length>0 && router.url==='/dashboard/sale_detail' ">
+    <mat-card-content>
+
+        <table class="table table-hover animated slideInLeft">
+            <thead>
+                <tr>
+                    <th scope="col" (click)="sortIt('id')">#
+                        <br>
+                        <i class="material-icons arrow">
+                            {{getArrowType('id')}}
+                        </i>
+
+                    </th>
+                    <th scope="col" (click)="sortIt('category_name')">Category
+                        <br>
+                        <i class="material-icons arrow">
+                            {{getArrowType('category_name')}}
+                        </i>
+
+                    </th>
+                    <th scope="col" (click)="sortIt('product_name')">Product
+                        <br>
+                        <i class="material-icons arrow">
+                            {{getArrowType('product_name')}}
+                        </i>
+                    </th>
+
+                    <th scope="col" (click)="sortIt('sale_visit')">Visit
+                        <br>
+                        <i class="material-icons arrow">
+                            {{getArrowType('sale_visit')}}
+                        </i>
+                    </th>
+                    <th scope="col" (click)="sortIt('sale_qty')">Quantity
+                        <br>
+                        <i class="material-icons arrow">
+                            {{getArrowType('sale_qty')}}
+                        </i>
+                    </th>
+                    <th scope="col" (click)="sortIt('trade_price')">Updated Trade Price
+                        <br>
+                        <i class="material-icons arrow">
+                            {{getArrowType('trade_price')}}
+                        </i>
+                    </th>
+                    <th scope="col" (click)="sortIt('sale_amount')">Amount
+                        <br>
+                        <i class="material-icons arrow">
+                            {{getArrowType('sale_amount')}}
+                        </i>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- | orderBy: sortBy : sortOrder -->
+                <ng-container *ngFor="let item of tableData | orderBy: sortBy : sortOrder;let i = index">
+                    <tr>
+                        <td>{{i+1}}</td>
+                        <td scope="row">{{item?.category_name}}</td>
+                        <td>
+                            {{item?.product_name}}
+                        </td>
+
+
+                        <td>{{item?.sale_visit}}</td>
+                        <td>{{item?.sale_qty | number}}</td>
+                        <td>{{item?.trade_price}}</td>
+                        <td>{{item?.sale_amount | number}}</td>
+
+                    </tr>
+                </ng-container>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <th>{{totalVisits|number}}</th>
+                    <th>{{totalQuantity|number}}</th>
+                    <td></td>
+                    <th>{{totalAmount|number}}</th>
+                </tr>
+
+
+
+            </tbody>
+
+
+        </table>
+
+    </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="tableData.length==0 && !loading && router.url==='/dashboard/sale_detail'" class="text-center">
+    <alert type="info">
+        Against your selected filter
+        <strong>No Data Found!</strong>
+    </alert>
+</mat-card>
+
+
+<!-- /shop detail -->
+
+
+<!-- vo error report -->
+<mat-card class="mb-20" *ngIf="router.url==='/dashboard/vo_error_report' ">
+
+    <mat-card-content>
+        <mat-card-title>
+            {{title| uppercase}}
+            <i color="primary" [ngClass]="{'fa fa-cog fa-spin':loading || loadingReportMessage }"> </i>
+            <!-- <span *ngIf="loading">Please wait loading regions list</span> -->
+            <small style="color:lightseagreen !important" class="mtb-5-IMP" *ngIf="loadingReportMessage">Your file is
+                being prepared for download</small>
+
+        </mat-card-title>
+        <section class="example-section">
+
+            <mat-form-field *ngIf="regions.length>0" class="example-margin mr-10-IMP">
+                <mat-select placeholder="Region" name='region' [(ngModel)]="selectedRegion">
+                    <mat-option [value]="region" *ngFor="let region of regions">{{region.title}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width mr-10-IMP">
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker0" [(ngModel)]="startDate" placeholder="Choose a start date" readonly>
+                <mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
+                <mat-datepicker #picker0></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="example-full-width mr-10-IMP">
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker1" [(ngModel)]="endDate" placeholder="Choose a end date" readonly>
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+
+
+        </section>
+
+        <section class="example-section" *ngIf="regions.length>0">
+            <button mat-raised-button color="warn" (click)="downloadVOErrorReport()">Download</button>
+
+        </section>
+
+    </mat-card-content>
+
+
+</mat-card>
+<!-- /vo error report -->
+
+<!-- evaluation summary report -->
+<mat-card class="mb-20" *ngIf="router.url==='/dashboard/evaluation_summary' ">
+
+    <mat-card-content>
+        <mat-card-title>
+            {{title| uppercase}}
+            <i color="primary" [ngClass]="{'fa fa-cog fa-spin':loading || loadingReportMessage }"> </i>
+            <!-- <span *ngIf="loading">Please wait loading regions list</span> -->
+            <small style="color:lightseagreen !important" class="mtb-5-IMP" *ngIf="loadingReportMessage">Your file is
+                being prepared for download</small>
+
+        </mat-card-title>
+        <section class="example-section">
+
+            <mat-form-field *ngIf="regions.length>0" class="example-margin mr-10-IMP">
+                <mat-select placeholder="Region" name='region' [(ngModel)]="selectedRegion">
+                    <mat-option [value]="region" *ngFor="let region of regions">{{region.title}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width mr-10-IMP">
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker0" [(ngModel)]="startDate" placeholder="Choose a start date" readonly>
+                <mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
+                <mat-datepicker #picker0></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="example-full-width mr-10-IMP">
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker1" [(ngModel)]="endDate" placeholder="Choose a end date" readonly>
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+
+
+        </section>
+
+        <section class="example-section" *ngIf="regions.length>0">
+            <button mat-raised-button color="warn" (click)="downloadEvaluationSummaryReport()">Download</button>
+
+        </section>
+
+    </mat-card-content>
+
+
+</mat-card>
+<!-- evaluation summary report -->

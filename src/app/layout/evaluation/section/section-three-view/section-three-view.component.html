@@ -42,7 +42,7 @@
     </div>
     <div class="col-md-12 mt-1">
 
-        <table class="table table-bordered table-hover" style="min-width:820px !important">
+        <table class="table table-bordered" style="min-width:820px !important">
             <thead style="background:lightgray">
                 <tr>
                     <th *ngFor="let item of tagList">
@@ -58,6 +58,15 @@
                     </tr>
                     <br>
                 </td>
+
+                <tr *ngIf="totalQuantity>0">
+                    <td></td>
+                    <td></td>
+                    <!-- <td *ngIf="totalQuantity==0"></td>
+                    <td *ngIf="totalAmount==0"></td> -->
+                    <td *ngIf="totalQuantity>0">{{totalQuantity}}</td>
+                    <td *ngIf="totalAmount>0">{{totalAmount}}</td>
+                </tr>
             </tbody>
         </table>
     </div>
