@@ -12,7 +12,7 @@ const routes: Routes = [
         path: 'login',
         loadChildren: './login/login.module#LoginModule'
     },
-    {path:"**",redirectTo:"login"}
+    {path: '**', redirectTo: 'login'}
 ];
 
 @NgModule({

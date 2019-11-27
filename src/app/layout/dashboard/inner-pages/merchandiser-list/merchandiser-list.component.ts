@@ -22,6 +22,7 @@ export class MerchandiserListComponent implements OnInit {
   selectedRTE: any = {};
   tempMerchandiserList: any = [];
   rteList: any = [];
+  loadingData: boolean;
 
   constructor(private httpService: DashboardService) {
 
@@ -34,6 +35,7 @@ export class MerchandiserListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadingData = false;
     this.getMerchandiserList(this.startDate);
 
   }
@@ -41,6 +43,7 @@ export class MerchandiserListComponent implements OnInit {
   getMerchandiserList(date) {
     this.tempMerchandiserList = [];
     this.rteList = [];
+    this.loadingData = true;
     date = moment(date).format('YYYY-MM-DD');
     const obj = {
       evaluatorId: localStorage.getItem('user_id'),
@@ -53,6 +56,7 @@ export class MerchandiserListComponent implements OnInit {
         this.tempMerchandiserList = data;
         this.merchandiserList = data;
         this.loading = false;
+        this.loadingData = false;
         this.getRTEList();
       }
     });

@@ -14,6 +14,7 @@ import { StockPopLoadingComponent } from './inner-pages/stock-pop-loading/stock-
 import { SaleDetailComponent } from './inner-pages/sale-detail/sale-detail.component';
 import { VoErrorReportComponent } from './inner-pages/vo-error-report/vo-error-report.component';
 import { EvaluationSummaryComponent } from './inner-pages/evaluation-summary/evaluation-summary.component';
+import { TimeAnalysisReportComponent } from './inner-pages/time-analysis-report/time-analysis-report.component';
 
 const routes: Routes = [
     {
@@ -26,14 +27,17 @@ const routes: Routes = [
     { path: 'unique-base-productivity', component: UniqueBaseProductivityComponent },
     { path: 'merchandiser_List', component: MerchandiserListComponent },
     { path: 'evaluation_summary', component: EvaluationSummaryComponent },
+    { path: 'time_analysis', component: TimeAnalysisReportComponent },
     { path: 'productivity_report', component: MerchandiserProductivityComponent },
     { path: 'sale-data-report', component: SaleDataReportComponent },
     { path: 'stock-pop-loading', component: StockPopLoadingComponent },
+
     { path: 'raw_data', component: RawDataComponent },
     { path: 'evaluation', loadChildren: '../evaluation/evaluation.module#EvaluationModule' },
     { path: 'shop_detail/:id', component: ShopDetailComponent },
     { path: 'sale_detail', component: SaleDetailComponent },
     { path: 'vo_error_report', component: VoErrorReportComponent },
+
 
 
 

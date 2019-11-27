@@ -776,4 +776,55 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
       return '';
     }
   }
+
+  timeAnalysisReport() {
+    if (this.endDate >= this.startDate) {
+      this.loadingData = true;
+      this.loadingReportMessage = true;
+      const obj = {
+        startDate: moment(this.startDate).format('YYYY-MM-DD'),
+        endDate: moment(this.endDate).format('YYYY-MM-DD'),
+        regionId: this.selectedRegion.id || -1,
+        actionType: this.selectedRegion.id === -1 ? 0 : 1,
+        // channelId: this.arrayMaker(this.selectedChannel),
+      };
+
+      const url = 'time-analysis';
+      const body = this.httpService.UrlEncodeMaker(obj);
+      this.httpService.getKeyForProductivityReport(body, url).subscribe(
+        data => {
+          console.log(data, 'oos shoplist');
+          const res: any = data;
+
+          if (res) {
+            const obj2 = {
+              key: res.key,
+              fileType: 'json.fileType'
+            };
+            const url = 'downloadReport';
+            this.getproductivityDownload(obj2, url);
+          } else {
+            // this.clearLoading();
+            this.loadingData = false;
+            this.loadingReportMessage = false;
+
+            this.toastr.info('Something went wrong,Please retry', 'Connectivity Message');
+          }
+        },
+        error => {
+          // this.clearLoading();
+          this.loadingData = false;
+          this.loadingReportMessage = false;
+        }
+      );
+    } else {
+      // this.clearLoading();
+      this.loadingData = false;
+      this.loadingReportMessage = false;
+      this.toastr.info('End date must be greater than start date', 'Date Selection');
+    }
+  }
+
+
+
 }

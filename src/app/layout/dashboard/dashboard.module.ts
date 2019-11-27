@@ -27,6 +27,7 @@ import { SaleDetailComponent } from './inner-pages/sale-detail/sale-detail.compo
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { VoErrorReportComponent } from './inner-pages/vo-error-report/vo-error-report.component';
 import { EvaluationSummaryComponent } from './inner-pages/evaluation-summary/evaluation-summary.component';
+import { TimeAnalysisReportComponent } from './inner-pages/time-analysis-report/time-analysis-report.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -51,6 +52,6 @@ import { EvaluationSummaryComponent } from './inner-pages/evaluation-summary/eva
         AlertModule.forRoot(),
         ModalModule.forRoot()
     ],
-    declarations: [FilterBarComponent, DashboardComponent, VisitProductivityComponent, AttendanceReportComponent, MerchandiserListComponent, MerchandiserProductivityComponent, ShopDetailComponent, RawDataComponent, UniqueBaseProductivityComponent, SaleDataReportComponent, StockPopLoadingComponent, SaleDetailComponent, VoErrorReportComponent, EvaluationSummaryComponent]
+    declarations: [FilterBarComponent, DashboardComponent, VisitProductivityComponent, AttendanceReportComponent, MerchandiserListComponent, MerchandiserProductivityComponent, ShopDetailComponent, RawDataComponent, UniqueBaseProductivityComponent, SaleDataReportComponent, StockPopLoadingComponent, SaleDetailComponent, VoErrorReportComponent, EvaluationSummaryComponent, TimeAnalysisReportComponent]
 })
 export class DashboardModule {}
