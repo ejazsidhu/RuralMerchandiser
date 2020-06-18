@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment.prod';
 export class DashboardService {
   ip = environment.ip;
 
-  // ip: any='http://192.168.3.209:8080/audit/';
+  // ip: any = 'http://localhost:8080/audit/';
   // ip: any = 'http://192.168.3.162:8080/audit/';
   // ip: any = 'http://192.168.3.94:8080/audit/';
   // ip: any = 'http://192.168.3.213:8080/audit/';
@@ -27,17 +27,17 @@ export class DashboardService {
   constructor(private http: HttpClient) {
     this.user_id = localStorage.getItem('user_id');
 
-   }
+  }
 
 
-   merchandiserShopListCBL(obj) {
+  merchandiserShopListCBL(obj) {
     const body = this.UrlEncodeMaker(obj);
     // `zoneId=${obj.zoneId}&regionId=${obj.regionId}&endDate=${obj.endDate}&startDate=${obj.startDate}&distributionId=${obj.distributionId}&cityId=${obj.cityId}&storeType=${obj.storeType}&channelId=${obj.channelId}`;
     const url = this.ip + 'merchandiserShopListCBL';
     return this.http.post(url, body, this.httpOptions);
 
   }
-   public login(credentials: any) {
+  public login(credentials: any) {
     // let body=JSON.stringify(credentials)
     const url = this.ip + 'pictureLogin';
     return this.http.post(url, credentials);
@@ -46,7 +46,7 @@ export class DashboardService {
   getZone() {
     this.user_id = localStorage.getItem('user_id');
 
-    const filter = JSON.stringify({ act: 0 , userId: this.user_id});
+    const filter = JSON.stringify({ act: 0, userId: this.user_id });
     const url = this.ip + 'loadFilters';
     return this.http.post(url, filter);
 
@@ -55,7 +55,7 @@ export class DashboardService {
   getCities(regionId) {
     this.user_id = localStorage.getItem('user_id');
 
-    const filter = JSON.stringify({ act: 2, regionId: regionId , userId: this.user_id});
+    const filter = JSON.stringify({ act: 2, regionId: regionId, userId: this.user_id });
     const url = this.ip + 'loadFilters';
     return this.http.post(url, filter);
 
@@ -72,11 +72,11 @@ export class DashboardService {
 
   getcategories() {
     this.user_id = localStorage.getItem('user_id');
-      const filter = JSON.stringify({ act: 10});
+    const filter = JSON.stringify({ act: 10 });
     const url = this.ip + 'loadFilters';
     return this.http.post(url, filter);
   }
-   getRegion(zoneId) {
+  getRegion(zoneId) {
     this.user_id = localStorage.getItem('user_id');
 
     const filter = JSON.stringify({ act: 1, zoneId: zoneId, userId: this.user_id });
@@ -94,25 +94,25 @@ export class DashboardService {
 
   getRegionFixed() {
     this.user_id = localStorage.getItem('user_id');
-      const filter = JSON.stringify({ act: 7, userId: this.user_id});
+    const filter = JSON.stringify({ act: 7, userId: this.user_id });
     const url = this.ip + 'loadFilters';
     return this.http.post(url, filter);
 
   }
 
   getRTE(regionID) {
-    const filter = JSON.stringify({ act: 8 , regionId: regionID});
-  const url = this.ip + 'loadFilters';
-  return this.http.post(url, filter);
+    const filter = JSON.stringify({ act: 8, regionId: regionID });
+    const url = this.ip + 'loadFilters';
+    return this.http.post(url, filter);
 
-}
+  }
 
-getMerchandiserListRTE(rteId) {
-  const filter = JSON.stringify({ act: 9 , rteId: rteId});
-const url = this.ip + 'loadFilters';
-return this.http.post(url, filter);
+  getMerchandiserListRTE(rteId) {
+    const filter = JSON.stringify({ act: 9, rteId: rteId });
+    const url = this.ip + 'loadFilters';
+    return this.http.post(url, filter);
 
-}
+  }
 
   public DownloadResource(obj, url) {
     let path;
@@ -150,7 +150,7 @@ return this.http.post(url, filter);
   }
   UrlEncodeMaker(obj) {
     let url = '';
-      for (const key in obj) {
+    for (const key in obj) {
       url += `${key}=${obj[key]}&`;
     }
     const newUrl = url.substring(0, url.length - 1);
@@ -182,7 +182,7 @@ return this.http.post(url, filter);
   getQueryTypeList() {
     this.user_id = localStorage.getItem('user_id');
 
-    const filter = JSON.stringify({ act: 6 , userId: this.user_id});
+    const filter = JSON.stringify({ act: 6, userId: this.user_id });
     const url = this.ip + 'loadFilters';
     return this.http.post(url, filter);
   }
@@ -196,6 +196,12 @@ return this.http.post(url, filter);
     return this.http.post(url, body, this.httpOptions);
 
 
+  }
+
+
+  getTebleauKey(obj) {
+    const body = this.UrlEncodeMaker(obj);
+    return this.http.post(this.ip + 'tableauTicket', body, this.httpOptions);
   }
 
 }

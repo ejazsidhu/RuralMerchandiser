@@ -237,15 +237,15 @@ this.clickCount=1;
     this.httpService.evaluateShop(obj).subscribe((data:any)=>{
       // console.log('evaluated shop data',data);
       this.loading=false;
-      
+
       if(data.success){
       this.toastr.success('shop evaluated successfully ');
       this.selectedRemarksList=[]
-  
+
       setTimeout(() => {
-        
+
       window.close();
-        
+
       }, 2000);
       }
       else{
@@ -256,7 +256,7 @@ this.clickCount=1;
       // window.close()
       this.loading=false;
       this.toastr.error(error.message,'Error');
-      
+
       })
 
   }
@@ -267,7 +267,7 @@ this.clickCount=1;
       if (this.selectedCriteria.id == inputs[j].id) inputs[j].checked = false;
     }
   }
-    
+
 
   showRemarksModal(){
     if(this.selectedCriteria==1){

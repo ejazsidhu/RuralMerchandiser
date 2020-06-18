@@ -28,6 +28,8 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import { VoErrorReportComponent } from './inner-pages/vo-error-report/vo-error-report.component';
 import { EvaluationSummaryComponent } from './inner-pages/evaluation-summary/evaluation-summary.component';
 import { TimeAnalysisReportComponent } from './inner-pages/time-analysis-report/time-analysis-report.component';
+import { TableauHelperComponent } from './tableau/tableau-helper/tableau-helper.component';
+import { SaleAnalysisDashboardComponent } from './tableau/sale-analysis-dashboard/sale-analysis-dashboard.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -52,6 +54,10 @@ import { TimeAnalysisReportComponent } from './inner-pages/time-analysis-report/
         AlertModule.forRoot(),
         ModalModule.forRoot()
     ],
-    declarations: [FilterBarComponent, DashboardComponent, VisitProductivityComponent, AttendanceReportComponent, MerchandiserListComponent, MerchandiserProductivityComponent, ShopDetailComponent, RawDataComponent, UniqueBaseProductivityComponent, SaleDataReportComponent, StockPopLoadingComponent, SaleDetailComponent, VoErrorReportComponent, EvaluationSummaryComponent, TimeAnalysisReportComponent]
+    declarations: [FilterBarComponent, DashboardComponent, VisitProductivityComponent, 
+        AttendanceReportComponent, MerchandiserListComponent, MerchandiserProductivityComponent, 
+        ShopDetailComponent, RawDataComponent, UniqueBaseProductivityComponent, SaleDataReportComponent, 
+        StockPopLoadingComponent, SaleDetailComponent, VoErrorReportComponent, EvaluationSummaryComponent, 
+        TimeAnalysisReportComponent, TableauHelperComponent, SaleAnalysisDashboardComponent]
 })
 export class DashboardModule {}

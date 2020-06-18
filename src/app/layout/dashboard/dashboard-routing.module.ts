@@ -15,6 +15,7 @@ import { SaleDetailComponent } from './inner-pages/sale-detail/sale-detail.compo
 import { VoErrorReportComponent } from './inner-pages/vo-error-report/vo-error-report.component';
 import { EvaluationSummaryComponent } from './inner-pages/evaluation-summary/evaluation-summary.component';
 import { TimeAnalysisReportComponent } from './inner-pages/time-analysis-report/time-analysis-report.component';
+import { SaleAnalysisDashboardComponent } from './tableau/sale-analysis-dashboard/sale-analysis-dashboard.component';
 
 const routes: Routes = [
     {
@@ -37,6 +38,7 @@ const routes: Routes = [
     { path: 'shop_detail/:id', component: ShopDetailComponent },
     { path: 'sale_detail', component: SaleDetailComponent },
     { path: 'vo_error_report', component: VoErrorReportComponent },
+    { path: 'sale-analysis-dashboard', component: SaleAnalysisDashboardComponent }
 
 
 

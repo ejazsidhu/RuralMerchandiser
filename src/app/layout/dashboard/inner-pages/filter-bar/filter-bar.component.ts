@@ -303,6 +303,10 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
   }
   downloadVOErrorReport() {
     if (this.endDate >= this.startDate) {
+      if(this.selectedRegion.id == undefined){
+        this.toastr.info('Please, select region', 'Info');
+        return;
+      }
       this.loadingReportMessage = true;
       const obj = {
         regionId: this.selectedRegion.id || -1,
@@ -338,6 +342,10 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
 
   downloadEvaluationSummaryReport() {
     if (this.endDate >= this.startDate) {
+      if(this.selectedRegion.id == undefined){
+        this.toastr.info('Please, select region', 'Info');
+        return;
+      }
       this.loadingReportMessage = true;
       const obj = {
         regionId: this.selectedRegion.id || -1,
