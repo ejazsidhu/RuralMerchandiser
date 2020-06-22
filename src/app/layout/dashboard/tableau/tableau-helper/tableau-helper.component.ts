@@ -28,9 +28,8 @@ export class TableauHelperComponent implements OnInit {
       userType: localStorage.getItem('user_type')
     };
     this.httpService.getTebleauKey(obj).subscribe((data: any) => {
-      this.ticketUrl = `${data.TableauData.tableau_url}/${data.ticket}/${data.tableauPath}
-      ?iframeSizedToWindow=${data.TableauData.iframe}&:embed=${data.TableauData.embed}&:showAppBanner=${data.TableauData.showAppBanner}
-      &:display_count=${data.TableauData.display_count}&:showVizHome=${data.TableauData.showVizHome}`;
+      // tslint:disable-next-line: max-line-length
+      this.ticketUrl = `${data.TableauData.tableau_url}/${data.ticket}/${data.tableauPath}?iframeSizedToWindow=${data.TableauData.iframe}&:embed=${data.TableauData.embed}&:showAppBanner=${data.TableauData.showAppBanner}&:display_count=${data.TableauData.display_count}&:showVizHome=${data.TableauData.showVizHome}`;
       console.log('url:', this.ticketUrl);
       this.initViz();
 

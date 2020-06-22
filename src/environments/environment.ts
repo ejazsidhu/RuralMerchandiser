@@ -4,8 +4,9 @@
 
 export const environment = {
   production: false,
-  ip:'http://merch.concavetech.com/',
-  hash:'/#/'
+  // ip:'http://merch.concavetech.com/',
+  ip: 'https://merch.rtdtradetracker.com/',
+  hash: '/#/'
 };
 
 /*

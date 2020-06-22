@@ -38,7 +38,7 @@ const routes: Routes = [
     { path: 'shop_detail/:id', component: ShopDetailComponent },
     { path: 'sale_detail', component: SaleDetailComponent },
     { path: 'vo_error_report', component: VoErrorReportComponent },
-    { path: 'sale-analysis-dashboard', component: SaleAnalysisDashboardComponent }
+    { path: 'sale-analysis-dashboard', component: SaleAnalysisDashboardComponent },
 
 
 
