@@ -182,7 +182,7 @@ export class DashboardService {
   getQueryTypeList() {
     this.user_id = localStorage.getItem('user_id');
 
-    const filter = JSON.stringify({ act: 6, userId: this.user_id });
+    const filter = JSON.stringify({ act: 12, userId: this.user_id });
     const url = this.ip + 'loadFilters';
     return this.http.post(url, filter);
   }

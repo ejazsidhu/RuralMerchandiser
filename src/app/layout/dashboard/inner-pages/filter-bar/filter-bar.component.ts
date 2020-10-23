@@ -454,44 +454,44 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
   }
 
   downloadRawDataReport() {
-
-    if (this.endDate >= this.startDate) {
-      this.loadingData = true;
-      this.loadingReportMessage = true;
-      const obj = {
-        typeId: this.selectedQuery.id,
-        startDate: moment(this.startDate).format('YYYY-MM-DD'),
-        endDate: moment(this.endDate).format('YYYY-MM-DD'),
-      };
-
-      const url = 'dashboard-data';
-      const body = this.httpService.UrlEncodeMaker(obj);
-      this.httpService.getKeyForProductivityReport(body, url).subscribe(data => {
-        console.log(data, 'query list');
+    this.loadingData = true;
+    const obj = {
+      queryId: this.selectedQuery.id,
+      startDate: moment(this.startDate).format("YYYY-MM-DD"),
+      endDate: moment(this.endDate).format("YYYY-MM-DD"),
+    };
+    const url = "dashboard-data";
+    const body = this.httpService.UrlEncodeMaker(obj);
+    this.httpService.getKeyForProductivityReport(body, url).subscribe(
+      (data) => {
         const res: any = data;
-
         if (res) {
+
           const obj2 = {
             key: res.key,
-            fileType: res.fileType
+            fileType: res.fileType,
           };
-          const url = 'downloadcsvReport';
+          const url =
+            this.selectedQuery.type == 1
+              ? "downloadcsvReport"
+              : "downloadReport";
+
           this.getproductivityDownload(obj2, url);
         } else {
-          // this.clearLoading()
-
-          this.toastr.info('Something went wrong,Please retry', 'Connectivity Message');
+          this.loadingData = false;
+          this.loadingReportMessage = false;
+          this.toastr.info(
+            "Something went wrong, please retry",
+            "Connectivity Message"
+          );
         }
-
-
-      }, error => {
-        // this.clearLoading()
-
-      });
-    } else {
-      // this.clearLoading();
-      this.toastr.info('End date must be greater than start date', 'Date Selection');
-    }
+      },
+      (error) => {
+        this.loadingData = false;
+        this.loadingReportMessage = false;
+        this.toastr.info('Something went wrong,Please retry', 'Connectivity Message');
+      }
+    );
   }
   downloadAttandanceReport() {
     if (this.endDate >= this.startDate) {
@@ -619,6 +619,8 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
   getproductivityDownload(obj, url) {
     const u = url;
     this.httpService.DownloadResource(obj, u);
+    this.loadingData = false;
+    this.loadingReportMessage = false;
     setTimeout(() => {
       this.loadingData = false;
       this.loadingReportMessage = false;

@@ -315,7 +315,7 @@
             <mat-form-field class="example-margin mr-10-IMP" *ngIf="queryList.length>0">
                 <mat-select placeholder="Query Type" name='queryList' [(ngModel)]="selectedQuery">
                     <ng-container *ngFor="let query of queryList">
-                        <mat-option [value]="query">{{query.name}}</mat-option>
+                        <mat-option [value]="query">{{query.title}}</mat-option>
                     </ng-container>
 
                 </mat-select>
