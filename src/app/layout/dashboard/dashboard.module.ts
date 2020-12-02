@@ -30,6 +30,7 @@ import { EvaluationSummaryComponent } from './inner-pages/evaluation-summary/eva
 import { TimeAnalysisReportComponent } from './inner-pages/time-analysis-report/time-analysis-report.component';
 import { TableauHelperComponent } from './tableau/tableau-helper/tableau-helper.component';
 import { SaleAnalysisDashboardComponent } from './tableau/sale-analysis-dashboard/sale-analysis-dashboard.component';
+import { SurveyDashboardComponent } from './tableau/survey-dashboard/survey-dashboard.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -58,6 +59,6 @@ import { SaleAnalysisDashboardComponent } from './tableau/sale-analysis-dashboar
         AttendanceReportComponent, MerchandiserListComponent, MerchandiserProductivityComponent, 
         ShopDetailComponent, RawDataComponent, UniqueBaseProductivityComponent, SaleDataReportComponent, 
         StockPopLoadingComponent, SaleDetailComponent, VoErrorReportComponent, EvaluationSummaryComponent, 
-        TimeAnalysisReportComponent, TableauHelperComponent, SaleAnalysisDashboardComponent]
+        TimeAnalysisReportComponent, TableauHelperComponent, SaleAnalysisDashboardComponent, SurveyDashboardComponent]
 })
 export class DashboardModule {}
